@@ -8,3 +8,11 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+# Project rules
+
+- Store and DWM are separate external apps; only link to them via constants in `src/lib/site.ts` — never build commerce or DWM features here.
+- Shared site copy/data lives in `src/lib/site.ts`; UI strings meant for localization live in `src/lib/i18n.ts` — keeps English/Arabic switch feasible.
+- Use logical CSS utilities (start/end, ms/me) and `rtl:` variants so Arabic RTL works without layout rewrites.
+- All forms write to the single `inquiries` table (anon insert-only RLS) via `InquiryForm` — one place to manage submissions.
+- Page metadata uses `seo()` from `src/lib/seo.ts` in each route's `head()`.

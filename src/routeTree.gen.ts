@@ -10,33 +10,167 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DwmRouteImport } from './routes/dwm'
+import { Route as IndustriesRouteImport } from './routes/industries'
+import { Route as ProductsRouteImport } from './routes/products'
+import { Route as QaQcInspectionRouteImport } from './routes/qa-qc-inspection'
+import { Route as RequestDwmDemoRouteImport } from './routes/request-dwm-demo'
+import { Route as RequestQuoteRouteImport } from './routes/request-quote'
+import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as WeldingEngineeringRouteImport } from './routes/welding-engineering'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DwmRoute = DwmRouteImport.update({
+  id: '/dwm',
+  path: '/dwm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesRoute = IndustriesRouteImport.update({
+  id: '/industries',
+  path: '/industries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QaQcInspectionRoute = QaQcInspectionRouteImport.update({
+  id: '/qa-qc-inspection',
+  path: '/qa-qc-inspection',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestDwmDemoRoute = RequestDwmDemoRouteImport.update({
+  id: '/request-dwm-demo',
+  path: '/request-dwm-demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestQuoteRoute = RequestQuoteRouteImport.update({
+  id: '/request-quote',
+  path: '/request-quote',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsRoute = SolutionsRouteImport.update({
+  id: '/solutions',
+  path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WeldingEngineeringRoute = WeldingEngineeringRouteImport.update({
+  id: '/welding-engineering',
+  path: '/welding-engineering',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/dwm': typeof DwmRoute
+  '/industries': typeof IndustriesRoute
+  '/products': typeof ProductsRoute
+  '/qa-qc-inspection': typeof QaQcInspectionRoute
+  '/request-dwm-demo': typeof RequestDwmDemoRoute
+  '/request-quote': typeof RequestQuoteRoute
+  '/solutions': typeof SolutionsRoute
+  '/welding-engineering': typeof WeldingEngineeringRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/dwm': typeof DwmRoute
+  '/industries': typeof IndustriesRoute
+  '/products': typeof ProductsRoute
+  '/qa-qc-inspection': typeof QaQcInspectionRoute
+  '/request-dwm-demo': typeof RequestDwmDemoRoute
+  '/request-quote': typeof RequestQuoteRoute
+  '/solutions': typeof SolutionsRoute
+  '/welding-engineering': typeof WeldingEngineeringRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/dwm': typeof DwmRoute
+  '/industries': typeof IndustriesRoute
+  '/products': typeof ProductsRoute
+  '/qa-qc-inspection': typeof QaQcInspectionRoute
+  '/request-dwm-demo': typeof RequestDwmDemoRoute
+  '/request-quote': typeof RequestQuoteRoute
+  '/solutions': typeof SolutionsRoute
+  '/welding-engineering': typeof WeldingEngineeringRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/dwm'
+    | '/industries'
+    | '/products'
+    | '/qa-qc-inspection'
+    | '/request-dwm-demo'
+    | '/request-quote'
+    | '/solutions'
+    | '/welding-engineering'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/dwm'
+    | '/industries'
+    | '/products'
+    | '/qa-qc-inspection'
+    | '/request-dwm-demo'
+    | '/request-quote'
+    | '/solutions'
+    | '/welding-engineering'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/dwm'
+    | '/industries'
+    | '/products'
+    | '/qa-qc-inspection'
+    | '/request-dwm-demo'
+    | '/request-quote'
+    | '/solutions'
+    | '/welding-engineering'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  DwmRoute: typeof DwmRoute
+  IndustriesRoute: typeof IndustriesRoute
+  ProductsRoute: typeof ProductsRoute
+  QaQcInspectionRoute: typeof QaQcInspectionRoute
+  RequestDwmDemoRoute: typeof RequestDwmDemoRoute
+  RequestQuoteRoute: typeof RequestQuoteRoute
+  SolutionsRoute: typeof SolutionsRoute
+  WeldingEngineeringRoute: typeof WeldingEngineeringRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +182,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dwm': {
+      id: '/dwm'
+      path: '/dwm'
+      fullPath: '/dwm'
+      preLoaderRoute: typeof DwmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries': {
+      id: '/industries'
+      path: '/industries'
+      fullPath: '/industries'
+      preLoaderRoute: typeof IndustriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/qa-qc-inspection': {
+      id: '/qa-qc-inspection'
+      path: '/qa-qc-inspection'
+      fullPath: '/qa-qc-inspection'
+      preLoaderRoute: typeof QaQcInspectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/request-dwm-demo': {
+      id: '/request-dwm-demo'
+      path: '/request-dwm-demo'
+      fullPath: '/request-dwm-demo'
+      preLoaderRoute: typeof RequestDwmDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/request-quote': {
+      id: '/request-quote'
+      path: '/request-quote'
+      fullPath: '/request-quote'
+      preLoaderRoute: typeof RequestQuoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions': {
+      id: '/solutions'
+      path: '/solutions'
+      fullPath: '/solutions'
+      preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/welding-engineering': {
+      id: '/welding-engineering'
+      path: '/welding-engineering'
+      fullPath: '/welding-engineering'
+      preLoaderRoute: typeof WeldingEngineeringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  DwmRoute: DwmRoute,
+  IndustriesRoute: IndustriesRoute,
+  ProductsRoute: ProductsRoute,
+  QaQcInspectionRoute: QaQcInspectionRoute,
+  RequestDwmDemoRoute: RequestDwmDemoRoute,
+  RequestQuoteRoute: RequestQuoteRoute,
+  SolutionsRoute: SolutionsRoute,
+  WeldingEngineeringRoute: WeldingEngineeringRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -18,6 +18,7 @@ import { Route as ProductsRouteImport } from './routes/products'
 import { Route as QaQcInspectionRouteImport } from './routes/qa-qc-inspection'
 import { Route as RequestDwmDemoRouteImport } from './routes/request-dwm-demo'
 import { Route as RequestQuoteRouteImport } from './routes/request-quote'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as WeldingEngineeringRouteImport } from './routes/welding-engineering'
 
@@ -66,6 +67,11 @@ const RequestQuoteRoute = RequestQuoteRouteImport.update({
   path: '/request-quote',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/qa-qc-inspection': typeof QaQcInspectionRoute
   '/request-dwm-demo': typeof RequestDwmDemoRoute
   '/request-quote': typeof RequestQuoteRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
   '/welding-engineering': typeof WeldingEngineeringRoute
 }
@@ -100,6 +107,7 @@ export interface FileRoutesByTo {
   '/qa-qc-inspection': typeof QaQcInspectionRoute
   '/request-dwm-demo': typeof RequestDwmDemoRoute
   '/request-quote': typeof RequestQuoteRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
   '/welding-engineering': typeof WeldingEngineeringRoute
 }
@@ -114,6 +122,7 @@ export interface FileRoutesById {
   '/qa-qc-inspection': typeof QaQcInspectionRoute
   '/request-dwm-demo': typeof RequestDwmDemoRoute
   '/request-quote': typeof RequestQuoteRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
   '/welding-engineering': typeof WeldingEngineeringRoute
 }
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
     | '/qa-qc-inspection'
     | '/request-dwm-demo'
     | '/request-quote'
+    | '/sitemap.xml'
     | '/solutions'
     | '/welding-engineering'
   fileRoutesByTo: FileRoutesByTo
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/qa-qc-inspection'
     | '/request-dwm-demo'
     | '/request-quote'
+    | '/sitemap.xml'
     | '/solutions'
     | '/welding-engineering'
   id:
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/qa-qc-inspection'
     | '/request-dwm-demo'
     | '/request-quote'
+    | '/sitemap.xml'
     | '/solutions'
     | '/welding-engineering'
   fileRoutesById: FileRoutesById
@@ -169,6 +181,7 @@ export interface RootRouteChildren {
   QaQcInspectionRoute: typeof QaQcInspectionRoute
   RequestDwmDemoRoute: typeof RequestDwmDemoRoute
   RequestQuoteRoute: typeof RequestQuoteRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SolutionsRoute: typeof SolutionsRoute
   WeldingEngineeringRoute: typeof WeldingEngineeringRoute
 }
@@ -238,6 +251,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RequestQuoteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions': {
       id: '/solutions'
       path: '/solutions'
@@ -265,6 +285,7 @@ const rootRouteChildren: RootRouteChildren = {
   QaQcInspectionRoute: QaQcInspectionRoute,
   RequestDwmDemoRoute: RequestDwmDemoRoute,
   RequestQuoteRoute: RequestQuoteRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SolutionsRoute: SolutionsRoute,
   WeldingEngineeringRoute: WeldingEngineeringRoute,
 }

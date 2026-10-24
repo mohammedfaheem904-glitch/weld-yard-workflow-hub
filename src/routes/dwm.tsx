@@ -18,7 +18,7 @@ function Page() {
   return (
     <>
       <PageHero eyebrow="Weld Yard DWM" title="Digital Welding Management" intro="One workspace for welders, joints, inspections and quality records — so your team spends less time chasing paperwork.">
-        <Link to="/request-dwm-demo" className={btnPrimary}>Request DWM Demo</Link>
+        <Link to="/request-dwm-demo" className={btnPrimary}>Request a DWM Demo</Link>
         <a href={DWM_URL} className={btnOutline}>Access DWM</a>
       </PageHero>
       <section className="py-20 sm:py-28">
@@ -54,7 +54,7 @@ function Page() {
         </Container>
       </section>
       <CtaBand title="See Weld Yard DWM in action" body="Book a walkthrough with our team, or open the application if you already have an account.">
-        <Link to="/request-dwm-demo" className={btnDark}>Request DWM Demo</Link>
+        <Link to="/request-dwm-demo" className={btnDark}>Request a DWM Demo</Link>
         <a href={DWM_URL} className={btnDarkOutline}>Access DWM</a>
       </CtaBand>
     </>

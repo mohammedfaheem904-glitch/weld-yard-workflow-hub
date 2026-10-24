@@ -29,7 +29,7 @@ function Page() {
         type="dwm_demo"
         topicLabel="Team size"
         messageLabel="What would you like to see?"
-        submitLabel="Request DWM Demo"
+        submitLabel="Request a DWM Demo"
         topics={["1–10 people", "11–50 people", "51–200 people", "200+ people"]}
       />
     </FormPage>

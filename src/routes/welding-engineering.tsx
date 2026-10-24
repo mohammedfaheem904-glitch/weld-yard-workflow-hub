@@ -4,7 +4,7 @@ import { seo } from "@/lib/seo";
 import { btnDark, btnDarkOutline, btnPrimary, Container, CtaBand, FeatureGrid, PageHero, SectionHeading } from "@/components/site/blocks";
 
 export const Route = createFileRoute("/welding-engineering")({
-  head: () => seo("Welding Engineering", "Welding procedure development, welder qualification support and technical welding guidance from Weld Yard."),
+  head: () => seo("Welding Engineering", "Welding procedure development, welder qualification support and technical welding guidance from Weld Yard.", "/welding-engineering"),
   component: Page,
 });
 

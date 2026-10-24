@@ -6,7 +6,7 @@ import { InquiryForm } from "@/components/site/InquiryForm";
 import { Checklist } from "@/components/site/blocks";
 
 export const Route = createFileRoute("/request-dwm-demo")({
-  head: () => seo("Request a DWM Demo", "Book a walkthrough of Weld Yard DWM, the digital welding management application."),
+  head: () => seo("Request a DWM Demo", "Book a walkthrough of Weld Yard DWM, the digital welding management application.", "/request-dwm-demo"),
   component: Page,
 });
 

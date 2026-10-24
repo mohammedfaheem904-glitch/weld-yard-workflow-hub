@@ -9,7 +9,7 @@ import {
 } from "@/components/site/blocks";
 
 export const Route = createFileRoute("/")({
-  head: () => seo("Integrated Welding Solutions", "Weld Yard connects welding products, engineering support, QA/QC inspection and digital welding management across your welding operations."),
+  head: () => seo("Integrated Welding Solutions", "Weld Yard connects welding products, engineering support, QA/QC inspection and digital welding management across your welding operations.", "/"),
   component: Home,
 });
 

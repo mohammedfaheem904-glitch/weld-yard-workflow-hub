@@ -4,7 +4,7 @@ import { seo } from "@/lib/seo";
 import { btnDark, btnDarkOutline, Container, CtaBand, FeatureGrid, PageHero, SectionHeading } from "@/components/site/blocks";
 
 export const Route = createFileRoute("/about")({
-  head: () => seo("About Weld Yard", "Weld Yard is an integrated welding solutions company connecting products, engineering, inspection and digital welding management."),
+  head: () => seo("About Weld Yard", "Weld Yard is an integrated welding solutions company connecting products, engineering, inspection and digital welding management.", "/about"),
   component: Page,
 });
 

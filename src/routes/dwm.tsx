@@ -4,7 +4,7 @@ import { seo } from "@/lib/seo";
 import { btnDark, btnDarkOutline, btnOutline, btnPrimary, Checklist, Container, CtaBand, FeatureGrid, PageHero, SectionHeading } from "@/components/site/blocks";
 
 export const Route = createFileRoute("/dwm")({
-  head: () => seo("Weld Yard DWM — Digital Welding Management", "Weld Yard DWM is a digital welding management application for welder qualifications, weld traceability, inspections and quality documentation."),
+  head: () => seo("Weld Yard DWM — Digital Welding Management", "Weld Yard DWM is a digital welding management application for welder qualifications, weld traceability, inspections and quality documentation.", "/dwm"),
   component: Page,
 });
 

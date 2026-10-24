@@ -4,7 +4,7 @@ import { seo } from "@/lib/seo";
 import { btnDark, btnDarkOutline, Container, CtaBand, PageHero } from "@/components/site/blocks";
 
 export const Route = createFileRoute("/industries")({
-  head: () => seo("Industries", "Weld Yard supports welding operations in oil & gas, petrochemical, power, structural steel, fabrication, marine and infrastructure."),
+  head: () => seo("Industries", "Weld Yard supports welding operations in oil & gas, petrochemical, power, structural steel, fabrication, marine and infrastructure.", "/industries"),
   component: Page,
 });
 

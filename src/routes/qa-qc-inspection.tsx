@@ -4,7 +4,7 @@ import { seo } from "@/lib/seo";
 import { btnDark, btnDarkOutline, btnPrimary, Container, CtaBand, FeatureGrid, PageHero, SectionHeading } from "@/components/site/blocks";
 
 export const Route = createFileRoute("/qa-qc-inspection")({
-  head: () => seo("QA/QC & Inspection", "Weld inspection, quality control support and quality documentation services from Weld Yard."),
+  head: () => seo("QA/QC & Inspection", "Weld inspection, quality control support and quality documentation services from Weld Yard.", "/qa-qc-inspection"),
   component: Page,
 });
 

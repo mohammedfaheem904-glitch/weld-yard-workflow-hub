@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { DWM_URL, STORE_URL, SUPPORTING } from "@/lib/site";
+import { CONTACT, DWM_URL, STORE_URL, SUPPORTING } from "@/lib/site";
 import { Logo } from "./Logo";
 
 const cols = [
@@ -30,6 +30,13 @@ export function SiteFooter() {
         <div className="md:col-span-2">
           <Logo />
           <p className="mt-5 max-w-sm text-sm text-muted-foreground">{SUPPORTING}</p>
+          {(CONTACT.email || CONTACT.phone || CONTACT.address) && (
+            <ul className="mt-5 space-y-1.5 text-sm text-muted-foreground">
+              {CONTACT.address && <li>{CONTACT.address}</li>}
+              {CONTACT.phone && <li><a href={`tel:${CONTACT.phone}`} className="hover:text-foreground">{CONTACT.phone}</a></li>}
+              {CONTACT.email && <li><a href={`mailto:${CONTACT.email}`} className="hover:text-foreground">{CONTACT.email}</a></li>}
+            </ul>
+          )}
         </div>
         {cols.map((c) => (
           <div key={c.title}>
@@ -46,7 +53,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <p>© {new Date().getFullYear()} Weld Yard. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Weld Yard. All rights reserved.{CONTACT.registration ? ` ${CONTACT.registration}` : ""}</p>
           <p className="flex gap-5">
             <a href={STORE_URL} className="hover:text-primary">store.weldyard.com</a>
             <a href={DWM_URL} className="hover:text-primary">dwm.weldyard.com</a>

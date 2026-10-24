@@ -6,7 +6,7 @@ import { seo } from "@/lib/seo";
 import { btnDark, btnDarkOutline, btnOutline, btnPrimary, Checklist, Container, CtaBand, PageHero, SectionHeading } from "@/components/site/blocks";
 
 export const Route = createFileRoute("/products")({
-  head: () => seo("Welding Products", "Welding consumables, equipment, accessories and safety products from Weld Yard. Browse and order through the Weld Yard online store."),
+  head: () => seo("Welding Products", "Welding consumables, equipment, accessories and safety products from Weld Yard. Browse and order through the Weld Yard online store.", "/products"),
   component: Products,
 });
 

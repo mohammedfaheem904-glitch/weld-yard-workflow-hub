@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import productsImg from "@/assets/products.jpg";
-import { PRODUCT_CATEGORIES, STORE_URL } from "@/lib/site";
+import { categoryHref, PRODUCT_CATEGORIES, STORE_URL } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import { btnDark, btnDarkOutline, btnOutline, btnPrimary, Checklist, Container, CtaBand, PageHero, SectionHeading } from "@/components/site/blocks";
 
@@ -14,7 +14,7 @@ function Products() {
   return (
     <>
       <PageHero eyebrow="Welding Products" title="The right products for every weld" intro="Weld Yard supplies welding consumables, equipment, accessories and safety products. Browse the full range and order through our online store." image={productsImg}>
-        <a href={STORE_URL} className={btnPrimary}>Shop Now</a>
+        <a href={STORE_URL} className={btnPrimary}>Browse Products</a>
         <Link to="/request-quote" className={btnOutline}>Request a Quote</Link>
       </PageHero>
       <section className="py-20 sm:py-28">
@@ -26,7 +26,7 @@ function Products() {
           <ul className="mt-12 grid gap-px border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {PRODUCT_CATEGORIES.map((c) => (
               <li key={c.name} className="bg-background">
-                <a href={STORE_URL} className="group flex h-full flex-col p-7 transition-colors hover:bg-accent">
+                <a href={categoryHref(c.url)} className="group flex h-full flex-col p-7 transition-colors hover:bg-accent">
                   <span className="flex items-start justify-between gap-4">
                     <h3 className="text-xl font-bold">{c.name}</h3>
                     <ArrowUpRight aria-hidden className="h-5 w-5 shrink-0 text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

@@ -66,7 +66,8 @@ export const INDUSTRIES = [
   { name: "Manufacturing & Maintenance", body: "Equipment manufacturing and plant maintenance teams." },
 ] as const;
 
-export const PRODUCT_CATEGORIES = [
+// Optional `url`: add verified store category URLs here; unset entries link to the store home.
+export const PRODUCT_CATEGORIES: { name: string; body: string; url?: string }[] = [
   { name: "Welding Consumables", body: "Electrodes, filler wires, TIG rods and fluxes for common processes and materials." },
   { name: "Welding Machines & Equipment", body: "Power sources and equipment for MMA, MIG/MAG and TIG applications." },
   { name: "Torches & Accessories", body: "Torches, cables, clamps, holders and consumable spare parts." },
@@ -122,3 +123,61 @@ export const CONTACT: {
 
 // Official 1200x630 share image (absolute URL). Null until an approved brand asset exists.
 export const SHARE_IMAGE_URL: string | null = null;
+
+// Official logo (absolute https URL or bundled asset URL). Null keeps the WY monogram fallback.
+export const LOGO_IMAGE_URL: string | null = null;
+
+// Allow only https URLs (or same-site relative paths). Blocks javascript:, data:, http:, etc.
+export function safeUrl(url: string | null | undefined): string | null {
+  if (!url) return null;
+  const v = url.trim();
+  if (v.startsWith("/") && !v.startsWith("//")) return v;
+  try {
+    return new URL(v).protocol === "https:" ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+// Store category destination: verified category URL on the store host, else the store home.
+export function categoryHref(url?: string | null): string {
+  const safe = safeUrl(url);
+  if (safe && safe.startsWith("https://store.weldyard.com")) return safe;
+  return STORE_URL;
+}
+
+// DWM CTA labels — existing users vs prospective customers. Keep them distinct.
+export const DWM_ACCESS_LABEL = "Access DWM";
+export const DWM_DEMO_LABEL = "Request a DWM Demo";
+export const DWM_DEMO_PATH = "/request-dwm-demo";
+
+export type JourneyAction = { label: string; href: string; external?: boolean };
+export const JOURNEYS: { audience: string; body: string; actions: JourneyAction[] }[] = [
+  {
+    audience: "Procurement teams",
+    body: "Source consumables, equipment and safety products, or request pricing for project volumes.",
+    actions: [
+      { label: "Browse Products", href: STORE_URL, external: true },
+      { label: "Request a Quote", href: "/request-quote" },
+      { label: "Contact Sales", href: "/contact" },
+    ],
+  },
+  {
+    audience: "Engineering & QA/QC teams",
+    body: "Get support with procedures, qualification, inspection and quality documentation.",
+    actions: [
+      { label: "Explore Welding Engineering", href: "/welding-engineering" },
+      { label: "Explore QA/QC & Inspection", href: "/qa-qc-inspection" },
+      { label: "Request Technical Support", href: "/contact" },
+    ],
+  },
+  {
+    audience: "Digital & project management teams",
+    body: "Digitise welder, joint and inspection records across your projects.",
+    actions: [
+      { label: "Explore Weld Yard DWM", href: "/dwm" },
+      { label: DWM_DEMO_LABEL, href: DWM_DEMO_PATH },
+      { label: DWM_ACCESS_LABEL, href: DWM_URL, external: true },
+    ],
+  },
+];

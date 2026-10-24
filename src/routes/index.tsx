@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import hero from "@/assets/hero-welding.jpg";
 import engineering from "@/assets/engineering.jpg";
-import { BUSINESS_AREAS, DWM_FEATURES, DWM_URL, INDUSTRIES, SUPPORTING } from "@/lib/site";
+import { JOURNEYS, BUSINESS_AREAS, DWM_FEATURES, DWM_URL, INDUSTRIES, SUPPORTING } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import {
   btnDark, btnDarkOutline, btnOutline, btnPrimary, Checklist, Container, CtaBand, Eyebrow,
@@ -53,7 +53,32 @@ function Home() {
         </Container>
       </section>
 
-      <section className="border-y bg-card py-20 sm:py-28">
+      <section className="border-y bg-card py-20 sm:py-28" aria-labelledby="journeys-title">
+        <Container>
+          <SectionHeading eyebrow="Start here" title="Find the right next step" intro="Choose the path that matches your team." />
+          <ul className="mt-14 grid gap-px border bg-border lg:grid-cols-3">
+            {JOURNEYS.map((j) => (
+              <li key={j.audience} className="flex flex-col bg-card p-8">
+                <h3 className="text-2xl font-extrabold">{j.audience}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{j.body}</p>
+                <ul className="mt-8 flex flex-col gap-2">
+                  {j.actions.map((a) => (
+                    <li key={a.label}>
+                      {a.external ? (
+                        <a href={a.href} className="flex min-h-11 items-center justify-between border px-4 py-2 text-sm font-bold transition-colors hover:border-primary hover:text-primary">{a.label}<span aria-hidden>↗</span></a>
+                      ) : (
+                        <Link to={a.href} className="flex min-h-11 items-center justify-between border px-4 py-2 text-sm font-bold transition-colors hover:border-primary hover:text-primary">{a.label}<span aria-hidden className="rtl:rotate-180">→</span></Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      <section className="py-20 sm:py-28">
         <Container>
           <SectionHeading eyebrow="The welding lifecycle" title="Every stage, connected" intro="Weld Yard supports the full path of a weld — from the material on the rack to the quality dossier at handover." />
           <div className="mt-14"><Lifecycle /></div>
@@ -99,8 +124,8 @@ function Home() {
           <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading eyebrow="Weld Yard DWM" title="Digital Welding Management" intro="Replace paper forms and scattered spreadsheets with one structured workspace for welding quality." />
             <div className="flex flex-wrap gap-3">
-              <Link to="/request-dwm-demo" className={btnPrimary}>Request DWM Demo</Link>
-              <a href={DWM_URL} className={btnOutline}>Visit DWM</a>
+              <Link to="/request-dwm-demo" className={btnPrimary}>Request a DWM Demo</Link>
+              <a href={DWM_URL} className={btnOutline}>Access DWM</a>
             </div>
           </div>
           <div className="mt-14"><FeatureGrid items={DWM_FEATURES} /></div>

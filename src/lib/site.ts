@@ -83,3 +83,42 @@ export const DWM_FEATURES = [
   { title: "Project visibility", body: "See progress and open quality items across projects and teams." },
   { title: "Fewer paper trails", body: "Replace scattered spreadsheets and paper forms with structured digital data." },
 ] as const;
+
+// Final production origin — the single source for canonical, og:url and sitemap URLs.
+export const SITE_URL = "https://www.weldyard.com";
+
+// Public, indexable pages (no trailing slashes). Sitemap and tests read this list.
+export const PUBLIC_PATHS = [
+  "/",
+  "/solutions",
+  "/products",
+  "/welding-engineering",
+  "/qa-qc-inspection",
+  "/dwm",
+  "/industries",
+  "/about",
+  "/contact",
+  "/request-quote",
+  "/request-dwm-demo",
+] as const;
+
+export function absoluteUrl(path: string) {
+  return path === "/" ? `${SITE_URL}/` : `${SITE_URL}${path.replace(/\/+$/, "")}`;
+}
+
+// Official contact details. Leave null until Weld Yard supplies verified values;
+// the footer only shows fields that are filled in. Never add placeholder data.
+export const CONTACT: {
+  email: string | null;
+  phone: string | null;
+  address: string | null;
+  registration: string | null;
+} = {
+  email: null,
+  phone: null,
+  address: null,
+  registration: null,
+};
+
+// Official 1200x630 share image (absolute URL). Null until an approved brand asset exists.
+export const SHARE_IMAGE_URL: string | null = null;

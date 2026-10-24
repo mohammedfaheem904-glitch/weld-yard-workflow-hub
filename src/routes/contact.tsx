@@ -6,7 +6,7 @@ import { InquiryForm } from "@/components/site/InquiryForm";
 import { Checklist } from "@/components/site/blocks";
 
 export const Route = createFileRoute("/contact")({
-  head: () => seo("Contact", "Contact Weld Yard about welding products, engineering, QA/QC inspection or Weld Yard DWM."),
+  head: () => seo("Contact", "Contact Weld Yard about welding products, engineering, QA/QC inspection or Weld Yard DWM.", "/contact"),
   component: Page,
 });
 

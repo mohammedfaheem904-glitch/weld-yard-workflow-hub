@@ -28,7 +28,7 @@ export const DICTIONARY: Record<Locale, Dict> = {
       contact: "Contact",
     },
     visitStore: "Visit Store",
-    requestDemo: "Request DWM Demo",
+    requestDemo: "Request a DWM Demo",
     requestQuote: "Request a Quote",
   },
   ar: {

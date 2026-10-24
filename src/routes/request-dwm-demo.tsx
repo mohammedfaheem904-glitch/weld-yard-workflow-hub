@@ -20,7 +20,7 @@ function Page() {
         <div className="space-y-6">
           <Checklist items={["A walkthrough tailored to your workflow", "Answers to your team's questions", "Next steps for getting started"]} />
           <p className="text-sm text-muted-foreground">
-            Already a user? <a href={DWM_URL} className="font-bold text-primary">Open dwm.weldyard.com</a>
+            Already a user? <a href={DWM_URL} className="font-bold text-primary">Access DWM</a>
           </p>
         </div>
       }
@@ -29,7 +29,7 @@ function Page() {
         type="dwm_demo"
         topicLabel="Team size"
         messageLabel="What would you like to see?"
-        submitLabel="Request DWM Demo"
+        submitLabel="Request a DWM Demo"
         topics={["1–10 people", "11–50 people", "51–200 people", "200+ people"]}
       />
     </FormPage>

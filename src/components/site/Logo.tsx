@@ -1,6 +1,12 @@
-export function Logo() {
+import { LOGO_IMAGE_URL, safeUrl } from "@/lib/site";
+
+export function Logo({ src = LOGO_IMAGE_URL }: { src?: string | null }) {
+  const url = safeUrl(src);
+  if (url) {
+    return <img src={url} alt="Weld Yard — Integrated Welding Solutions" className="h-10 w-auto max-w-[200px] object-contain" decoding="async" />;
+  }
   return (
-    <span className="flex items-center gap-2.5">
+    <span className="flex items-center gap-2.5" data-testid="logo-fallback">
       <span aria-hidden className="grid h-9 w-9 place-items-center bg-primary font-display text-base font-black text-primary-foreground">
         WY
       </span>

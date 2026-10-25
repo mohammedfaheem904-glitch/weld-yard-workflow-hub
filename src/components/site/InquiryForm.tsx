@@ -17,7 +17,7 @@ const schema = z.object({
 type Errors = Partial<Record<keyof z.infer<typeof schema>, string>>;
 
 const field =
-  "mt-2 w-full border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-brand-ink focus:outline-none focus:ring-2 focus:ring-ring/30";
+  "mt-2 w-full border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-brand-ink focus:outline-none focus:ring-2 focus:ring-ring/30";
 
 export function InquiryForm({
   type,

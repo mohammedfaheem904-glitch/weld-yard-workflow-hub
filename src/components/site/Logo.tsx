@@ -10,7 +10,7 @@ export function Logo({ src = LOGO_IMAGE_URL }: { src?: string | null }) {
   return (
     <span className="flex items-center gap-2.5" data-testid={showImage ? "logo-official" : "logo-fallback"}>
       {showImage ? (
-        <span aria-hidden className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-foreground p-1">
+        <span aria-hidden className="grid h-10 w-10 shrink-0 place-items-center">
           <img
             src={url}
             alt=""

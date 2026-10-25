@@ -110,7 +110,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang={DEFAULT_LOCALE} dir={LOCALES[DEFAULT_LOCALE].dir} className="dark">
+    <html lang={DEFAULT_LOCALE} dir={LOCALES[DEFAULT_LOCALE].dir}>
       <head>
         <HeadContent />
       </head>

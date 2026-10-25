@@ -9,7 +9,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const d = t();
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b bg-background/95 shadow-sm backdrop-blur">
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-4 focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-foreground">
         Skip to content
       </a>
@@ -24,7 +24,7 @@ export function SiteHeader() {
                 <Link
                   to={n.to}
                   activeOptions={{ exact: n.to === "/" }}
-                  className="px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[status=active]:text-primary"
+                  className="px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[status=active]:text-brand-ink"
                 >
                   {d.nav[n.key]}
                 </Link>
@@ -33,7 +33,7 @@ export function SiteHeader() {
           </ul>
         </nav>
         <div className="hidden items-center gap-2 lg:flex">
-          <Link to="/request-dwm-demo" className="border px-3.5 py-2 text-sm font-semibold transition-colors hover:border-primary hover:text-primary">
+          <Link to="/request-dwm-demo" className="border px-3.5 py-2 text-sm font-semibold transition-colors hover:border-primary hover:text-brand-ink">
             {d.requestDemo}
           </Link>
           <a href={STORE_URL} className="inline-flex items-center gap-2 bg-primary px-4 py-2 text-sm font-bold text-primary-foreground shadow-glow transition-opacity hover:opacity-90">
@@ -60,7 +60,7 @@ export function SiteHeader() {
                   to={n.to}
                   activeOptions={{ exact: n.to === "/" }}
                   onClick={() => setOpen(false)}
-                  className="block border-b py-3 font-medium data-[status=active]:text-primary"
+                  className="block border-b py-3 font-medium data-[status=active]:text-brand-ink"
                 >
                   {d.nav[n.key]}
                 </Link>

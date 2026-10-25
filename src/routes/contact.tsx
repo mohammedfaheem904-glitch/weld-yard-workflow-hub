@@ -20,7 +20,7 @@ function Page() {
         <div className="space-y-6">
           <Checklist items={["General enquiries", "Technical questions", "Partnership requests"]} />
           <p className="text-sm text-muted-foreground">
-            Need pricing? <Link to="/request-quote" className="font-bold text-primary">Request a quote</Link>. Ready to order? <a href={STORE_URL} className="font-bold text-primary">Visit the store</a>.
+            Need pricing? <Link to="/request-quote" className="font-bold text-brand-ink">Request a quote</Link>. Ready to order? <a href={STORE_URL} className="font-bold text-brand-ink">Visit the store</a>.
           </p>
         </div>
       }

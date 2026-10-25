@@ -10,7 +10,7 @@ export function Container({ children, className }: { children: ReactNode; classN
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-primary">
+    <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-ink">
       <span aria-hidden className="h-px w-8 bg-primary" />
       {children}
     </p>
@@ -64,7 +64,7 @@ export function PageHero({
 
 const btn = "inline-flex items-center gap-2 px-6 py-3.5 text-sm font-bold transition-all";
 export const btnPrimary = cn(btn, "bg-primary text-primary-foreground shadow-glow hover:opacity-90");
-export const btnOutline = cn(btn, "border border-foreground/30 text-foreground hover:border-primary hover:text-primary");
+export const btnOutline = cn(btn, "border border-foreground/40 bg-background text-foreground hover:border-primary hover:text-brand-ink");
 
 export function FeatureGrid({ items }: { items: readonly { title: string; body: string }[] }) {
   return (
@@ -85,7 +85,7 @@ export function Lifecycle() {
     <ol className="grid gap-px border bg-border sm:grid-cols-2 lg:grid-cols-7">
       {LIFECYCLE.map((s, i) => (
         <li key={s} className="group relative bg-background p-5 transition-colors hover:bg-accent">
-          <span className="font-mono text-xs text-primary">{String(i + 1).padStart(2, "0")}</span>
+          <span className="font-mono text-xs text-brand-ink">{String(i + 1).padStart(2, "0")}</span>
           <p className="mt-6 font-display text-base font-bold leading-tight">{s}</p>
           {i < LIFECYCLE.length - 1 && (
             <ArrowRight aria-hidden className="absolute end-3 top-5 hidden h-4 w-4 text-muted-foreground lg:block rtl:rotate-180" />
@@ -115,7 +115,7 @@ export const btnDarkOutline = cn(btn, "border border-primary-foreground/40 hover
 
 export function TextLink({ to, children }: { to: string; children: ReactNode }) {
   return (
-    <Link to={to} className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:gap-3 transition-all">
+    <Link to={to} className="inline-flex items-center gap-2 text-sm font-bold text-brand-ink hover:gap-3 transition-all">
       {children} <ArrowRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
     </Link>
   );

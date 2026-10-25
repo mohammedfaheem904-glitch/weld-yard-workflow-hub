@@ -17,7 +17,7 @@ const schema = z.object({
 type Errors = Partial<Record<keyof z.infer<typeof schema>, string>>;
 
 const field =
-  "mt-2 w-full border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none";
+  "mt-2 w-full border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-brand-ink focus:outline-none focus:ring-2 focus:ring-ring/30";
 
 export function InquiryForm({
   type,
@@ -69,10 +69,10 @@ export function InquiryForm({
   if (status === "sent") {
     return (
       <div role="status" className="border border-primary/50 bg-card p-8">
-        <CheckCircle2 className="h-8 w-8 text-primary" aria-hidden />
+        <CheckCircle2 className="h-8 w-8 text-brand-ink" aria-hidden />
         <h3 className="mt-4 text-2xl font-bold">Thank you — your request was received.</h3>
         <p className="mt-2 text-muted-foreground">Our team will review it and get back to you.</p>
-        <button type="button" onClick={() => setStatus("idle")} className="mt-6 text-sm font-bold text-primary">
+        <button type="button" onClick={() => setStatus("idle")} className="mt-6 text-sm font-bold text-brand-ink">
           Send another request
         </button>
       </div>

@@ -20,7 +20,7 @@ function Page() {
         <div className="space-y-6">
           <Checklist items={["A walkthrough tailored to your workflow", "Answers to your team's questions", "Next steps for getting started"]} />
           <p className="text-sm text-muted-foreground">
-            Already a user? <a href={DWM_URL} className="font-bold text-primary">Access DWM</a>
+            Already a user? <a href={DWM_URL} className="font-bold text-brand-ink">Access DWM</a>
           </p>
         </div>
       }

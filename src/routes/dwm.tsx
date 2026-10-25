@@ -43,7 +43,7 @@ function Page() {
           <ol className="grid gap-px border bg-border">
             {steps.map((s, i) => (
               <li key={s.title} className="flex gap-6 bg-background p-7">
-                <span className="font-mono text-2xl text-primary">{i + 1}</span>
+                <span className="font-mono text-2xl text-brand-ink">{i + 1}</span>
                 <div>
                   <h3 className="text-lg font-bold">{s.title}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">{s.body}</p>

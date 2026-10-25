@@ -40,7 +40,7 @@ export function SiteFooter() {
         </div>
         {cols.map((c) => (
           <div key={c.title}>
-            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-primary">{c.title}</h2>
+            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-brand-ink">{c.title}</h2>
             <ul className="mt-4 space-y-2.5 text-sm">
               {c.links.map((l) => (
                 <li key={l.to}>
@@ -55,8 +55,8 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <p>© {new Date().getFullYear()} Weld Yard. All rights reserved.{CONTACT.registration ? ` ${CONTACT.registration}` : ""}</p>
           <p className="flex gap-5">
-            <a href={STORE_URL} className="hover:text-primary">store.weldyard.com</a>
-            <a href={DWM_URL} className="hover:text-primary">dwm.weldyard.com</a>
+            <a href={STORE_URL} className="hover:text-brand-ink">store.weldyard.com</a>
+            <a href={DWM_URL} className="hover:text-brand-ink">dwm.weldyard.com</a>
           </p>
         </div>
       </div>

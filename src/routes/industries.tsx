@@ -17,7 +17,7 @@ function Page() {
           <ul className="grid gap-px border bg-border sm:grid-cols-2 lg:grid-cols-4">
             {INDUSTRIES.map((i, idx) => (
               <li key={i.name} className="bg-background p-7">
-                <span className="font-mono text-xs text-primary">{String(idx + 1).padStart(2, "0")}</span>
+                <span className="font-mono text-xs text-brand-ink">{String(idx + 1).padStart(2, "0")}</span>
                 <h2 className="mt-8 text-xl font-extrabold">{i.name}</h2>
                 <p className="mt-3 text-sm text-muted-foreground">{i.body}</p>
               </li>

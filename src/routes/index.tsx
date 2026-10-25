@@ -23,7 +23,7 @@ function Home() {
           <div className="max-w-2xl">
             <Eyebrow>Weld Yard — Integrated Welding Solutions</Eyebrow>
             <h1 className="mt-6 text-5xl font-black leading-[0.98] sm:text-6xl lg:text-7xl">
-              Integrated Welding <span className="text-primary">Solutions</span>
+              Integrated Welding <span className="text-brand-ink">Solutions</span>
             </h1>
             <p className="mt-7 max-w-xl text-lg text-muted-foreground sm:text-xl">
               From welding products and engineering support to quality inspection and digital welding management, Weld Yard connects the essential stages of your welding operations.
@@ -43,7 +43,7 @@ function Home() {
           <ul className="mt-14 grid gap-px border bg-border md:grid-cols-2 lg:grid-cols-4">
             {BUSINESS_AREAS.map((a) => (
               <li key={a.n} className="flex flex-col bg-background p-8">
-                <span className="font-mono text-sm text-primary">{a.n}</span>
+                <span className="font-mono text-sm text-brand-ink">{a.n}</span>
                 <h3 className="mt-8 text-2xl font-extrabold">{a.title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{a.body}</p>
                 <div className="mt-8"><TextLink to={a.to}>Learn more</TextLink></div>
@@ -65,9 +65,9 @@ function Home() {
                   {j.actions.map((a) => (
                     <li key={a.label}>
                       {a.external ? (
-                        <a href={a.href} className="flex min-h-11 items-center justify-between border px-4 py-2 text-sm font-bold transition-colors hover:border-primary hover:text-primary">{a.label}<span aria-hidden>↗</span></a>
+                        <a href={a.href} className="flex min-h-11 items-center justify-between border px-4 py-2 text-sm font-bold transition-colors hover:border-primary hover:text-brand-ink">{a.label}<span aria-hidden>↗</span></a>
                       ) : (
-                        <Link to={a.href} className="flex min-h-11 items-center justify-between border px-4 py-2 text-sm font-bold transition-colors hover:border-primary hover:text-primary">{a.label}<span aria-hidden className="rtl:rotate-180">→</span></Link>
+                        <Link to={a.href} className="flex min-h-11 items-center justify-between border px-4 py-2 text-sm font-bold transition-colors hover:border-primary hover:text-brand-ink">{a.label}<span aria-hidden className="rtl:rotate-180">→</span></Link>
                       )}
                     </li>
                   ))}

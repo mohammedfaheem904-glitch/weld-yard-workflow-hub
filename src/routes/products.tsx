@@ -29,10 +29,10 @@ function Products() {
                 <a href={categoryHref(c.url)} className="group flex h-full flex-col p-7 transition-colors hover:bg-accent">
                   <span className="flex items-start justify-between gap-4">
                     <h3 className="text-xl font-bold">{c.name}</h3>
-                    <ArrowUpRight aria-hidden className="h-5 w-5 shrink-0 text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    <ArrowUpRight aria-hidden className="h-5 w-5 shrink-0 text-brand-ink transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </span>
                   <p className="mt-3 text-sm text-muted-foreground">{c.body}</p>
-                  <span className="mt-6 text-xs font-bold uppercase tracking-widest text-primary">Browse Products</span>
+                  <span className="mt-6 text-xs font-bold uppercase tracking-widest text-brand-ink">Browse Products</span>
                 </a>
               </li>
             ))}

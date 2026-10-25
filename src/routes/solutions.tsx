@@ -16,7 +16,7 @@ function Solutions() {
         <Container className="grid gap-6 md:grid-cols-2">
           {BUSINESS_AREAS.map((a) => (
             <article key={a.n} className="border bg-card p-8 sm:p-10">
-              <span className="font-mono text-sm text-primary">{a.n}</span>
+              <span className="font-mono text-sm text-brand-ink">{a.n}</span>
               <h2 className="mt-6 text-3xl font-extrabold">{a.title}</h2>
               <p className="mt-4 text-muted-foreground">{a.body}</p>
               <div className="mt-8"><TextLink to={a.to}>Explore {a.title}</TextLink></div>

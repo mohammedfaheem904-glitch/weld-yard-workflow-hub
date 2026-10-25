@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { Logo } from "@/components/site/Logo";
 import { categoryHref, safeUrl, JOURNEYS, PRODUCT_CATEGORIES, STORE_URL, DWM_URL, DWM_DEMO_PATH } from "@/lib/site";
 
@@ -8,9 +8,16 @@ describe("Logo", () => {
     render(<Logo src={null} />);
     expect(screen.getByTestId("logo-fallback")).toBeTruthy();
   });
-  it("renders the official image with alt text when a safe URL is set", () => {
-    render(<Logo src="https://cdn.example.com/logo.svg" />);
-    expect(screen.getByRole("img").getAttribute("alt")).toMatch(/Weld Yard/);
+  it("renders the official mark (decorative) beside the brand text when a safe URL is set", () => {
+    const { container } = render(<Logo src="https://cdn.example.com/logo.svg" />);
+    expect(screen.getByTestId("logo-official")).toBeTruthy();
+    expect(container.querySelector("img")!.getAttribute("alt")).toBe("");
+    expect(screen.getByText("WELD YARD")).toBeTruthy();
+  });
+  it("falls back to the monogram when the image fails to load", () => {
+    const { container } = render(<Logo src="/weld-yard-logo.png" />);
+    fireEvent.error(container.querySelector("img")!);
+    expect(screen.getByTestId("logo-fallback")).toBeTruthy();
   });
   it("rejects unsafe logo URLs", () => {
     render(<Logo src="javascript:alert(1)" />);

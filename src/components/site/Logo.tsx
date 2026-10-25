@@ -1,15 +1,31 @@
+import { useState } from "react";
 import { LOGO_IMAGE_URL, safeUrl } from "@/lib/site";
 
+// Official mark + brand text. The mark is decorative (alt="") because the
+// visible "WELD YARD" text already names the brand for screen readers.
 export function Logo({ src = LOGO_IMAGE_URL }: { src?: string | null }) {
   const url = safeUrl(src);
-  if (url) {
-    return <img src={url} alt="Weld Yard — Integrated Welding Solutions" className="h-10 w-auto max-w-[200px] object-contain" decoding="async" />;
-  }
+  const [failed, setFailed] = useState(false);
+  const showImage = url && !failed;
   return (
-    <span className="flex items-center gap-2.5" data-testid="logo-fallback">
-      <span aria-hidden className="grid h-9 w-9 place-items-center bg-primary font-display text-base font-black text-primary-foreground">
-        WY
-      </span>
+    <span className="flex items-center gap-2.5" data-testid={showImage ? "logo-official" : "logo-fallback"}>
+      {showImage ? (
+        <span aria-hidden className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-foreground p-1">
+          <img
+            src={url}
+            alt=""
+            width={287}
+            height={286}
+            className="h-full w-full object-contain"
+            decoding="async"
+            onError={() => setFailed(true)}
+          />
+        </span>
+      ) : (
+        <span aria-hidden className="grid h-9 w-9 place-items-center bg-primary font-display text-base font-black text-primary-foreground">
+          WY
+        </span>
+      )}
       <span className="flex flex-col leading-none">
         <span className="font-display text-lg font-extrabold tracking-tight">WELD YARD</span>
         <span className="mt-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Integrated Welding Solutions</span>

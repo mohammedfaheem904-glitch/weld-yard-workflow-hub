@@ -121,11 +121,11 @@ export const CONTACT: {
   registration: null,
 };
 
-// Official 1200x630 share image (absolute URL). Null until an approved brand asset exists.
-export const SHARE_IMAGE_URL: string | null = null;
+// Official 1200x630 share image (absolute production URL; file lives at public/og-image.png).
+export const SHARE_IMAGE_URL: string | null = "https://www.weldyard.com/og-image.png";
 
-// Official logo (absolute https URL or bundled asset URL). Null keeps the WY monogram fallback.
-export const LOGO_IMAGE_URL: string | null = null;
+// Official logo mark (file lives at public/weld-yard-logo.png). Null keeps the WY monogram fallback.
+export const LOGO_IMAGE_URL: string | null = "/weld-yard-logo.png";
 
 // Allow only https URLs (or same-site relative paths). Blocks javascript:, data:, http:, etc.
 export function safeUrl(url: string | null | undefined): string | null {

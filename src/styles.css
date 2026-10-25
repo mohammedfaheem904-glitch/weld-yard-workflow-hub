@@ -37,6 +37,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-brand-ink: var(--brand-ink);
+  --color-brand-wordmark: #FF914D;
   --color-steel: var(--steel);
   --color-steel-foreground: var(--steel-foreground);
 }

@@ -27,7 +27,7 @@ export function Logo({ src = LOGO_IMAGE_URL }: { src?: string | null }) {
         </span>
       )}
       <span className="flex flex-col leading-none">
-        <span className="font-display text-lg font-extrabold tracking-tight">WELD YARD</span>
+        <span className="font-display text-lg font-extrabold tracking-tight text-brand-wordmark">WELD YARD</span>
         <span className="mt-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Integrated Welding Solutions</span>
       </span>
     </span>

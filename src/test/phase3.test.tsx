@@ -12,7 +12,7 @@ describe("Logo", () => {
     const { container } = render(<Logo src="https://cdn.example.com/logo.svg" />);
     expect(screen.getByTestId("logo-official")).toBeTruthy();
     expect(container.querySelector("img")!.getAttribute("alt")).toBe("");
-    expect(screen.getByText("WELD YARD")).toBeTruthy();
+    expect(screen.getByText("WELD YARD").className).toContain("text-brand-wordmark");
   });
   it("falls back to the monogram when the image fails to load", () => {
     const { container } = render(<Logo src="/weld-yard-logo.png" />);

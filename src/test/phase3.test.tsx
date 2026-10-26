@@ -40,7 +40,7 @@ describe("store category destinations", () => {
 });
 
 describe("CTA destinations", () => {
-  const all = Object.fromEntries(JOURNEYS.flatMap((j) => j.actions).map((a) => [a.label, a.href]));
+  const all = Object.fromEntries(JOURNEYS.flatMap((j) => j.actions).map((a) => [a.label, a.href] as const));
   it("maps each journey CTA to the right place", () => {
     expect(all["Browse Products"]).toBe(STORE_URL);
     expect(all["Request a Quote"]).toBe("/request-quote");

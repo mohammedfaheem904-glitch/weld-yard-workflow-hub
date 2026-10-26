@@ -79,6 +79,11 @@
   @media (min-width: 64rem) {
     background-image: var(--gradient-hero);
   }
+  [dir="rtl"] & {
+    @media (min-width: 64rem) {
+      background-image: linear-gradient(270deg, oklch(1 0 0 / 0.97) 0%, oklch(1 0 0 / 0.88) 45%, oklch(1 0 0 / 0.1) 100%);
+    }
+  }
 }
 
 @utility shadow-glow {

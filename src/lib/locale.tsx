@@ -69,7 +69,7 @@ export function useLocalizedMeta(ar: { title: string; description: string }) {
     const prevTitle = document.title;
     const prevDesc = desc?.content ?? "";
     if (locale !== "ar") return;
-    document.title = `${ar.title} | ويلد يارد Weld Yard`;
+    document.title = `${ar.title} | Weld Yard`;
     if (desc) desc.content = ar.description;
     return () => {
       document.title = prevTitle;

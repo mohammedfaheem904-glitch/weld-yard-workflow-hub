@@ -14,14 +14,14 @@ export const Route = createFileRoute("/contact")({
 function Page() {
   const tr = useTr();
   useLocalizedMeta({ title: "تواصل معنا", description: "تواصل مع Weld Yard بشأن منتجات اللحام أو الهندسة أو فحص ضمان/مراقبة الجودة (QA/QC) أو Weld Yard DWM." });
-  const topics = [
+  const topics = ([
     ["General enquiry", "استفسار عام"],
     ["Welding Products", "منتجات اللحام"],
     ["Welding Engineering", "هندسة اللحام"],
     ["QA/QC & Inspection", "ضمان/مراقبة الجودة (QA/QC) والفحص"],
     ["Weld Yard DWM", "Weld Yard DWM"],
     ["Other", "أخرى"],
-  ].map(([en, ar]) => ({ value: en, label: tr(en, ar) }));
+  ] as [string, string][]).map(([en, ar]) => ({ value: en, label: tr(en, ar) }));
   return (
     <FormPage
       eyebrow={tr("Contact", "تواصل معنا")}

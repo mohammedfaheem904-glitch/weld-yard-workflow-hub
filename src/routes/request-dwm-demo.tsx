@@ -17,12 +17,12 @@ function Page() {
   const tr = useTr();
   const d = t(locale);
   useLocalizedMeta({ title: "طلب عرض تجريبي لـ DWM", description: "احجز جولة تعريفية في Weld Yard DWM، تطبيق الإدارة الرقمية للحام." });
-  const topics = [
+  const topics = ([
     ["1–10 people", "1–10 أشخاص"],
     ["11–50 people", "11–50 شخصاً"],
     ["51–200 people", "51–200 شخص"],
     ["200+ people", "أكثر من 200 شخص"],
-  ].map(([en, ar]) => ({ value: en, label: tr(en, ar) }));
+  ] as [string, string][]).map(([en, ar]) => ({ value: en, label: tr(en, ar) }));
   return (
     <FormPage
       eyebrow="Weld Yard DWM"

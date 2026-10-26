@@ -13,12 +13,12 @@ export const Route = createFileRoute("/request-quote")({
 function Page() {
   const tr = useTr();
   useLocalizedMeta({ title: "طلب عرض سعر", description: "اطلب عرض سعر من Weld Yard لمنتجات اللحام أو الهندسة أو خدمات فحص ضمان/مراقبة الجودة (QA/QC)." });
-  const topics = [
+  const topics = ([
     ["Welding Products", "منتجات اللحام"],
     ["Welding Engineering", "هندسة اللحام"],
     ["QA/QC & Inspection", "ضمان/مراقبة الجودة (QA/QC) والفحص"],
     ["Combined solution", "حل متكامل"],
-  ].map(([en, ar]) => ({ value: en, label: tr(en, ar) }));
+  ] as [string, string][]).map(([en, ar]) => ({ value: en, label: tr(en, ar) }));
   return (
     <FormPage
       eyebrow={tr("Request a Quote", "طلب عرض سعر")}

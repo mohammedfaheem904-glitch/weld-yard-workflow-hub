@@ -26,7 +26,7 @@ function Home() {
   return (
     <>
       <section className="relative overflow-hidden border-b">
-        <img src={hero} alt={tr("Welder working on a large steel pipe with sparks", "لحّام يعمل على أنبوب فولاذي كبير مع تطاير الشرر")} width={1640} height={1088} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover object-[70%_center] rtl:-scale-x-100" />
+        <img src={hero} alt={tr("Welder working on a large steel pipe with sparks", "لحّام يعمل على أنبوب فولاذي كبير مع تطاير الشرر")} width={1640} height={1088} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover object-[70%_center]" />
         <div aria-hidden className="absolute inset-0 bg-hero-fade" />
         <Container className="relative py-24 sm:py-32 lg:py-40">
           <div className="max-w-2xl">

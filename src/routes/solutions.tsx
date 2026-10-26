@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BUSINESS_AREAS } from "@/lib/site";
 import { seo } from "@/lib/seo";
+import { t } from "@/lib/i18n";
+import { loc, useLocale, useLocalizedMeta, useTr } from "@/lib/locale";
 import { btnDark, btnDarkOutline, Container, CtaBand, Lifecycle, PageHero, SectionHeading, TextLink } from "@/components/site/blocks";
 
 export const Route = createFileRoute("/solutions")({
@@ -9,30 +11,37 @@ export const Route = createFileRoute("/solutions")({
 });
 
 function Solutions() {
+  const { locale } = useLocale();
+  const tr = useTr();
+  const d = t(locale);
+  useLocalizedMeta({ title: "الحلول", description: "حلول Weld Yard: منتجات اللحام، هندسة اللحام، ضمان/مراقبة الجودة (QA/QC) والفحص، والإدارة الرقمية للحام." });
   return (
     <>
-      <PageHero eyebrow="Solutions" title="One partner across the welding lifecycle" intro="Products. Engineering. Inspection. Digital Welding Management. Use one service or combine them for a connected approach." />
+      <PageHero eyebrow={tr("Solutions", "الحلول")} title={tr("One partner across the welding lifecycle", "شريك واحد عبر دورة حياة اللحام")} intro={tr("Products. Engineering. Inspection. Digital Welding Management. Use one service or combine them for a connected approach.", "المنتجات. الهندسة. الفحص. الإدارة الرقمية للحام. استخدم خدمة واحدة أو اجمع بينها لنهج مترابط.")} />
       <section className="py-20">
         <Container className="grid gap-6 md:grid-cols-2">
-          {BUSINESS_AREAS.map((a) => (
-            <article key={a.n} className="border bg-card p-8 sm:p-10">
-              <span className="font-mono text-sm text-brand-ink">{a.n}</span>
-              <h2 className="mt-6 text-3xl font-extrabold">{a.title}</h2>
-              <p className="mt-4 text-muted-foreground">{a.body}</p>
-              <div className="mt-8"><TextLink to={a.to}>Explore {a.title}</TextLink></div>
-            </article>
-          ))}
+          {BUSINESS_AREAS.map((raw) => {
+            const a = loc(raw, locale);
+            return (
+              <article key={a.n} className="border bg-card p-8 sm:p-10">
+                <span className="font-mono text-sm text-brand-ink">{a.n}</span>
+                <h2 className="mt-6 text-3xl font-extrabold">{a.title}</h2>
+                <p className="mt-4 text-muted-foreground">{a.body}</p>
+                <div className="mt-8"><TextLink to={a.to}>{tr(`Explore ${a.title}`, `استكشف ${a.title}`)}</TextLink></div>
+              </article>
+            );
+          })}
         </Container>
       </section>
       <section className="border-t bg-card py-20">
         <Container>
-          <SectionHeading eyebrow="How it connects" title="From material to handover" />
+          <SectionHeading eyebrow={tr("How it connects", "كيف تترابط")} title={tr("From material to handover", "من المواد حتى التسليم")} />
           <div className="mt-12"><Lifecycle /></div>
         </Container>
       </section>
-      <CtaBand title="Not sure where to start?" body="Describe your requirement and we'll point you to the right solution.">
-        <Link to="/contact" className={btnDark}>Contact Our Team</Link>
-        <Link to="/request-quote" className={btnDarkOutline}>Request a Quote</Link>
+      <CtaBand title={tr("Not sure where to start?", "لست متأكداً من أين تبدأ؟")} body={tr("Describe your requirement and we'll point you to the right solution.", "صِف متطلباتك وسنرشدك إلى الحل المناسب.")}>
+        <Link to="/contact" className={btnDark}>{d.contactTeam}</Link>
+        <Link to="/request-quote" className={btnDarkOutline}>{d.requestQuote}</Link>
       </CtaBand>
     </>
   );

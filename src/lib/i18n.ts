@@ -1,5 +1,5 @@
-// Localization foundation. English ships now; Arabic strings are placeholders
-// to be reviewed by a native speaker before an Arabic version goes live.
+// Localization dictionary for shared UI. English is the default; Arabic should
+// be reviewed by a native-speaking welding professional before launch.
 import type { NavKey } from "./site";
 
 export type Locale = "en" | "ar";
@@ -9,43 +9,129 @@ export const LOCALES: Record<Locale, { label: string; dir: "ltr" | "rtl" }> = {
   ar: { label: "العربية", dir: "rtl" },
 };
 
-type Dict = {
-  nav: Record<NavKey, string>;
-  visitStore: string;
-  requestDemo: string;
-  requestQuote: string;
+const en = {
+  nav: {
+    home: "Home",
+    solutions: "Solutions",
+    products: "Products",
+    dwm: "DWM",
+    industries: "Industries",
+    about: "About",
+    contact: "Contact",
+  } as Record<NavKey, string>,
+  visitStore: "Visit Store",
+  requestDemo: "Request a DWM Demo",
+  requestQuote: "Request a Quote",
+  accessDwm: "Access DWM",
+  browseProducts: "Browse Products",
+  contactTeam: "Contact Our Team",
+  learnMore: "Learn more",
+  skip: "Skip to content",
+  homeLabel: "Weld Yard home",
+  openMenu: "Open menu",
+  closeMenu: "Close menu",
+  mainNav: "Main",
+  mobileNav: "Mobile",
+  langGroup: "Language",
+  switchToEn: "Switch to English",
+  switchToAr: "التبديل إلى العربية",
+  logoSub: "Integrated Welding Solutions",
+  tagline: "Weld Yard — Integrated Welding Solutions",
+  supporting: "Products. Engineering. Inspection. Digital Welding Management.",
+  footerSolutions: "Solutions",
+  footerCompany: "Company",
+  weldingProducts: "Welding Products",
+  weldingEngineering: "Welding Engineering",
+  qaqc: "QA/QC & Inspection",
+  weldYardDwm: "Weld Yard DWM",
+  aboutWeldYard: "About Weld Yard",
+  industries: "Industries",
+  contact: "Contact",
+  rights: "All rights reserved.",
+  form: {
+    name: "Full name",
+    email: "Work email",
+    company: "Company",
+    phone: "Phone",
+    topic: "Topic",
+    message: "Message",
+    send: "Send message",
+    sending: "Sending…",
+    required: "* Required fields",
+    errName: "Please enter your name",
+    errEmail: "Please enter a valid email",
+    errMessage: "Please add a short message",
+    errTooLong: "This entry is too long",
+    errSubmit: "Something went wrong sending your request. Please try again.",
+    sentTitle: "Thank you — your request was received.",
+    sentBody: "Our team will review it and get back to you.",
+    another: "Send another request",
+  },
 };
 
-export const DICTIONARY: Record<Locale, Dict> = {
-  en: {
-    nav: {
-      home: "Home",
-      solutions: "Solutions",
-      products: "Products",
-      dwm: "DWM",
-      industries: "Industries",
-      about: "About",
-      contact: "Contact",
-    },
-    visitStore: "Visit Store",
-    requestDemo: "Request a DWM Demo",
-    requestQuote: "Request a Quote",
+export type Dict = typeof en;
+
+const ar: Dict = {
+  nav: {
+    home: "الرئيسية",
+    solutions: "الحلول",
+    products: "المنتجات",
+    dwm: "DWM",
+    industries: "القطاعات",
+    about: "من نحن",
+    contact: "تواصل معنا",
   },
-  ar: {
-    nav: {
-      home: "الرئيسية",
-      solutions: "الحلول",
-      products: "المنتجات",
-      dwm: "DWM",
-      industries: "القطاعات",
-      about: "من نحن",
-      contact: "تواصل معنا",
-    },
-    visitStore: "زيارة المتجر",
-    requestDemo: "اطلب عرضاً لـ DWM",
-    requestQuote: "اطلب عرض سعر",
+  visitStore: "زيارة المتجر",
+  requestDemo: "طلب عرض تجريبي لـ DWM",
+  requestQuote: "طلب عرض سعر",
+  accessDwm: "الدخول إلى DWM",
+  browseProducts: "تصفح المنتجات",
+  contactTeam: "تواصل مع فريقنا",
+  learnMore: "اعرف المزيد",
+  skip: "انتقل إلى المحتوى",
+  homeLabel: "الصفحة الرئيسية لـ Weld Yard",
+  openMenu: "فتح القائمة",
+  closeMenu: "إغلاق القائمة",
+  mainNav: "القائمة الرئيسية",
+  mobileNav: "قائمة الجوال",
+  langGroup: "اللغة",
+  switchToEn: "Switch to English",
+  switchToAr: "التبديل إلى العربية",
+  logoSub: "حلول لحام متكاملة",
+  tagline: "Weld Yard — حلول لحام متكاملة",
+  supporting: "المنتجات. الهندسة. الفحص. الإدارة الرقمية للحام.",
+  footerSolutions: "الحلول",
+  footerCompany: "الشركة",
+  weldingProducts: "منتجات اللحام",
+  weldingEngineering: "هندسة اللحام",
+  qaqc: "ضمان الجودة / مراقبة الجودة (QA/QC) والفحص",
+  weldYardDwm: "Weld Yard DWM",
+  aboutWeldYard: "عن Weld Yard",
+  industries: "القطاعات",
+  contact: "تواصل معنا",
+  rights: "جميع الحقوق محفوظة.",
+  form: {
+    name: "الاسم الكامل",
+    email: "البريد الإلكتروني للعمل",
+    company: "الشركة",
+    phone: "الهاتف",
+    topic: "الموضوع",
+    message: "الرسالة",
+    send: "إرسال الرسالة",
+    sending: "جارٍ الإرسال…",
+    required: "* حقول إلزامية",
+    errName: "يرجى إدخال اسمك",
+    errEmail: "يرجى إدخال بريد إلكتروني صحيح",
+    errMessage: "يرجى كتابة رسالة قصيرة",
+    errTooLong: "هذا الإدخال طويل جداً",
+    errSubmit: "حدث خطأ أثناء إرسال طلبك. يرجى المحاولة مرة أخرى.",
+    sentTitle: "شكراً لك — تم استلام طلبك.",
+    sentBody: "سيراجع فريقنا طلبك ويتواصل معك.",
+    another: "إرسال طلب آخر",
   },
 };
+
+export const DICTIONARY: Record<Locale, Dict> = { en, ar };
 
 export function t(locale: Locale = DEFAULT_LOCALE) {
   return DICTIONARY[locale];

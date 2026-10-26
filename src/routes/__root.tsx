@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { DEFAULT_LOCALE, LOCALES } from "@/lib/i18n";
+import { LocaleProvider } from "@/lib/locale";
 
 function NotFoundComponent() {
   return (
@@ -127,12 +128,14 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <LocaleProvider>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <SiteHeader />
       <main id="main">
         <Outlet />
       </main>
       <SiteFooter />
+      </LocaleProvider>
     </QueryClientProvider>
   );
 }

@@ -13,6 +13,7 @@
   --font-display: "Archivo", "IBM Plex Sans Arabic", system-ui, sans-serif;
   --font-sans: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-arabic: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 2px);
@@ -78,6 +79,11 @@
   @media (min-width: 64rem) {
     background-image: var(--gradient-hero);
   }
+  [dir="rtl"] & {
+    @media (min-width: 64rem) {
+      background-image: linear-gradient(270deg, oklch(1 0 0 / 0.97) 0%, oklch(1 0 0 / 0.88) 45%, oklch(1 0 0 / 0.1) 100%);
+    }
+  }
 }
 
 @utility shadow-glow {
@@ -119,6 +125,18 @@
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
+  }
+  /* Arabic: Plex Sans Arabic for all text; no negative tracking on Arabic script. */
+  html[lang="ar"] body,
+  html[lang="ar"] h1,
+  html[lang="ar"] h2,
+  html[lang="ar"] h3,
+  html[lang="ar"] h4 {
+    font-family: var(--font-arabic);
+    letter-spacing: 0;
+  }
+  html[lang="ar"] .font-display {
+    font-family: var(--font-arabic);
   }
   :focus-visible {
     outline: 2px solid var(--color-ring);

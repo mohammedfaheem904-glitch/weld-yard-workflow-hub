@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
-import { LIFECYCLE } from "@/lib/site";
+import { LIFECYCLE, LIFECYCLE_AR } from "@/lib/site";
+import { useLocale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
 export function Container({ children, className }: { children: ReactNode; className?: string }) {
@@ -10,7 +11,7 @@ export function Container({ children, className }: { children: ReactNode; classN
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-ink">
+    <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-ink rtl:tracking-normal">
       <span aria-hidden className="h-px w-8 bg-primary" />
       {children}
     </p>
@@ -81,13 +82,15 @@ export function FeatureGrid({ items }: { items: readonly { title: string; body: 
 }
 
 export function Lifecycle() {
+  const { locale } = useLocale();
+  const stages = locale === "ar" ? LIFECYCLE_AR : LIFECYCLE;
   return (
     <ol className="grid gap-px border bg-border sm:grid-cols-2 lg:grid-cols-7">
-      {LIFECYCLE.map((s, i) => (
+      {stages.map((s, i) => (
         <li key={s} className="group relative bg-background p-5 transition-colors hover:bg-accent">
           <span className="font-mono text-xs text-brand-ink">{String(i + 1).padStart(2, "0")}</span>
           <p className="mt-6 font-display text-base font-bold leading-tight">{s}</p>
-          {i < LIFECYCLE.length - 1 && (
+          {i < stages.length - 1 && (
             <ArrowRight aria-hidden className="absolute end-3 top-5 hidden h-4 w-4 text-muted-foreground lg:block rtl:rotate-180" />
           )}
         </li>

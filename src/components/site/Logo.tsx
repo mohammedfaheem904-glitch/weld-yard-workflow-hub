@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { LOGO_IMAGE_URL, safeUrl } from "@/lib/site";
+import { useLocale } from "@/lib/locale";
+import { t } from "@/lib/i18n";
 
 // Official mark + brand text. The mark is decorative (alt="") because the
 // visible "WELD YARD" text already names the brand for screen readers.
@@ -7,6 +9,7 @@ export function Logo({ src = LOGO_IMAGE_URL }: { src?: string | null }) {
   const url = safeUrl(src);
   const [failed, setFailed] = useState(false);
   const showImage = url && !failed;
+  const { locale } = useLocale();
   return (
     <span className="flex items-center gap-2.5" data-testid={showImage ? "logo-official" : "logo-fallback"}>
       {showImage ? (
@@ -28,7 +31,7 @@ export function Logo({ src = LOGO_IMAGE_URL }: { src?: string | null }) {
       )}
       <span className="flex flex-col leading-none">
         <span className="font-display text-lg font-extrabold tracking-tight text-brand-wordmark">WELD YARD</span>
-        <span className="mt-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Integrated Welding Solutions</span>
+        <span className="mt-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground rtl:tracking-normal">{t(locale).logoSub}</span>
       </span>
     </span>
   );

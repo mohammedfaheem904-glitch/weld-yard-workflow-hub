@@ -18,10 +18,10 @@ describe("server-side inquiry validation", () => {
     const db = okDb();
     expect(await persistInquiry({ ...base, inquiryType }, db)).toEqual({ ok: true });
     const args = (db.rpc.mock.calls[0] as unknown[])[1] as Record<string, unknown>;
-    expect(args.p_inquiry_type).toBe(inquiryType);
-    expect(args.p_email).toBe("buyer@example.com");
-    expect(args.p_phone).toBeNull();
-    expect(args.p_recipient).toBe("system@weldyard.com");
+    expect(args["p_inquiry_type"]).toBe(inquiryType);
+    expect(args["p_email"]).toBe("buyer@example.com");
+    expect(args["p_phone"]).toBeNull();
+    expect(args["p_recipient"]).toBe("system@weldyard.com");
   });
 
   it.each([

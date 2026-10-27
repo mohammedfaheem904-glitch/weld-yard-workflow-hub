@@ -14,7 +14,8 @@
 - Store and DWM are separate external apps; only link to them via constants in `src/lib/site.ts` — never build commerce or DWM features here.
 - Shared site copy/data lives in `src/lib/site.ts`; UI strings meant for localization live in `src/lib/i18n.ts` — keeps English/Arabic switch feasible.
 - Use logical CSS utilities (start/end, ms/me) and `rtl:` variants so Arabic RTL works without layout rewrites.
-- All forms write to the single `inquiries` table (anon insert-only RLS) via `InquiryForm` — one place to manage submissions.
+- All forms submit via `InquiryForm` → `submitInquiry` server fn → `public.submit_inquiry` RPC (service role only), which writes the inquiry and its `inquiry_notifications` outbox row in one transaction; browsers have no table access — keeps validation server-side and notifications durable.
+- Email dispatch is gated by server env `INQUIRY_EMAIL_DISPATCH_ENABLED` (off unless "true"); no dispatcher or schedule exists yet — prevents accidental sends before the sender domain is verified.
 - Page metadata uses `seo()` from `src/lib/seo.ts` in each route's `head()`.
 - Language is client state (`LocaleProvider` in `src/lib/locale.tsx`, persisted in localStorage); URLs are identical in both languages and server/crawler metadata stays English — avoids duplicate routes until separate Arabic URLs are approved.
 - Translatable content: shared UI strings in `src/lib/i18n.ts`, data items carry an `ar` override read via `loc()`, page copy uses `useTr()(en, ar)`; form topic values stay English so stored inquiries are consistent.

@@ -20,6 +20,7 @@ export type Database = {
           created_at: string
           email: string
           id: string
+          idempotency_key: string | null
           inquiry_type: string
           message: string
           name: string
@@ -31,6 +32,7 @@ export type Database = {
           created_at?: string
           email: string
           id?: string
+          idempotency_key?: string | null
           inquiry_type: string
           message: string
           name: string
@@ -42,6 +44,7 @@ export type Database = {
           created_at?: string
           email?: string
           id?: string
+          idempotency_key?: string | null
           inquiry_type?: string
           message?: string
           name?: string
@@ -50,12 +53,87 @@ export type Database = {
         }
         Relationships: []
       }
+      inquiry_notifications: {
+        Row: {
+          attempts: number
+          created_at: string
+          event: string
+          id: string
+          inquiry_id: string
+          last_error: string | null
+          locked_at: string | null
+          max_attempts: number
+          next_attempt_at: string
+          provider_message_id: string | null
+          recipient: string
+          sent_at: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          attempts?: number
+          created_at?: string
+          event?: string
+          id?: string
+          inquiry_id: string
+          last_error?: string | null
+          locked_at?: string | null
+          max_attempts?: number
+          next_attempt_at?: string
+          provider_message_id?: string | null
+          recipient: string
+          sent_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          attempts?: number
+          created_at?: string
+          event?: string
+          id?: string
+          inquiry_id?: string
+          last_error?: string | null
+          locked_at?: string | null
+          max_attempts?: number
+          next_attempt_at?: string
+          provider_message_id?: string | null
+          recipient?: string
+          sent_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inquiry_notifications_inquiry_id_fkey"
+            columns: ["inquiry_id"]
+            isOneToOne: false
+            referencedRelation: "inquiries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      submit_inquiry: {
+        Args: {
+          p_company: string
+          p_email: string
+          p_idempotency_key: string
+          p_inquiry_type: string
+          p_message: string
+          p_name: string
+          p_phone: string
+          p_recipient: string
+          p_topic: string
+        }
+        Returns: {
+          duplicate: boolean
+          inquiry_id: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

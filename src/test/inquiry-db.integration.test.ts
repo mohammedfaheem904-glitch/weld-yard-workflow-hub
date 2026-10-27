@@ -105,6 +105,10 @@ describe.skipIf(!ready)("database: browser access is locked", () => {
     });
     expect(error).not.toBeNull();
   });
+  it("visitors cannot insert inquiries directly (server path only)", async () => {
+    const { error } = await anon.from("inquiries").insert({ inquiry_type: "contact", name: "x", email: "qa-test@example.com", message: "x" });
+    expect(error).not.toBeNull();
+  });
   it("visitors cannot read inquiries", async () => {
     const { data } = await anon.from("inquiries").select("id").limit(1);
     expect(data ?? []).toHaveLength(0);

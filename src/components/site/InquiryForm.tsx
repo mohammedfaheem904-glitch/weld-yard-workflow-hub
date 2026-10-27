@@ -1,11 +1,13 @@
-import { useMemo, useState, type FormEvent } from "react";
+import { useMemo, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { CheckCircle2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { submitInquiry } from "@/lib/inquiry.functions";
+import type { InquiryType } from "@/lib/inquiry-schema";
 import { t, type Dict } from "@/lib/i18n";
 import { useLocale } from "@/lib/locale";
 
-export type InquiryType = "contact" | "quote" | "dwm_demo";
+export type { InquiryType };
 
 // Schema limits are unchanged; only the messages follow the active language.
 export function inquirySchema(f: Dict["form"]) {
@@ -46,9 +48,13 @@ export function InquiryForm({
   const schema = useMemo(() => inquirySchema(f), [f]);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const send = useServerFn(submitInquiry);
+  // One key per submission attempt: a retried/double-clicked send is stored once.
+  const keyRef = useRef<string | null>(null);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (status === "sending") return;
     const form = e.currentTarget;
     const raw = Object.fromEntries(new FormData(form)) as Record<string, string>;
     const parsed = schema.safeParse(raw);
@@ -60,20 +66,30 @@ export function InquiryForm({
     }
     setErrors({});
     setStatus("sending");
+    keyRef.current ??= crypto.randomUUID();
     const v = parsed.data;
-    const { error } = await supabase.from("inquiries").insert({
-      inquiry_type: type,
-      name: v.name,
-      email: v.email,
-      company: v.company || null,
-      phone: v.phone || null,
-      topic: v.topic || null,
-      message: v.message,
-    });
-    if (error) {
+    try {
+      const res = await send({
+        data: {
+          inquiryType: type,
+          name: v.name,
+          email: v.email,
+          company: v.company,
+          phone: v.phone,
+          topic: v.topic,
+          message: v.message,
+          idempotencyKey: keyRef.current,
+        },
+      });
+      if (!res.ok) {
+        setStatus("error");
+        return;
+      }
+    } catch {
       setStatus("error");
       return;
     }
+    keyRef.current = null;
     form.reset();
     setStatus("sent");
   }

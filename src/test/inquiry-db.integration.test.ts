@@ -44,7 +44,7 @@ describe.skipIf(!ready)("database: atomic inquiry + outbox", () => {
 
   it.each(["contact", "quote", "dwm_demo"])("%s creates exactly one inquiry and one pending outbox row", async (t) => {
     const k = newKey();
-    expect(await persistInquiry(input(t, k), admin)).toEqual({ ok: true });
+    expect(await persistInquiry(input(t, k), admin, ctx())).toEqual({ ok: true });
     const { inq, out } = await rowsFor(k);
     expect(inq).toHaveLength(1);
     expect(out).toHaveLength(1);
@@ -53,8 +53,8 @@ describe.skipIf(!ready)("database: atomic inquiry + outbox", () => {
 
   it("is idempotent: the same key twice stores one inquiry and one outbox row", async () => {
     const k = newKey();
-    await persistInquiry(input("quote", k), admin);
-    await persistInquiry(input("quote", k), admin);
+    await persistInquiry(input("quote", k), admin, ctx());
+    await persistInquiry(input("quote", k), admin, ctx());
     const { inq, out } = await rowsFor(k);
     expect(inq).toHaveLength(1);
     expect(out).toHaveLength(1);
@@ -62,7 +62,7 @@ describe.skipIf(!ready)("database: atomic inquiry + outbox", () => {
 
   it("concurrent duplicate submits still store once", async () => {
     const k = newKey();
-    await Promise.all([1, 2, 3].map(() => persistInquiry(input("contact", k), admin)));
+    await Promise.all([1, 2, 3].map(() => persistInquiry(input("contact", k), admin, ctx())));
     const { inq, out } = await rowsFor(k);
     expect(inq).toHaveLength(1);
     expect(out).toHaveLength(1);

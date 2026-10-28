@@ -79,6 +79,7 @@ export function InquiryForm({
           topic: v.topic,
           message: v.message,
           idempotencyKey: keyRef.current,
+          hp: raw["company_website"] ?? "",
         },
       });
       if (!res.ok) {
@@ -112,7 +113,10 @@ export function InquiryForm({
   const describe = (k: Fields) => (errors[k] ? `${k}-err` : undefined);
 
   return (
-    <form onSubmit={onSubmit} noValidate className="grid gap-5 border bg-card p-6 sm:grid-cols-2 sm:p-8">
+    <form onSubmit={onSubmit} noValidate className="relative grid gap-5 border bg-card p-6 sm:grid-cols-2 sm:p-8">
+      <div aria-hidden="true" className="pointer-events-none absolute -start-[10000px] top-0 h-px w-px overflow-hidden opacity-0">
+        <input type="text" name="company_website" tabIndex={-1} autoComplete="off" defaultValue="" />
+      </div>
       <label className="text-sm font-semibold">
         {f.name} *
         <input name="name" dir="auto" autoComplete="name" required aria-required="true" className={field} aria-invalid={!!errors.name} aria-describedby={describe("name")} />

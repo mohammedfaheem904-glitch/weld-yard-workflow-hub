@@ -19,6 +19,8 @@ export const serverInquirySchema = z.object({
   topic: opt(LIMITS.topic),
   message: z.string().trim().min(1).max(LIMITS.message),
   idempotencyKey: z.string().uuid(),
+  /** Bot trap: must stay empty for genuine visitors. */
+  hp: z.string().max(500).optional().transform((v) => !!v && v.trim().length > 0),
 });
 export type ServerInquiryInput = z.infer<typeof serverInquirySchema>;
 

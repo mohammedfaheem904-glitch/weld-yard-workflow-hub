@@ -29,15 +29,54 @@ const rowsFor = async (k: string) => {
   const { data: out } = ids.length ? await admin.from("inquiry_notifications").select("*").in("inquiry_id", ids) : { data: [] };
   return { inq: inq ?? [], out: out ?? [] };
 };
+// Each test gets its own throwaway rate-limit bucket (cleaned up afterwards).
+const buckets: string[] = [];
+const ctx = (max = 50) => { const b = `test:${crypto.randomUUID()}`; buckets.push(b); return { bucket: b, limit: { max, windowSeconds: 600 } }; };
 
 afterAll(async () => {
   if (ready && keys.length) await admin.from("inquiries").delete().in("idempotency_key", keys);
+  if (ready && buckets.length) await admin.from("inquiry_rate_limits").delete().in("bucket", buckets);
+});
+
+describe.skipIf(!ready)("database: rate limiting", () => {
+  it("allows up to the limit, then blocks without storing", async () => {
+    const c = ctx(3);
+    const results = [];
+    for (let i = 0; i < 4; i++) results.push(await persistInquiry(input("contact", newKey()), admin, c));
+    expect(results.slice(0, 3)).toEqual([{ ok: true }, { ok: true }, { ok: true }]);
+    expect(results[3]).toEqual({ ok: false, error: "unavailable" });
+    const blockedKey = keys[keys.length - 1]!;
+    expect((await rowsFor(blockedKey)).inq).toHaveLength(0);
+  });
+
+  it("concurrent requests cannot exceed the limit", async () => {
+    const c = ctx(5);
+    const res = await Promise.all(Array.from({ length: 12 }, () => persistInquiry(input("quote", newKey()), admin, c)));
+    expect(res.filter((r) => r.ok)).toHaveLength(5);
+  });
+
+  it("visitors cannot read or call the rate limiter", async () => {
+    const r = await anon.from("inquiry_rate_limits").select("bucket").limit(1);
+    expect(r.error).not.toBeNull();
+    const f = await anon.rpc("consume_inquiry_rate_limit", { p_bucket: "x", p_limit: 5, p_window_seconds: 600 });
+    expect(f.error).not.toBeNull();
+  });
+});
+
+describe.skipIf(!ready)("database: bot trap", () => {
+  it.each(["contact", "quote", "dwm_demo"])("%s with filled trap creates no inquiry or notification", async (t) => {
+    const k = newKey();
+    expect(await persistInquiry({ ...input(t, k), hp: "spam" }, admin, ctx())).toEqual({ ok: true });
+    const { inq, out } = await rowsFor(k);
+    expect(inq).toHaveLength(0);
+    expect(out).toHaveLength(0);
+  });
 });
 
 describe.skipIf(!ready)("database: atomic inquiry + outbox", () => {
   it("leaves existing inquiries untouched", async () => {
     const { count: before } = await admin.from("inquiries").select("*", { count: "exact", head: true }).is("idempotency_key", null);
-    await persistInquiry(input("contact", newKey()), admin);
+    await persistInquiry(input("contact", newKey()), admin, ctx());
     const { count: after } = await admin.from("inquiries").select("*", { count: "exact", head: true }).is("idempotency_key", null);
     expect(after).toBe(before);
   });

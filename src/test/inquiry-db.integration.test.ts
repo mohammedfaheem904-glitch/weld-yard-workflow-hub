@@ -149,7 +149,13 @@ describe.skipIf(!ready)("database: browser access is locked", () => {
     expect(error).not.toBeNull();
   });
   it("visitors cannot read inquiries", async () => {
-    const { data } = await anon.from("inquiries").select("id").limit(1);
-    expect(data ?? []).toHaveLength(0);
+    const { error } = await anon.from("inquiries").select("id").limit(1);
+    expect(error).not.toBeNull();
+  });
+  it("visitors cannot update or delete inquiries (no table privileges at all)", async () => {
+    const upd = await anon.from("inquiries").update({ message: "x" }).eq("id", crypto.randomUUID());
+    expect(upd.error).not.toBeNull();
+    const del = await anon.from("inquiries").delete().eq("id", crypto.randomUUID());
+    expect(del.error).not.toBeNull();
   });
 });

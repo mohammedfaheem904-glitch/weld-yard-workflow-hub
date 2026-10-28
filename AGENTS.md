@@ -19,3 +19,4 @@
 - Page metadata uses `seo()` from `src/lib/seo.ts` in each route's `head()`.
 - Language is client state (`LocaleProvider` in `src/lib/locale.tsx`, persisted in localStorage); URLs are identical in both languages and server/crawler metadata stays English — avoids duplicate routes until separate Arabic URLs are approved.
 - Translatable content: shared UI strings in `src/lib/i18n.ts`, data items carry an `ar` override read via `loc()`, page copy uses `useTr()(en, ar)`; form topic values stay English so stored inquiries are consistent.
+- Inquiry abuse controls live server-side in `persistInquiry`: an empty-only bot-trap field (filled → generic success, nothing stored) and a database rate limit via `public.consume_inquiry_rate_limit` (service role only) keyed by a salted SHA-256 of the edge-set `cf-connecting-ip` header; never key limits on browser-controlled headers or fields — they are spoofable.

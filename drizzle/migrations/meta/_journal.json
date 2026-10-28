@@ -22,6 +22,20 @@
       "when": 1793084111086,
       "tag": "0002_inquiries_server_only_insert",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793152646944,
+      "tag": "0003_inquiries_revoke_browser_privileges",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793152651257,
+      "tag": "0004_inquiry_rate_limits",
+      "breakpoints": true
     }
   ]
 }

@@ -19,8 +19,8 @@ const base = {
   idempotencyKey: "7f1c3c1e-2b1a-4c4e-9a7e-1f2d3c4b5a69",
 };
 const ctx: PersistContext = { bucket: "ip:test", limit: { max: 5, windowSeconds: 600 } };
-const okDb = (allowed = true) => ({
-  rpc: vi.fn(async (fn: string) =>
+const okDb = (allowed = true) => ({ // rpc(fn, args)
+  rpc: vi.fn(async (fn: string, _args?: Record<string, unknown>) =>
     fn === "consume_inquiry_rate_limit"
       ? { data: allowed, error: null }
       : { data: [{ inquiry_id: "x", duplicate: false }], error: null },
@@ -56,7 +56,7 @@ describe("server-side inquiry validation", () => {
 
   it("returns a generic error and hides database details", async () => {
     const db = {
-      rpc: vi.fn(async (fn: string) =>
+      rpc: vi.fn(async (fn: string, _args?: Record<string, unknown>) =>
         fn === "consume_inquiry_rate_limit" ? { data: true, error: null } : { data: null, error: { code: "XX000", message: "secret internal detail" } },
       ),
     };

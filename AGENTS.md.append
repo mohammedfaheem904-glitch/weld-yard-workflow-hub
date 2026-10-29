@@ -1,0 +1,2 @@
+- Inquiry email dispatch lives in `src/lib/inquiry-mailer.server.ts`: claim via `public.claim_inquiry_notifications` (FOR UPDATE SKIP LOCKED, reclaims stale `processing`), finish via `public.complete_inquiry_notification` keyed by the claim token (both service role only); delivery is at-least-once with a per-notification provider Idempotency-Key, and the dispatcher must be awaited by a worker — never fired as an unawaited promise from the form handler.
+- Vitest runs files serially (`fileParallelism: false`) because integration tests share the live notification queue.

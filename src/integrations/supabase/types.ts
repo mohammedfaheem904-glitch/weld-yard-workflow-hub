@@ -142,6 +142,10 @@ export type Database = {
         Args: { p_bucket: string; p_limit: number; p_window_seconds: number }
         Returns: boolean
       }
+      prune_inquiry_rate_limits: {
+        Args: { p_retention?: string }
+        Returns: number
+      }
       submit_inquiry: {
         Args: {
           p_company: string

@@ -60,9 +60,9 @@ describe.skipIf(!ready)("rate-limit cleanup", () => {
       const b = `test:${crypto.randomUUID()}`;
       await seedStale(b);
       // Fire both at once; alternate start order to vary interleavings.
-      const [r1, r2] = i % 2
-        ? await Promise.all([prune(), refresh(b)])
-        : (await Promise.all([refresh(b), prune()])).reverse();
+      let r1, r2;
+      if (i % 2) [r1, r2] = await Promise.all([prune(), refresh(b)]);
+      else [r2, r1] = await Promise.all([refresh(b), prune()]);
       expect(r1.error).toBeNull();
       expect(r2.error).toBeNull();
       expect(r2.data).toBe(true);

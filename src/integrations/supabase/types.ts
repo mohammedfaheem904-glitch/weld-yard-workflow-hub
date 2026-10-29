@@ -138,6 +138,37 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      claim_inquiry_notifications: {
+        Args: { p_limit?: number; p_stale_after?: string }
+        Returns: {
+          attempts: number
+          claim_token: string
+          company: string
+          email: string
+          id: string
+          inquiry_created_at: string
+          inquiry_id: string
+          inquiry_type: string
+          max_attempts: number
+          message: string
+          name: string
+          phone: string
+          recipient: string
+          topic: string
+        }[]
+      }
+      complete_inquiry_notification: {
+        Args: {
+          p_claim_token: string
+          p_error?: string
+          p_id: string
+          p_permanent?: boolean
+          p_provider_message_id?: string
+          p_retry_delay_seconds?: number
+          p_success: boolean
+        }
+        Returns: string
+      }
       consume_inquiry_rate_limit: {
         Args: { p_bucket: string; p_limit: number; p_window_seconds: number }
         Returns: boolean

@@ -73,19 +73,19 @@ describe("retries and failures", () => {
     const db = fakeDb([note()]);
     const s = await dispatchPendingInquiryNotifications(db, ON, { transport: async () => ({ ok: true, id: "re_1" }) });
     expect(s).toMatchObject({ claimed: 1, sent: 1 });
-    expect(db.calls[1].args).toMatchObject({ p_id: "n1", p_claim_token: "2026-01-01T00:00:00Z", p_success: true, p_provider_message_id: "re_1" });
+    expect(db.calls[1]?.args).toMatchObject({ p_id: "n1", p_claim_token: "2026-01-01T00:00:00Z", p_success: true, p_provider_message_id: "re_1" });
   });
   it("schedules a transient retry with backoff", async () => {
     const db = fakeDb([note({ attempts: 2 })], "pending");
     const s = await dispatchPendingInquiryNotifications(db, ON, { transport: async () => ({ ok: false, status: 503, permanent: false }), log: () => {} });
     expect(s.retrying).toBe(1);
-    expect(db.calls[1].args).toMatchObject({ p_success: false, p_permanent: false, p_retry_delay_seconds: 300, p_error: "provider_http_503" });
+    expect(db.calls[1]?.args).toMatchObject({ p_success: false, p_permanent: false, p_retry_delay_seconds: 300, p_error: "provider_http_503" });
   });
   it("marks permanent failures terminal", async () => {
     const db = fakeDb([note()], "failed");
     const s = await dispatchPendingInquiryNotifications(db, ON, { transport: async () => ({ ok: false, status: 403, permanent: true }), log: () => {} });
     expect(s.failed).toBe(1);
-    expect(db.calls[1].args).toMatchObject({ p_permanent: true });
+    expect(db.calls[1]?.args).toMatchObject({ p_permanent: true });
   });
   it("counts a claim taken over by another worker as lost (duplicate-delivery risk is surfaced)", async () => {
     const db = fakeDb([note()], "lost_claim");

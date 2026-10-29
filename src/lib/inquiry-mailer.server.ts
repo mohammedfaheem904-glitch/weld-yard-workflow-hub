@@ -54,7 +54,7 @@ export function sanitizeError(r: Extract<SendResult, { ok: false }>): string {
   return r.status === 0 ? "network_error" : `provider_http_${r.status}`;
 }
 export function retryDelay(attempt: number): number {
-  return RETRY_DELAYS_SECONDS[Math.min(Math.max(attempt, 1), RETRY_DELAYS_SECONDS.length) - 1];
+  return RETRY_DELAYS_SECONDS[Math.min(Math.max(attempt, 1), RETRY_DELAYS_SECONDS.length) - 1] ?? 7500;
 }
 /** 4xx (except 408/409/429) are configuration/content problems — retrying will not help. */
 export function isPermanent(status: number): boolean {

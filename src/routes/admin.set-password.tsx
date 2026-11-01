@@ -81,7 +81,9 @@ function SetPassword() {
       <div className="w-full max-w-sm border bg-card p-8">
         <Logo />
         <h1 className="mt-6 text-2xl font-bold">{tr("Set your password", "تعيين كلمة المرور")}</h1>
-        {ready === false ? (
+        {ready === null ? (
+          <p role="status" className="mt-4 text-sm text-muted-foreground">{tr("Verifying your link…", "جارٍ التحقق من الرابط…")}</p>
+        ) : ready === false ? (
           <p role="alert" className="mt-4 text-sm text-muted-foreground">{tr("This setup link is invalid or has expired.", "رابط الإعداد غير صالح أو منتهي الصلاحية.")}</p>
         ) : (
           <form onSubmit={submit} className="mt-6 space-y-4">

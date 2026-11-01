@@ -3,7 +3,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { checkAdmin, listCommunications, updateInquiry } from "@/lib/communications.functions";
+import { checkAdmin, listCommunications, updateInquiry, logAdminEvent } from "@/lib/communications.functions";
+import { AuditLog } from "@/components/admin/AuditLog";
 import { STATUSES, subscribersCsv } from "@/lib/communications";
 import { useLocale, useTr } from "@/lib/locale";
 import { Logo } from "@/components/site/Logo";
@@ -36,6 +37,8 @@ const LABELS: Record<string, [string, string]> = {
   new: ["New", "جديد"], in_progress: ["In progress", "قيد المعالجة"], resolved: ["Resolved", "تم الحل"],
   contacted: ["Contacted", "تم التواصل"], demo_scheduled: ["Demo scheduled", "تمت جدولة العرض"],
   completed: ["Completed", "مكتمل"], not_interested: ["Not interested", "غير مهتم"],
+  under_review: ["Under review", "قيد المراجعة"], quotation_in_preparation: ["Quotation in preparation", "جارٍ إعداد عرض السعر"],
+  quotation_sent: ["Quotation sent", "تم إرسال عرض السعر"], won: ["Won", "تم الفوز"], lost: ["Lost", "خسارة"],
   active: ["Active", "نشط"], unsubscribed: ["Unsubscribed", "ألغى الاشتراك"],
   contact: ["Contact", "تواصل"], dwm_demo: ["DWM demo", "عرض DWM"], quote: ["Quote", "عرض سعر"], newsletter: ["Newsletter", "النشرة"],
 };
@@ -48,6 +51,7 @@ function CommunicationsPage() {
   const admin = useQuery({ queryKey: ["admin-check"], queryFn: () => fetchAdmin() });
 
   async function signOut() {
+    try { await logAdminEvent({ data: { action: "sign_out" } }); } catch { /* not an admin or offline */ }
     await qc.cancelQueries();
     qc.clear();
     await supabase.auth.signOut();
@@ -92,6 +96,7 @@ function Inbox() {
   const { inquiries, subscribers } = q.data;
   const contacts = inquiries.filter((i) => i.inquiry_type === "contact");
   const demos = inquiries.filter((i) => i.inquiry_type === "dwm_demo");
+  const quotes = inquiries.filter((i) => i.inquiry_type === "quote");
   const current = selected && "inquiry_type" in selected ? inquiries.find((i) => i.id === selected.id) ?? null : selected;
 
   const cards: [string, number][] = [
@@ -120,11 +125,15 @@ function Inbox() {
           <TabsTrigger value="newsletter">{tr("Newsletter subscribers", "مشتركو النشرة")}</TabsTrigger>
           <TabsTrigger value="contact">{tr("Contact messages", "رسائل التواصل")}</TabsTrigger>
           <TabsTrigger value="dwm">{tr("Request a DWM demo", "طلبات عرض DWM")}</TabsTrigger>
+          <TabsTrigger value="quote">{tr("Quote requests", "طلبات عروض الأسعار")}</TabsTrigger>
+          <TabsTrigger value="audit">{tr("Admin audit log", "سجل تدقيق المسؤولين")}</TabsTrigger>
         </TabsList>
         <TabsContent value="all"><UnifiedList inquiries={inquiries} subscribers={subscribers} onOpen={setSelected} /></TabsContent>
         <TabsContent value="newsletter"><SubscriberList rows={subscribers} onOpen={setSelected} /></TabsContent>
         <TabsContent value="contact"><InquiryList rows={contacts} kind="contact" onOpen={setSelected} /></TabsContent>
         <TabsContent value="dwm"><InquiryList rows={demos} kind="dwm_demo" onOpen={setSelected} /></TabsContent>
+        <TabsContent value="quote"><InquiryList rows={quotes} kind="quote" onOpen={setSelected} /></TabsContent>
+        <TabsContent value="audit"><AuditLog /></TabsContent>
       </Tabs>
       <Sheet open={!!current} onOpenChange={(o) => !o && setSelected(null)}>
         <SheetContent className="w-full overflow-y-auto sm:max-w-lg">
@@ -190,7 +199,11 @@ function SubscriberList({ rows, onOpen }: { rows: Subscriber[]; onOpen: (s: Subs
   const [sort, setSort] = useState<"desc" | "asc">("desc");
   const list = sortBy(rows.filter((r) => (!status || r.status === status) && r.email.includes(search.trim().toLowerCase())), sort);
 
-  function exportCsv() {
+  const logEvent = useServerFn(logAdminEvent);
+  const qc = useQueryClient();
+  async function exportCsv() {
+    try { await logEvent({ data: { action: "newsletter_export", count: list.length } }); } catch { return; }
+    qc.invalidateQueries({ queryKey: ["audit-logs"] });
     const blob = new Blob([subscribersCsv(list)], { type: "text/csv;charset=utf-8" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
@@ -219,16 +232,22 @@ function SubscriberList({ rows, onOpen }: { rows: Subscriber[]; onOpen: (s: Subs
   );
 }
 
-function InquiryList({ rows, kind, onOpen }: { rows: Inquiry[]; kind: "contact" | "dwm_demo"; onOpen: (i: Inquiry) => void }) {
+function InquiryList({ rows, kind, onOpen }: { rows: Inquiry[]; kind: "contact" | "dwm_demo" | "quote"; onOpen: (i: Inquiry) => void }) {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
   const [sort, setSort] = useState<"desc" | "asc">("desc");
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const tr = useTr();
   const s = search.trim().toLowerCase();
-  const list = sortBy(rows.filter((r) => (!status || r.status === status) &&
+  const list = sortBy(rows.filter((r) => (!status || r.status === status) && (!from || r.created_at >= from) && (!to || r.created_at.slice(0, 10) <= to) &&
     (!s || [r.name, r.email, r.company, r.topic, r.message].some((v) => v?.toLowerCase().includes(s)))), sort);
   return (
     <>
-      <Toolbar {...{ search, setSearch, status, setStatus, sort, setSort }} statuses={STATUSES[kind]} />
+      <Toolbar {...{ search, setSearch, status, setStatus, sort, setSort }} statuses={STATUSES[kind]} extra={<>
+        <label className="flex items-center gap-2 text-sm">{tr("From", "من")}<Input type="date" className="h-9 w-auto" value={from} onChange={(e) => setFrom(e.target.value)} /></label>
+        <label className="flex items-center gap-2 text-sm">{tr("To", "إلى")}<Input type="date" className="h-9 w-auto" value={to} onChange={(e) => setTo(e.target.value)} /></label>
+      </>} />
       {list.length === 0 ? <Empty /> : <ul className="divide-y border bg-card">{list.map((i) => <InquiryRow key={i.id} row={i} onOpen={onOpen} />)}</ul>}
     </>
   );
@@ -344,7 +363,7 @@ function InquiryDetail({ row }: { row: Inquiry }) {
   const [notes, setNotes] = useState(row.admin_notes ?? "");
   const m = useMutation({
     mutationFn: (d: { status?: string; read?: boolean; notes?: string }) => update({ data: { id: row.id, ...d } }),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["communications"] }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["communications"] }); qc.invalidateQueries({ queryKey: ["audit-logs"] }); },
   });
   const statuses = STATUSES[row.inquiry_type as keyof typeof STATUSES] ?? [];
   const isDemo = row.inquiry_type === "dwm_demo";

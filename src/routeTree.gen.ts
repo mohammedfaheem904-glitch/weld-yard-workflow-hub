@@ -23,6 +23,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as WeldingEngineeringRouteImport } from './routes/welding-engineering'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminSetPasswordRouteImport } from './routes/admin.set-password'
 import { Route as AuthenticatedAdminCommunicationsRouteImport } from './routes/_authenticated/admin.communications'
 
 const IndexRoute = IndexRouteImport.update({
@@ -94,6 +95,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminSetPasswordRoute = AdminSetPasswordRouteImport.update({
+  id: '/admin/set-password',
+  path: '/admin/set-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminCommunicationsRoute =
   AuthenticatedAdminCommunicationsRouteImport.update({
     id: '/admin/communications',
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/solutions': typeof SolutionsRoute
   '/welding-engineering': typeof WeldingEngineeringRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/set-password': typeof AdminSetPasswordRoute
   '/admin/communications': typeof AuthenticatedAdminCommunicationsRoute
 }
 export interface FileRoutesByTo {
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/solutions': typeof SolutionsRoute
   '/welding-engineering': typeof WeldingEngineeringRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/set-password': typeof AdminSetPasswordRoute
   '/admin/communications': typeof AuthenticatedAdminCommunicationsRoute
 }
 export interface FileRoutesById {
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/solutions': typeof SolutionsRoute
   '/welding-engineering': typeof WeldingEngineeringRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/set-password': typeof AdminSetPasswordRoute
   '/_authenticated/admin/communications': typeof AuthenticatedAdminCommunicationsRoute
 }
 export interface FileRouteTypes {
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
     | '/solutions'
     | '/welding-engineering'
     | '/admin/login'
+    | '/admin/set-password'
     | '/admin/communications'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -183,6 +193,7 @@ export interface FileRouteTypes {
     | '/solutions'
     | '/welding-engineering'
     | '/admin/login'
+    | '/admin/set-password'
     | '/admin/communications'
   id:
     | '__root__'
@@ -200,6 +211,7 @@ export interface FileRouteTypes {
     | '/solutions'
     | '/welding-engineering'
     | '/admin/login'
+    | '/admin/set-password'
     | '/_authenticated/admin/communications'
   fileRoutesById: FileRoutesById
 }
@@ -218,6 +230,7 @@ export interface RootRouteChildren {
   SolutionsRoute: typeof SolutionsRoute
   WeldingEngineeringRoute: typeof WeldingEngineeringRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminSetPasswordRoute: typeof AdminSetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -320,6 +333,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/set-password': {
+      id: '/admin/set-password'
+      path: '/admin/set-password'
+      fullPath: '/admin/set-password'
+      preLoaderRoute: typeof AdminSetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/admin/communications': {
       id: '/_authenticated/admin/communications'
       path: '/admin/communications'
@@ -356,6 +376,7 @@ const rootRouteChildren: RootRouteChildren = {
   SolutionsRoute: SolutionsRoute,
   WeldingEngineeringRoute: WeldingEngineeringRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AdminSetPasswordRoute: AdminSetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

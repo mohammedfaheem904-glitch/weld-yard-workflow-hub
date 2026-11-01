@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_audit_logs: {
+        Row: {
+          action: string
+          actor_email: string | null
+          actor_user_id: string
+          created_at: string
+          entity_id: string | null
+          entity_type: string
+          id: string
+          new_values: Json | null
+          old_values: Json | null
+        }
+        Insert: {
+          action: string
+          actor_email?: string | null
+          actor_user_id: string
+          created_at?: string
+          entity_id?: string | null
+          entity_type: string
+          id?: string
+          new_values?: Json | null
+          old_values?: Json | null
+        }
+        Update: {
+          action?: string
+          actor_email?: string | null
+          actor_user_id?: string
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string
+          id?: string
+          new_values?: Json | null
+          old_values?: Json | null
+        }
+        Relationships: []
+      }
       inquiries: {
         Row: {
           admin_notes: string | null
@@ -201,6 +237,28 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_log_event: {
+        Args: {
+          p_action: string
+          p_actor: string
+          p_entity_id: string
+          p_entity_type: string
+          p_new: Json
+          p_old: Json
+        }
+        Returns: undefined
+      }
+      admin_update_inquiry: {
+        Args: {
+          p_actor: string
+          p_id: string
+          p_notes: string
+          p_read: boolean
+          p_set_notes: boolean
+          p_status: string
+        }
+        Returns: string
+      }
       claim_inquiry_notifications: {
         Args: { p_limit?: number; p_stale_after?: string }
         Returns: {

@@ -3,7 +3,7 @@ import { z } from "zod";
 /** Statuses an admin may set, per inquiry type. Must stay within the DB CHECK constraint. */
 export const STATUSES = {
   contact: ["new", "in_progress", "resolved"],
-  quote: ["new", "in_progress", "resolved"],
+  quote: ["new", "under_review", "quotation_in_preparation", "quotation_sent", "won", "lost"],
   dwm_demo: ["new", "contacted", "demo_scheduled", "completed", "not_interested"],
 } as const;
 

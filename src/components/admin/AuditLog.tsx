@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { listAuditLogs } from "@/lib/communications.functions";
+import { formatAdminDateTime } from "@/lib/communications";
 import { useLocale, useTr } from "@/lib/locale";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -28,7 +29,7 @@ export function AuditLog() {
   const tr = useTr();
   const { locale } = useLocale();
   const L = (m: Record<string, [string, string]>, k: string) => (m[k] ? m[k][locale === "ar" ? 1 : 0] : k);
-  const date = (d: string) => new Date(d).toLocaleString(locale === "ar" ? "ar" : "en-GB", { dateStyle: "medium", timeStyle: "short" });
+  const date = (d: string) => formatAdminDateTime(d, locale === "ar" ? "ar" : "en");
   const fetchLogs = useServerFn(listAuditLogs);
   const q = useQuery({ queryKey: ["audit-logs"], queryFn: () => fetchLogs() });
   const [search, setSearch] = useState("");
@@ -92,7 +93,7 @@ export function AuditLog() {
                   <span className="font-medium">{L(ACTIONS, l.action)}</span>
                   <span dir="ltr" className="text-sm text-muted-foreground">{l.actor_email ?? l.actor_user_id}</span>
                 </span>
-                <span className="text-sm text-muted-foreground">{date(l.created_at)}</span>
+                <time dateTime={l.created_at} className="text-sm text-muted-foreground [unicode-bidi:isolate]">{date(l.created_at)}</time>
               </button>
             </li>
           ))}
@@ -123,7 +124,7 @@ export function AuditLog() {
                 ] as [string, string, boolean][]).map(([k, v, ltr]) => (
                   <div key={k}>
                     <dt className="text-xs uppercase tracking-wide text-muted-foreground">{k}</dt>
-                    <dd dir={ltr ? "ltr" : undefined} className="whitespace-pre-wrap break-words text-start rtl:text-end">{v}</dd>
+                    <dd dir={ltr ? "ltr" : undefined} className="whitespace-pre-wrap break-words text-start rtl:text-end [unicode-bidi:isolate]">{v}</dd>
                   </div>
                 ))}
               </dl>

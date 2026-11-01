@@ -150,7 +150,7 @@ function useLabel() {
 }
 function useDate() {
   const { locale } = useLocale();
-  return (d: string | null) => (d ? new Date(d).toLocaleString(locale === "ar" ? "ar" : "en-GB", { dateStyle: "medium", timeStyle: "short" }) : "—");
+  return (d: string | null) => formatAdminDateTime(d, locale === "ar" ? "ar" : "en");
 }
 
 function StatusBadge({ status }: { status: string }) {

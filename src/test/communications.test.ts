@@ -27,3 +27,13 @@ describe("communications rules", () => {
     expect(subscribersCsv([{ email: "=cmd()", status: "active", created_at: "", updated_at: "", unsubscribed_at: null }])).toContain("'=cmd()");
   });
 });
+
+import { formatAdminDateTime } from "@/lib/communications";
+describe("admin date format", () => {
+  it("uses Latin digits and 24h time in Arabic", () => {
+    const s = formatAdminDateTime("2026-11-01T18:05:00Z", "ar");
+    expect(s).toMatch(/2026/);
+    expect(s).not.toMatch(/[٠-٩]/);
+  });
+  it("returns a dash for missing dates", () => expect(formatAdminDateTime(null, "en")).toBe("—"));
+});

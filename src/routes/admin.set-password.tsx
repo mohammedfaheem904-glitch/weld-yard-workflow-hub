@@ -31,9 +31,37 @@ function SetPassword() {
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((_e, session) => { if (session) setReady(true); });
-    supabase.auth.getSession().then(({ data: d }) => setReady((r) => r || !!d.session));
-    return () => data.subscription.unsubscribe();
+    let cancelled = false;
+    const ok = () => { if (!cancelled) setReady(true); };
+    const fail = () => { if (!cancelled) setReady((r) => (r ? r : false)); };
+    const { data } = supabase.auth.onAuthStateChange((_e, session) => { if (session) ok(); });
+
+    (async () => {
+      const url = new URL(window.location.href);
+      const hash = new URLSearchParams(url.hash.replace(/^#/, ""));
+      if (hash.get("error") || url.searchParams.get("error")) return fail();
+      try {
+        const code = url.searchParams.get("code");
+        const at = hash.get("access_token");
+        const rt = hash.get("refresh_token");
+        if (code) {
+          const { error } = await supabase.auth.exchangeCodeForSession(code);
+          if (!error) { window.history.replaceState(null, "", url.pathname); return ok(); }
+        } else if (at && rt) {
+          const { error } = await supabase.auth.setSession({ access_token: at, refresh_token: rt });
+          if (!error) { window.history.replaceState(null, "", url.pathname); return ok(); }
+        }
+      } catch { /* fall through to session check */ }
+      // Give the auth client time to finish restoring any session before deciding.
+      for (let i = 0; i < 8 && !cancelled; i++) {
+        const { data: d } = await supabase.auth.getSession();
+        if (d.session) return ok();
+        await new Promise((r) => setTimeout(r, 500));
+      }
+      fail();
+    })();
+
+    return () => { cancelled = true; data.subscription.unsubscribe(); };
   }, []);
 
   async function submit(e: React.FormEvent) {
@@ -53,7 +81,9 @@ function SetPassword() {
       <div className="w-full max-w-sm border bg-card p-8">
         <Logo />
         <h1 className="mt-6 text-2xl font-bold">{tr("Set your password", "تعيين كلمة المرور")}</h1>
-        {ready === false ? (
+        {ready === null ? (
+          <p role="status" className="mt-4 text-sm text-muted-foreground">{tr("Verifying your link…", "جارٍ التحقق من الرابط…")}</p>
+        ) : ready === false ? (
           <p role="alert" className="mt-4 text-sm text-muted-foreground">{tr("This setup link is invalid or has expired.", "رابط الإعداد غير صالح أو منتهي الصلاحية.")}</p>
         ) : (
           <form onSubmit={submit} className="mt-6 space-y-4">

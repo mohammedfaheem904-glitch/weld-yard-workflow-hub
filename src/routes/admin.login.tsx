@@ -1,3 +1,4 @@
+import { logAdminEvent } from "@/lib/communications.functions";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -35,6 +36,7 @@ function AdminLogin() {
     const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
     setBusy(false);
     if (error) return setError(tr("Sign in failed. Check your email and password.", "فشل تسجيل الدخول. تحقق من البريد وكلمة المرور."));
+    try { await logAdminEvent({ data: { action: "sign_in" } }); } catch { /* non-admins are not logged */ }
     navigate({ to: "/admin/communications", replace: true });
   }
 

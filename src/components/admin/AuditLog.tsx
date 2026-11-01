@@ -124,7 +124,7 @@ export function AuditLog() {
                 ] as [string, string, boolean][]).map(([k, v, ltr]) => (
                   <div key={k}>
                     <dt className="text-xs uppercase tracking-wide text-muted-foreground">{k}</dt>
-                    <dd dir={ltr ? "ltr" : undefined} className="whitespace-pre-wrap break-words text-start rtl:text-end [unicode-bidi:isolate]">{v}</dd>
+                    <dd dir={ltr ? "ltr" : locale === "ar" ? "rtl" : "ltr"} className="whitespace-pre-wrap break-words text-start rtl:text-end [unicode-bidi:isolate]">{v}</dd>
                   </div>
                 ))}
               </dl>

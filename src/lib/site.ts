@@ -136,6 +136,17 @@ export const CONTACT: {
   registration: null,
 };
 
+// Official social profiles (confirmed by Weld Yard). YouTube is intentionally
+// absent until an official URL exists — never add a placeholder.
+export type SocialKey = "facebook" | "linkedin" | "instagram" | "whatsapp";
+export const WHATSAPP_NUMBER = "+201014565099";
+export const SOCIAL_LINKS: { key: SocialKey; name: string; url: string; label: string; labelAr: string }[] = [
+  { key: "facebook", name: "Facebook", url: "https://www.facebook.com/weldyardco", label: "Weld Yard on Facebook (opens in a new tab)", labelAr: "Weld Yard على فيسبوك (يفتح في علامة تبويب جديدة)" },
+  { key: "linkedin", name: "LinkedIn", url: "https://www.linkedin.com/company/weld-yard", label: "Weld Yard on LinkedIn (opens in a new tab)", labelAr: "Weld Yard على لينكدإن (يفتح في علامة تبويب جديدة)" },
+  { key: "instagram", name: "Instagram", url: "https://www.instagram.com/weld_yard", label: "Weld Yard on Instagram (opens in a new tab)", labelAr: "Weld Yard على إنستغرام (يفتح في علامة تبويب جديدة)" },
+  { key: "whatsapp", name: "WhatsApp", url: `https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g, "")}`, label: "Chat with Weld Yard on WhatsApp (opens in a new tab)", labelAr: "تواصل مع Weld Yard عبر واتساب (يفتح في علامة تبويب جديدة)" },
+];
+
 // Official 1200x630 share image (absolute production URL; file lives at public/og-image.png).
 export const SHARE_IMAGE_URL: string | null = "https://www.weldyard.com/og-image.png";
 

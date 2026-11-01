@@ -3,6 +3,8 @@ import { CONTACT, DWM_URL, STORE_URL } from "@/lib/site";
 import { t } from "@/lib/i18n";
 import { useLocale } from "@/lib/locale";
 import { Logo } from "./Logo";
+import { NewsletterSignup } from "./NewsletterSignup";
+import { SocialLinks } from "./SocialLinks";
 
 export function SiteFooter() {
   const { locale } = useLocale();
@@ -53,6 +55,15 @@ export function SiteFooter() {
             </ul>
           </div>
         ))}
+      </div>
+      <div className="border-t">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1fr_auto] md:items-end">
+          <NewsletterSignup />
+          <div>
+            <h2 className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-brand-ink rtl:tracking-normal">{d.followUs}</h2>
+            <SocialLinks />
+          </div>
+        </div>
       </div>
       <div className="border-t">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6">

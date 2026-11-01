@@ -35,3 +35,11 @@ export function subscribersCsv(rows: SubscriberRow[]): string {
   const head = "email,status,subscribed_at,updated_at,unsubscribed_at";
   return [head, ...rows.map((r) => [r.email, r.status, r.created_at, r.updated_at, r.unsubscribed_at].map(cell).join(","))].join("\n");
 }
+
+/** Admin date/time: Latin digits in both languages so timestamps read in a fixed order inside RTL. */
+export function formatAdminDateTime(d: string | null, locale: "en" | "ar"): string {
+  if (!d) return "—";
+  return new Intl.DateTimeFormat(locale === "ar" ? "ar-u-nu-latn" : "en-GB", {
+    year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+  }).format(new Date(d));
+}

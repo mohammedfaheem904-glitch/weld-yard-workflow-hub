@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { checkAdmin, listCommunications, updateInquiry, logAdminEvent } from "@/lib/communications.functions";
 import { AuditLog } from "@/components/admin/AuditLog";
-import { STATUSES, subscribersCsv } from "@/lib/communications";
+import { STATUSES, subscribersCsv, formatAdminDateTime } from "@/lib/communications";
 import { useLocale, useTr } from "@/lib/locale";
 import { Logo } from "@/components/site/Logo";
 import { LanguageSwitcher } from "@/components/site/LanguageSwitcher";
@@ -150,7 +150,7 @@ function useLabel() {
 }
 function useDate() {
   const { locale } = useLocale();
-  return (d: string | null) => (d ? new Date(d).toLocaleString(locale === "ar" ? "ar" : "en-GB", { dateStyle: "medium", timeStyle: "short" }) : "—");
+  return (d: string | null) => formatAdminDateTime(d, locale === "ar" ? "ar" : "en");
 }
 
 function StatusBadge({ status }: { status: string }) {

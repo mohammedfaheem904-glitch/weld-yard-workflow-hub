@@ -67,6 +67,19 @@ const en = {
     sentBody: "Our team will review it and get back to you.",
     another: "Send another request",
   },
+  newsletter: {
+    title: "Newsletter",
+    copy: "Subscribe to our newsletter and be among the first to know the latest from Weld Yard.",
+    label: "Email address",
+    placeholder: "you@company.com",
+    button: "Subscribe",
+    loading: "Subscribing…",
+    success: "Thank you — your subscription has been recorded.",
+    errEmpty: "Please enter your email address",
+    errInvalid: "Please enter a valid email address",
+    errSubmit: "We couldn't complete your subscription right now. Please try again later.",
+  },
+  followUs: "Follow us",
 };
 
 export type Dict = typeof en;
@@ -129,6 +142,19 @@ const ar: Dict = {
     sentBody: "سيراجع فريقنا طلبك ويتواصل معك.",
     another: "إرسال طلب آخر",
   },
+  newsletter: {
+    title: "النشرة البريدية",
+    copy: "اشترك في نشرتنا البريدية لتكون من أوائل من يعرف آخر أخبار Weld Yard.",
+    label: "البريد الإلكتروني",
+    placeholder: "you@company.com",
+    button: "اشترك",
+    loading: "جارٍ الاشتراك…",
+    success: "شكراً لك — تم تسجيل اشتراكك.",
+    errEmpty: "يرجى إدخال بريدك الإلكتروني",
+    errInvalid: "يرجى إدخال بريد إلكتروني صحيح",
+    errSubmit: "تعذّر إتمام الاشتراك الآن. يرجى المحاولة لاحقاً.",
+  },
+  followUs: "تابعونا",
 };
 
 export const DICTIONARY: Record<Locale, Dict> = { en, ar };

@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { isAllowedStatus, updateInquirySchema } from "./communications";
 
@@ -39,7 +40,7 @@ export const listCommunications = createServerFn({ method: "GET" })
     return { inquiries: inq.data, subscribers: subs.data };
   });
 
-/** Update status / read flag / internal note on one inquiry. */
+/** Update status / read flag / internal note on one inquiry; audited atomically in the DB. */
 export const updateInquiry = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => updateInquirySchema.parse(d))
@@ -48,14 +49,54 @@ export const updateInquiry = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: row } = await supabaseAdmin.from("inquiries").select("inquiry_type").eq("id", data.id).single();
     if (!row) throw new Error("Not found");
-    const patch: { status?: string; read_at?: string | null; admin_notes?: string | null; updated_at: string } = { updated_at: new Date().toISOString() };
-    if (data.status !== undefined) {
-      if (!isAllowedStatus(row.inquiry_type, data.status)) throw new Error("Invalid status");
-      patch.status = data.status;
-    }
-    if (data.read !== undefined) patch.read_at = data.read ? new Date().toISOString() : null;
-    if (data.notes !== undefined) patch.admin_notes = data.notes.trim() || null;
-    const { error } = await supabaseAdmin.from("inquiries").update(patch).eq("id", data.id);
-    if (error) throw new Error("Update failed");
+    if (data.status !== undefined && !isAllowedStatus(row.inquiry_type, data.status)) throw new Error("Invalid status");
+    const { data: res, error } = await supabaseAdmin.rpc("admin_update_inquiry", {
+      p_actor: context.userId,
+      p_id: data.id,
+      p_status: data.status ?? (null as unknown as string),
+      p_read: data.read ?? (null as unknown as boolean),
+      p_notes: data.notes ?? (null as unknown as string),
+      p_set_notes: data.notes !== undefined,
+    });
+    if (error || res !== "ok") throw new Error("Update failed");
     return { ok: true };
+  });
+
+const logEventSchema = z.object({
+  action: z.enum(["sign_in", "sign_out", "newsletter_export"]),
+  count: z.number().int().min(0).max(100000).optional(),
+});
+
+/** Record a client-initiated admin event. Actor always comes from the verified session. */
+export const logAdminEvent = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => logEventSchema.parse(d))
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context as unknown as Ctx);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const isExport = data.action === "newsletter_export";
+    const { error } = await supabaseAdmin.rpc("admin_log_event", {
+      p_actor: context.userId,
+      p_action: data.action,
+      p_entity_type: isExport ? "newsletter" : "auth",
+      p_entity_id: null as unknown as string,
+      p_old: null as unknown as never,
+      p_new: (isExport ? { rows: data.count ?? 0 } : null) as never,
+    });
+    if (error) throw new Error("Audit failed");
+    return { ok: true };
+  });
+
+/** Audit log, admin only. Read through the admin's own client so RLS also applies. */
+export const listAuditLogs = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await assertAdmin(context as unknown as Ctx);
+    const { data, error } = await context.supabase
+      .from("admin_audit_logs")
+      .select("id, actor_user_id, actor_email, action, entity_type, entity_id, old_values, new_values, created_at")
+      .order("created_at", { ascending: false })
+      .limit(5000);
+    if (error) throw new Error("Could not load audit log");
+    return { logs: data };
   });

@@ -88,7 +88,8 @@ function CommunicationsPage() {
 function Inbox() {
   const tr = useTr();
   const fetchAll = useServerFn(listCommunications);
-  const q = useQuery({ queryKey: ["communications"], queryFn: () => fetchAll() });
+  // Always read live from the database; poll so new public submissions appear without a manual reload.
+  const q = useQuery({ queryKey: ["communications"], queryFn: () => fetchAll(), refetchInterval: 15_000, refetchOnWindowFocus: true, staleTime: 0 });
   const [selected, setSelected] = useState<Inquiry | Subscriber | null>(null);
 
   if (q.isPending) return <p className="text-muted-foreground">{tr("Loading…", "جارٍ التحميل…")}</p>;
@@ -103,15 +104,23 @@ function Inbox() {
     [tr("Newsletter subscribers", "مشتركو النشرة"), subscribers.filter((s) => s.status === "active").length],
     [tr("New contact messages", "رسائل تواصل جديدة"), contacts.filter((i) => i.status === "new").length],
     [tr("New DWM demo requests", "طلبات عرض DWM جديدة"), demos.filter((i) => i.status === "new").length],
+    [tr("New quote requests", "طلبات عروض أسعار جديدة"), quotes.filter((i) => i.status === "new").length],
     [tr("Unread messages", "رسائل غير مقروءة"), inquiries.filter((i) => !i.read_at).length],
     [tr("Total communications", "إجمالي المراسلات"), inquiries.length + subscribers.length],
   ];
 
   return (
     <>
-      <h1 className="text-3xl font-extrabold tracking-tight">{tr("Communications", "المراسلات")}</h1>
-      <p className="mt-1 text-muted-foreground">{tr("Newsletter subscribers and messages from the public contact form and DWM demo requests.", "مشتركو النشرة الإخبارية ورسائل نموذج التواصل وطلبات عرض DWM.")}</p>
-      <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-5">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="text-3xl font-extrabold tracking-tight">{tr("Communications", "المراسلات")}</h1>
+          <p className="mt-1 text-muted-foreground">{tr("Newsletter subscribers, contact messages, DWM demo and quote requests from the public website.", "مشتركو النشرة ورسائل التواصل وطلبات عرض DWM وعروض الأسعار من الموقع.")}</p>
+        </div>
+        <Button variant="outline" size="sm" onClick={() => q.refetch()} disabled={q.isFetching}>
+          {q.isFetching ? tr("Refreshing…", "جارٍ التحديث…") : tr("Refresh", "تحديث")}
+        </Button>
+      </div>
+      <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
         {cards.map(([label, n]) => (
           <div key={label} className="border border-s-4 border-s-primary bg-card p-4">
             <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>

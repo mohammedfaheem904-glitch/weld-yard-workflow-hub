@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       inquiries: {
         Row: {
+          admin_notes: string | null
           company: string | null
           created_at: string
           email: string
@@ -25,9 +26,13 @@ export type Database = {
           message: string
           name: string
           phone: string | null
+          read_at: string | null
+          status: string
           topic: string | null
+          updated_at: string
         }
         Insert: {
+          admin_notes?: string | null
           company?: string | null
           created_at?: string
           email: string
@@ -37,9 +42,13 @@ export type Database = {
           message: string
           name: string
           phone?: string | null
+          read_at?: string | null
+          status?: string
           topic?: string | null
+          updated_at?: string
         }
         Update: {
+          admin_notes?: string | null
           company?: string | null
           created_at?: string
           email?: string
@@ -49,7 +58,10 @@ export type Database = {
           message?: string
           name?: string
           phone?: string | null
+          read_at?: string | null
+          status?: string
           topic?: string | null
+          updated_at?: string
         }
         Relationships: []
       }
@@ -163,6 +175,27 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -203,6 +236,13 @@ export type Database = {
         Args: { p_bucket: string; p_limit: number; p_window_seconds: number }
         Returns: boolean
       }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       prune_inquiry_rate_limits: {
         Args: { p_retention?: string }
         Returns: number
@@ -227,7 +267,7 @@ export type Database = {
       subscribe_newsletter: { Args: { p_email: string }; Returns: string }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -354,6 +394,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+    },
   },
 } as const

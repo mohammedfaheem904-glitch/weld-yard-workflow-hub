@@ -93,7 +93,7 @@ export function AuditLog() {
                   <span className="font-medium">{L(ACTIONS, l.action)}</span>
                   <span dir="ltr" className="text-sm text-muted-foreground">{l.actor_email ?? l.actor_user_id}</span>
                 </span>
-                <time dateTime={l.created_at} className="text-sm text-muted-foreground [unicode-bidi:isolate]">{date(l.created_at)}</time>
+                <time dateTime={l.created_at} dir={locale === "ar" ? "rtl" : "ltr"} className="text-sm text-muted-foreground [unicode-bidi:isolate]">{date(l.created_at)}</time>
               </button>
             </li>
           ))}

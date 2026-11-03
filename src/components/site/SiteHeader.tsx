@@ -25,7 +25,7 @@ export function SiteHeader() {
         <Link to="/" aria-label={d.homeLabel} onClick={() => setOpen(false)} className="shrink-0">
           <Logo />
         </Link>
-        <nav aria-label={d.mainNav} className="hidden xl:block">
+        <nav aria-label={d.mainNav} className="hidden min-[1360px]:block">
           <ul className="flex items-center gap-0.5">
             {NAV.map((n) => (
               <li key={n.key}>
@@ -40,7 +40,7 @@ export function SiteHeader() {
             ))}
           </ul>
         </nav>
-        <div className="hidden shrink-0 items-center gap-3 xl:flex">
+        <div className="hidden shrink-0 items-center gap-3 min-[1360px]:flex">
           <LanguageSwitcher />
           <span aria-hidden className="h-6 w-px bg-border" />
           <Link to="/request-dwm-demo" className="border border-foreground/30 px-3.5 py-2 text-sm font-semibold transition-colors hover:border-primary hover:text-brand-ink">
@@ -50,8 +50,8 @@ export function SiteHeader() {
             <ShoppingBag className="h-4 w-4" aria-hidden /> {d.visitStore}
           </a>
         </div>
-        <div className="flex items-center gap-2 xl:hidden">
-          <LanguageSwitcher />
+        <div className="flex items-center gap-2 min-[1360px]:hidden">
+          <LanguageSwitcher className="hidden sm:inline-flex" />
           <button
             type="button"
             className="inline-flex h-10 w-10 items-center justify-center border"
@@ -65,7 +65,7 @@ export function SiteHeader() {
         </div>
       </div>
       {open && (
-        <nav id="mobile-nav" aria-label={d.mobileNav} className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t bg-background xl:hidden">
+        <nav id="mobile-nav" aria-label={d.mobileNav} className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t bg-background min-[1360px]:hidden">
           <div className="mx-auto max-w-7xl px-4 pb-6 sm:px-6">
             <ul className="flex flex-col py-2 lg:grid lg:grid-cols-4 lg:gap-x-6">
               {NAV.map((n) => (
@@ -81,6 +81,7 @@ export function SiteHeader() {
                 </li>
               ))}
             </ul>
+            <LanguageSwitcher className="mt-5 sm:hidden" />
             <div className="mt-5 grid gap-2 sm:grid-cols-2">
               <a href={STORE_URL} className="inline-flex items-center justify-center gap-2 bg-primary px-4 py-3 font-bold text-primary-foreground">
                 <ShoppingBag className="h-4 w-4" aria-hidden /> {d.visitStore}

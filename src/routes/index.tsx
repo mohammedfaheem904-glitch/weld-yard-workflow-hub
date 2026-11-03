@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useParallax, heroParallax, sectionParallax } from "@/hooks/use-parallax";
+import { useParallax, sectionParallax } from "@/hooks/use-parallax";
 import hero from "@/assets/hero-welding.jpg";
 import engineering from "@/assets/engineering.jpg";
 import { JOURNEYS, BUSINESS_AREAS, DWM_FEATURES, DWM_URL, INDUSTRIES } from "@/lib/site";
@@ -25,16 +25,13 @@ function Home() {
     title: "حلول لحام متكاملة",
     description: "تربط Weld Yard بين منتجات اللحام والدعم الهندسي وفحص ضمان/مراقبة الجودة (QA/QC) والإدارة الرقمية للحام عبر جميع مراحل عمليات اللحام لديكم.",
   });
-  const heroRef = useRef<HTMLElement>(null);
-  const heroImgRef = useRef<HTMLImageElement>(null);
   const engRef = useRef<HTMLDivElement>(null);
   const engImgRef = useRef<HTMLImageElement>(null);
-  useParallax(heroRef, heroImgRef, heroParallax);
   useParallax(engRef, engImgRef, sectionParallax);
   return (
     <>
-      <section ref={heroRef} className="relative overflow-hidden border-b">
-        <img ref={heroImgRef} src={hero} alt={tr("Welder working on a large steel pipe with sparks", "لحّام يعمل على أنبوب فولاذي كبير مع تطاير الشرر")} width={1640} height={1088} fetchPriority="high" className="absolute inset-x-0 bottom-0 h-full w-full object-cover object-[70%_center] md:-top-[15%] md:h-[115%]" />
+      <section className="relative overflow-hidden border-b">
+        <div role="img" aria-label={tr("Welder working on a large steel pipe with sparks", "لحّام يعمل على أنبوب فولاذي كبير مع تطاير الشرر")} className="hero-fixed-bg absolute inset-0 bg-cover bg-no-repeat" style={{ backgroundImage: `url(${hero})`, backgroundPosition: "70% center" }} />
         <div aria-hidden className="absolute inset-0 bg-hero-fade" />
         <Container className="relative py-20 sm:py-28 lg:py-36">
           <div className="max-w-2xl lg:max-w-xl xl:max-w-2xl">

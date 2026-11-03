@@ -40,7 +40,7 @@ function Page() {
                 ["Next steps", "الخطوات التالية", "We discuss how to get your team started.", "نناقش كيفية بدء فريقك."],
               ] as const).map(([en, ar, dEn, dAr], i) => (
                 <li key={en} className="flex gap-3">
-                  <span className="grid size-7 shrink-0 place-items-center border-2 border-brand font-mono text-xs font-bold text-brand-ink">{i + 1}</span>
+                  <span className="grid size-7 shrink-0 place-items-center border-2 border-primary font-mono text-xs font-bold text-brand-ink">{i + 1}</span>
                   <div><p className="font-bold">{tr(en, ar)}</p><p className="text-sm text-muted-foreground">{tr(dEn, dAr)}</p></div>
                 </li>
               ))}

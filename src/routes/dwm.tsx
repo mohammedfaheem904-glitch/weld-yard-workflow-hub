@@ -51,7 +51,7 @@ const roles = [
 function Badge() {
   const tr = useTr();
   return (
-    <span className="inline-flex items-center gap-2 border border-dashed border-brand/60 bg-background px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-brand-ink">
+    <span className="inline-flex items-center gap-2 border border-dashed border-primary/60 bg-background px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-brand-ink">
       {tr("Illustrative Workflow", "مخطط توضيحي لمسار العمل")}
     </span>
   );
@@ -84,13 +84,13 @@ function Page() {
           <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,20rem)_1fr]">
             <div className="border-2 border-navy bg-navy p-6 text-navy-foreground">
               <div className="flex items-center gap-3">
-                <span className="grid size-9 place-items-center bg-brand font-mono text-sm font-bold text-navy">01</span>
+                <span className="grid size-9 place-items-center bg-primary font-mono text-sm font-bold text-primary-foreground">01</span>
                 <h3 className="text-base font-bold uppercase tracking-wide">{tr("Project Initialization", "بدء المشروع")}</h3>
               </div>
               <ul className="mt-5 space-y-3">
                 {DWM_INIT_ACTIVITIES.map((a, i) => (
                   <li key={a.en} className="border border-navy-border p-3">
-                    <p className="font-mono text-xs text-brand">1.{i + 1}</p>
+                    <p className="font-mono text-xs text-primary">1.{i + 1}</p>
                     <p className="font-bold">{ar ? a.ar : a.en}</p>
                     <p className="mt-1 text-xs text-navy-muted">{ar ? a.dAr : a.dEn}</p>
                   </li>
@@ -101,12 +101,12 @@ function Page() {
             <ol className="relative grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
               {DWM_STAGES.map((s, i) => (
                 <li key={s.en} className="relative flex gap-4 border bg-card p-5">
-                  <span className="grid size-9 shrink-0 place-items-center border-2 border-brand font-mono text-sm font-bold text-brand-ink">{String(i + 2).padStart(2, "0")}</span>
+                  <span className="grid size-9 shrink-0 place-items-center border-2 border-primary font-mono text-sm font-bold text-brand-ink">{String(i + 2).padStart(2, "0")}</span>
                   <div className="min-w-0">
                     <p className="font-bold tracking-wide">{ar ? s.ar : s.en}</p>
                     <p className="mt-1 text-sm text-muted-foreground">{ar ? s.dAr : s.dEn}</p>
                   </div>
-                  {i < DWM_STAGES.length - 1 && <span aria-hidden className="absolute -bottom-3 start-9 h-3 w-0.5 bg-brand sm:hidden" />}
+                  {i < DWM_STAGES.length - 1 && <span aria-hidden className="absolute -bottom-3 start-9 h-3 w-0.5 bg-primary sm:hidden" />}
                 </li>
               ))}
             </ol>
@@ -135,7 +135,7 @@ function Page() {
             <SectionHeading eyebrow={tr("Who it's for", "لمن صُمّم")} title={tr("Built for every role in welding quality", "لكل دور في جودة اللحام")} />
             <ul className="mt-8 grid gap-3">
               {roles.map(([en, a, dEn, dAr]) => (
-                <li key={en} className="border-s-2 border-brand bg-background p-4">
+                <li key={en} className="border-s-2 border-primary bg-background p-4">
                   <p className="font-bold">{ar ? a : en}</p>
                   <p className="text-sm text-muted-foreground">{ar ? dAr : dEn}</p>
                 </li>

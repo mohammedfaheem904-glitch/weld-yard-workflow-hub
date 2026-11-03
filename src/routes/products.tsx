@@ -43,7 +43,7 @@ function Products() {
             <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
               {PRODUCT_CATEGORIES.map((raw, i) => {
                 const c = loc(raw, locale);
-                const Icon = icons[i % icons.length];
+                const Icon = icons[i % icons.length] ?? Wrench;
                 return (
                   <li key={raw.name}>
                     <a href={categoryHref(raw.url)} className="group relative flex h-full flex-col border bg-background p-6 transition-colors hover:border-primary">

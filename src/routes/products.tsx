@@ -21,7 +21,7 @@ function Products() {
   useLocalizedMeta({ title: "منتجات اللحام", description: "مواد اللحام الاستهلاكية والمعدات والملحقات ومنتجات السلامة من Weld Yard. تصفّح واطلب عبر متجر Weld Yard الإلكتروني." });
   return (
     <>
-      <PageHero eyebrow={d.weldingProducts} title={tr("The right products for every weld", "المنتجات المناسبة لكل لحام")} intro={tr("Weld Yard supplies welding consumables, equipment, accessories and safety products. Browse the full range and order through our online store.", "توفّر Weld Yard مواد اللحام الاستهلاكية والمعدات والملحقات ومنتجات السلامة. تصفّح المجموعة الكاملة واطلب عبر متجرنا الإلكتروني.")} image={productsImg}>
+      <PageHero eyebrow={d.weldingProducts} title={tr("The right products for every weld", "المنتجات المناسبة لكل لحام")} intro={tr("Weld Yard supplies welding consumables, equipment, accessories and safety products. Browse the full range and order through our online store.", "توفّر Weld Yard مواد اللحام الاستهلاكية والمعدات والملحقات ومنتجات السلامة. تصفّح المجموعة الكاملة واطلب عبر متجرنا الإلكتروني.")} image={productsImg} fixedImage>
         <a href={STORE_URL} className={btnPrimary}>{d.browseProducts}</a>
         <Link to="/request-quote" className={btnOutline}>{d.requestQuote}</Link>
       </PageHero>

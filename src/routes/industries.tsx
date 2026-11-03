@@ -1,4 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import oilGas from "@/assets/industry-oil-gas.jpg";
+import power from "@/assets/industry-power.jpg";
+import structural from "@/assets/industry-structural.jpg";
+import marine from "@/assets/industry-marine.jpg";
+import hero from "@/assets/hero-welding.jpg";
+import engineering from "@/assets/engineering.jpg";
+import inspection from "@/assets/inspection.jpg";
+import products from "@/assets/products.jpg";
 import { INDUSTRIES } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import { t } from "@/lib/i18n";
@@ -10,24 +18,64 @@ export const Route = createFileRoute("/industries")({
   component: Page,
 });
 
+type Svc = "P" | "E" | "Q" | "D";
+const SVC: Record<Svc, [string, string]> = {
+  P: ["Products", "المنتجات"],
+  E: ["Engineering", "الهندسة"],
+  Q: ["QA/QC", "QA/QC"],
+  D: ["DWM", "DWM"],
+};
+
+// Indexed to INDUSTRIES order in src/lib/site.ts.
+const details: { img: string; challenge: [string, string]; svc: Svc[] }[] = [
+  { img: oilGas, challenge: ["Weld integrity and traceability on pressure-containing systems", "سلامة اللحام وتتبعه في الأنظمة الحاوية للضغط"], svc: ["P", "E", "Q", "D"] },
+  { img: power, challenge: ["Qualified procedures for process plant and shutdown work", "إجراءات مؤهلة لأعمال المصانع والتوقف الدوري"], svc: ["P", "E", "Q"] },
+  { img: hero, challenge: ["Consistent quality on pressure parts and maintenance welds", "جودة ثابتة في أجزاء الضغط ولحامات الصيانة"], svc: ["P", "E", "Q"] },
+  { img: structural, challenge: ["Inspection and records across many structural connections", "الفحص والسجلات عبر وصلات إنشائية كثيرة"], svc: ["P", "Q", "D"] },
+  { img: engineering, challenge: ["Dependable supply, procedures and quality records", "توريد موثوق وإجراءات وسجلات جودة"], svc: ["P", "E", "D"] },
+  { img: marine, challenge: ["Welding quality in shipyard, repair and offshore work", "جودة اللحام في أحواض السفن والإصلاح والأعمال البحرية"], svc: ["P", "E", "Q"] },
+  { img: inspection, challenge: ["Inspection of tank and pipeline welds", "فحص لحامات الخزانات وخطوط الأنابيب"], svc: ["P", "Q", "D"] },
+  { img: products, challenge: ["Reliable consumables and repeatable weld quality", "مواد استهلاكية موثوقة وجودة لحام قابلة للتكرار"], svc: ["P", "E"] },
+];
+
 function Page() {
   const { locale } = useLocale();
   const tr = useTr();
   const d = t(locale);
+  const ar = locale === "ar";
   useLocalizedMeta({ title: "القطاعات", description: "تدعم Weld Yard عمليات اللحام في قطاعات النفط والغاز والبتروكيماويات والطاقة والهياكل الفولاذية والتصنيع والقطاع البحري والبنية التحتية." });
   return (
     <>
       <PageHero eyebrow={d.industries} title={tr("Welding solutions for demanding sectors", "حلول لحام للقطاعات ذات المتطلبات العالية")} intro={tr("Wherever weld quality, traceability and reliable supply matter, Weld Yard can support your team.", "أينما كانت جودة اللحام وإمكانية التتبع والتوريد الموثوق مهمة، يمكن لـ Weld Yard دعم فريقك.")} />
       <section className="py-20">
         <Container>
-          <ul className="grid gap-px border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {INDUSTRIES.map((raw, idx) => {
               const i = loc(raw, locale);
+              const det = details[idx];
               return (
-                <li key={raw.name} className="bg-background p-7">
-                  <span className="font-mono text-xs text-brand-ink">{String(idx + 1).padStart(2, "0")}</span>
-                  <h2 className="mt-8 text-xl font-extrabold">{i.name}</h2>
-                  <p className="mt-3 text-sm text-muted-foreground">{i.body}</p>
+                <li key={raw.name} className="flex flex-col border bg-background">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-navy">
+                    {det && <img src={det.img} alt="" width={1024} height={768} loading="lazy" className="h-full w-full object-cover" />}
+                    <span className="absolute start-0 top-0 bg-navy px-3 py-1.5 font-mono text-xs text-primary">{String(idx + 1).padStart(2, "0")}</span>
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
+                    <h2 className="text-xl font-extrabold">{i.name}</h2>
+                    <p className="mt-2 text-sm text-muted-foreground">{i.body}</p>
+                    {det && (
+                      <>
+                        <p className="mt-5 border-s-2 border-primary ps-3 text-sm font-semibold">
+                          <span className="block font-mono text-[10px] uppercase text-muted-foreground">{tr("Key challenge", "التحدي الرئيسي")}</span>
+                          {ar ? det.challenge[1] : det.challenge[0]}
+                        </p>
+                        <ul className="mt-auto flex flex-wrap gap-1.5 pt-5" aria-label={tr("Relevant services", "الخدمات ذات الصلة")}>
+                          {det.svc.map((s) => (
+                            <li key={s} className="bg-card px-2 py-1 font-mono text-[11px] font-bold">{ar ? SVC[s][1] : SVC[s][0]}</li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
+                  </div>
                 </li>
               );
             })}

@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import heroImg from "@/assets/hero-dwm.jpg";
 import { DWM_URL } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import { t } from "@/lib/i18n";
@@ -65,7 +66,7 @@ function Page() {
   useLocalizedMeta({ title: "Weld Yard DWM — الإدارة الرقمية للحام", description: "Weld Yard DWM تطبيق للإدارة الرقمية للحام يغطي مسار جودة اللحام من بدء المشروع حتى التسليم والإغلاق." });
   return (
     <>
-      <PageHero eyebrow="Weld Yard DWM" title={tr("Digital Welding Management", "الإدارة الرقمية للحام")} intro={tr("One workspace for the welding quality workflow — from project initialization to turnover and closure.", "مساحة عمل واحدة لمسار جودة اللحام — من بدء المشروع حتى التسليم والإغلاق.")}>
+      <PageHero eyebrow="Weld Yard DWM" title={tr("Digital Welding Management", "الإدارة الرقمية للحام")} intro={tr("One workspace for the welding quality workflow — from project initialization to turnover and closure.", "مساحة عمل واحدة لمسار جودة اللحام — من بدء المشروع حتى التسليم والإغلاق.")} image={heroImg} fixedImage imagePosition="75% center" credit="Photo: Nicolás Adamo, CC BY-SA 4.0, via Wikimedia Commons">
         <Link to="/request-dwm-demo" className={btnPrimary}>{d.requestDemo}</Link>
         <a href={DWM_URL} className={btnOutline}>{d.accessDwm}</a>
       </PageHero>

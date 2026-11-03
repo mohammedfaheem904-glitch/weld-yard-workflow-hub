@@ -153,3 +153,8 @@
     outline-offset: 2px;
   }
 }
+
+/* Stationary hero photo: fixed only on wide, pointer-capable screens with motion allowed. */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .hero-fixed-bg { background-attachment: fixed; }
+}

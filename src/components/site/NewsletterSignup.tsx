@@ -34,10 +34,10 @@ export function NewsletterSignup() {
 
   return (
     <div>
-      <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-brand-ink rtl:tracking-normal">{d.title}</h2>
-      <p className="mt-3 max-w-md text-sm text-muted-foreground">{d.copy}</p>
+      <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-primary rtl:tracking-normal">{d.title}</h2>
+      <p className="mt-3 max-w-md text-sm text-navy-muted">{d.copy}</p>
       {state === "done" ? (
-        <p role="status" className="mt-4 rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-sm text-foreground">{d.success}</p>
+        <p role="status" className="mt-4 border border-primary/50 bg-primary/15 px-3 py-2 text-sm text-navy-foreground">{d.success}</p>
       ) : (
         <form onSubmit={onSubmit} noValidate className="mt-4">
           <div className="flex max-w-md flex-col gap-2 sm:flex-row">
@@ -53,7 +53,7 @@ export function NewsletterSignup() {
               placeholder={d.placeholder}
               aria-invalid={!!error}
               aria-describedby={error ? "newsletter-error" : undefined}
-              className="h-11 min-w-0 flex-1 rounded-md border bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rtl:text-end"
+              className="h-11 min-w-0 flex-1 border-0 bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rtl:text-end"
             />
             <div aria-hidden="true" className="absolute -start-[9999px] h-px w-px overflow-hidden">
               <input tabIndex={-1} autoComplete="off" name="company_url" value={hp} onChange={(e) => setHp(e.target.value)} />
@@ -61,12 +61,12 @@ export function NewsletterSignup() {
             <button
               type="submit"
               disabled={state === "loading"}
-              className="h-11 shrink-0 rounded-md bg-primary px-5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60"
+              className="h-11 shrink-0 bg-primary px-5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60"
             >
               {state === "loading" ? d.loading : d.button}
             </button>
           </div>
-          {error && <p id="newsletter-error" role="alert" className="mt-2 text-sm text-destructive">{error}</p>}
+          {error && <p id="newsletter-error" role="alert" className="mt-2 inline-block bg-background px-2 py-1 text-sm text-destructive">{error}</p>}
         </form>
       )}
     </div>

@@ -58,7 +58,7 @@ export function PageHero({
             style={{ backgroundImage: `url(${image})`, backgroundPosition: imagePosition }}
           />
           <div aria-hidden className="absolute inset-0 bg-hero-fade" />
-          {credit && <p className="absolute bottom-2 end-3 z-10 text-[10px] text-foreground/60" dir="ltr">{credit}</p>}
+          {credit && <p className="absolute bottom-2 end-3 z-10 bg-background/80 px-1.5 py-0.5 text-[10px] text-foreground/70" dir="ltr">{credit}</p>}
         </>
       ) : image ? (
         <>

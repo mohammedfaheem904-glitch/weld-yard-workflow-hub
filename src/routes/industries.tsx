@@ -7,6 +7,7 @@ import hero from "@/assets/hero-welding.jpg";
 import engineering from "@/assets/engineering.jpg";
 import inspection from "@/assets/inspection.jpg";
 import products from "@/assets/products.jpg";
+import heroImg from "@/assets/hero-industries.jpg";
 import { INDUSTRIES } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import { t } from "@/lib/i18n";
@@ -46,7 +47,7 @@ function Page() {
   useLocalizedMeta({ title: "القطاعات", description: "تدعم Weld Yard عمليات اللحام في قطاعات النفط والغاز والبتروكيماويات والطاقة والهياكل الفولاذية والتصنيع والقطاع البحري والبنية التحتية." });
   return (
     <>
-      <PageHero eyebrow={d.industries} title={tr("Welding solutions for demanding sectors", "حلول لحام للقطاعات ذات المتطلبات العالية")} intro={tr("Wherever weld quality, traceability and reliable supply matter, Weld Yard can support your team.", "أينما كانت جودة اللحام وإمكانية التتبع والتوريد الموثوق مهمة، يمكن لـ Weld Yard دعم فريقك.")} />
+      <PageHero eyebrow={d.industries} title={tr("Welding solutions for demanding sectors", "حلول لحام للقطاعات ذات المتطلبات العالية")} intro={tr("Wherever weld quality, traceability and reliable supply matter, Weld Yard can support your team.", "أينما كانت جودة اللحام وإمكانية التتبع والتوريد الموثوق مهمة، يمكن لـ Weld Yard دعم فريقك.")} image={heroImg} fixedImage imagePosition="70% 60%" />
       <section className="py-20">
         <Container>
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

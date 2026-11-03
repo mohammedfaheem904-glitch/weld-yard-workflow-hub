@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import heroImg from "@/assets/hero-solutions.jpg";
 import { BUSINESS_AREAS } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import { t } from "@/lib/i18n";
@@ -32,7 +33,7 @@ function Solutions() {
   useLocalizedMeta({ title: "الحلول", description: "حلول Weld Yard: منتجات اللحام، هندسة اللحام، ضمان/مراقبة الجودة (QA/QC) والفحص، والإدارة الرقمية للحام." });
   return (
     <>
-      <PageHero eyebrow={tr("Solutions", "الحلول")} title={tr("One partner across the welding lifecycle", "شريك واحد عبر دورة حياة اللحام")} intro={tr("Products. Engineering. Inspection. Digital Welding Management. Use one service or combine them for a connected approach.", "المنتجات. الهندسة. الفحص. الإدارة الرقمية للحام. استخدم خدمة واحدة أو اجمع بينها لنهج مترابط.")} />
+      <PageHero eyebrow={tr("Solutions", "الحلول")} title={tr("One partner across the welding lifecycle", "شريك واحد عبر دورة حياة اللحام")} intro={tr("Products. Engineering. Inspection. Digital Welding Management. Use one service or combine them for a connected approach.", "المنتجات. الهندسة. الفحص. الإدارة الرقمية للحام. استخدم خدمة واحدة أو اجمع بينها لنهج مترابط.")} image={heroImg} fixedImage imagePosition="70% center" />
 
       {/* Ecosystem */}
       <section className="py-20 sm:py-28">

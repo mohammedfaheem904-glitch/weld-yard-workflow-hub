@@ -33,17 +33,34 @@ export function PageHero({
   title,
   intro,
   image,
+  fixedImage = false,
+  imagePosition = "center",
+  credit,
   children,
 }: {
   eyebrow: string;
   title: string;
   intro: string;
   image?: string;
+  /** Stationary background while scrolling (desktop, motion allowed only). */
+  fixedImage?: boolean;
+  imagePosition?: string;
+  credit?: string;
   children?: ReactNode;
 }) {
   return (
     <section className="relative overflow-hidden border-b">
-      {image ? (
+      {image && fixedImage ? (
+        <>
+          <div
+            aria-hidden
+            className="hero-fixed-bg absolute inset-0 bg-cover bg-no-repeat"
+            style={{ backgroundImage: `url(${image})`, backgroundPosition: imagePosition }}
+          />
+          <div aria-hidden className="absolute inset-0 bg-hero-fade" />
+          {credit && <p className="absolute bottom-2 end-3 z-10 text-[10px] text-foreground/60" dir="ltr">{credit}</p>}
+        </>
+      ) : image ? (
         <>
           <img src={image} alt="" width={1280} height={896} className="absolute inset-0 h-full w-full object-cover" />
           <div aria-hidden className="absolute inset-0 bg-hero-fade" />

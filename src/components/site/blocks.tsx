@@ -63,7 +63,7 @@ export function PageHero({
   );
 }
 
-const btn = "inline-flex items-center gap-2 px-6 py-3.5 text-sm font-bold transition-all";
+const btn = "inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
 export const btnPrimary = cn(btn, "bg-primary text-primary-foreground shadow-glow hover:opacity-90");
 export const btnOutline = cn(btn, "border border-foreground/40 bg-background text-foreground hover:border-primary hover:text-brand-ink");
 
@@ -71,7 +71,8 @@ export function FeatureGrid({ items }: { items: readonly { title: string; body: 
   return (
     <ul className="grid gap-px overflow-hidden border bg-border sm:grid-cols-2 lg:grid-cols-3">
       {items.map((i) => (
-        <li key={i.title} className="bg-background p-7">
+        <li key={i.title} className="group relative bg-background p-7 transition-colors hover:bg-card">
+          <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-primary transition-transform group-hover:scale-x-100 rtl:origin-right" />
           <span aria-hidden className="block h-1 w-8 bg-primary" />
           <h3 className="mt-5 text-lg font-bold">{i.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{i.body}</p>
@@ -101,11 +102,13 @@ export function Lifecycle() {
 
 export function CtaBand({ title, body, children }: { title: string; body: string; children: ReactNode }) {
   return (
-    <section className="bg-primary text-primary-foreground">
-      <Container className="flex flex-col gap-8 py-16 lg:flex-row lg:items-center lg:justify-between">
+    <section className="relative overflow-hidden bg-navy text-navy-foreground">
+      <span aria-hidden className="absolute inset-y-0 start-0 w-1 bg-primary" />
+      <Container className="relative flex flex-col gap-8 py-16 sm:py-20 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-2xl">
-          <h2 className="text-3xl font-black sm:text-4xl">{title}</h2>
-          <p className="mt-3 text-lg opacity-80">{body}</p>
+          <span aria-hidden className="block h-1 w-10 bg-primary" />
+          <h2 className="mt-5 text-3xl font-black sm:text-4xl">{title}</h2>
+          <p className="mt-3 text-lg text-navy-muted">{body}</p>
         </div>
         <div className="flex flex-wrap gap-3">{children}</div>
       </Container>
@@ -113,8 +116,9 @@ export function CtaBand({ title, body, children }: { title: string; body: string
   );
 }
 
-export const btnDark = cn(btn, "bg-primary-foreground text-primary hover:opacity-90");
-export const btnDarkOutline = cn(btn, "border border-primary-foreground/40 hover:bg-primary-foreground/10");
+/* Buttons for use on the navy CtaBand */
+export const btnDark = cn(btn, "bg-primary text-primary-foreground hover:opacity-90");
+export const btnDarkOutline = cn(btn, "border border-navy-foreground/40 text-navy-foreground hover:border-primary hover:text-primary");
 
 export function TextLink({ to, children }: { to: string; children: ReactNode }) {
   return (

@@ -28,13 +28,13 @@ function Home() {
       <section className="relative overflow-hidden border-b">
         <img src={hero} alt={tr("Welder working on a large steel pipe with sparks", "لحّام يعمل على أنبوب فولاذي كبير مع تطاير الشرر")} width={1640} height={1088} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover object-[70%_center]" />
         <div aria-hidden className="absolute inset-0 bg-hero-fade" />
-        <Container className="relative py-24 sm:py-32 lg:py-40">
-          <div className="max-w-2xl">
+        <Container className="relative py-20 sm:py-28 lg:py-36">
+          <div className="max-w-2xl lg:max-w-xl xl:max-w-2xl">
             <Eyebrow>{d.tagline}</Eyebrow>
             <h1 className="mt-6 text-5xl font-black leading-[0.98] sm:text-6xl lg:text-7xl rtl:leading-[1.2]">
               {tr(<>Integrated Welding <span className="text-brand-ink">Solutions</span></>, <>حلول لحام <span className="text-brand-ink">متكاملة</span></>)}
             </h1>
-            <p className="mt-7 max-w-xl text-lg text-muted-foreground sm:text-xl">
+            <p className="mt-7 max-w-xl text-lg text-foreground/75 sm:text-xl">
               {tr(
                 "From welding products and engineering support to quality inspection and digital welding management, Weld Yard connects the essential stages of your welding operations.",
                 "من منتجات اللحام والدعم الهندسي إلى فحص الجودة والإدارة الرقمية للحام، تربط Weld Yard بين المراحل الأساسية لعمليات اللحام لديكم.",
@@ -44,7 +44,7 @@ function Home() {
               <Link to="/solutions" className={btnPrimary}>{tr("Explore Our Solutions", "استكشف حلولنا")}</Link>
               <Link to="/contact" className={btnOutline}>{d.contactTeam}</Link>
             </div>
-            <p className="mt-12 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground rtl:font-arabic rtl:tracking-normal">{d.supporting}</p>
+            <p className="mt-12 border-s-2 border-primary ps-3 font-mono text-xs uppercase tracking-[0.2em] text-foreground/70 rtl:font-arabic rtl:tracking-normal">{d.supporting}</p>
           </div>
         </Container>
       </section>

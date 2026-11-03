@@ -41,14 +41,18 @@
   --color-brand-wordmark: #FF914D;
   --color-steel: var(--steel);
   --color-steel-foreground: var(--steel-foreground);
+  --color-navy: var(--navy);
+  --color-navy-foreground: var(--navy-foreground);
+  --color-navy-muted: var(--navy-muted);
+  --color-navy-border: var(--navy-border);
 }
 
 :root {
   color-scheme: light;
   --radius: 0.25rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.22 0.01 60);
-  --card: oklch(0.98 0.002 250);
+  --foreground: oklch(0.2 0.035 265);
+  --card: oklch(0.975 0.004 255);
   --card-foreground: oklch(0.22 0.01 60);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.22 0.01 60);
@@ -58,19 +62,25 @@
   --secondary: oklch(0.965 0.003 250);
   --secondary-foreground: oklch(0.22 0.01 60);
   --muted: oklch(0.965 0.003 250);
-  --muted-foreground: oklch(0.45 0.012 60);
+  --muted-foreground: oklch(0.45 0.025 260);
   --accent: oklch(0.97 0.025 60);
   --accent-foreground: oklch(0.22 0.01 60);
   --destructive: oklch(0.52 0.2 27);
   --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.9 0.005 250);
+  --border: oklch(0.905 0.008 255);
   --input: oklch(0.6 0.01 250);
   --ring: oklch(0.53 0.15 45);
-  --steel: oklch(0.22 0.01 60);
+  --steel: oklch(0.2 0.035 265);
+  /* Deep industrial navy (#0F172A) */
+  --navy: oklch(0.208 0.042 265.75);
+  --navy-foreground: oklch(0.98 0.003 255);
+  --navy-muted: oklch(0.74 0.02 260);
+  --navy-border: oklch(0.32 0.04 265);
   --steel-foreground: oklch(0.98 0 0);
-  --gradient-hero: linear-gradient(90deg, oklch(1 0 0 / 0.97) 0%, oklch(1 0 0 / 0.88) 45%, oklch(1 0 0 / 0.1) 100%);
-  --gradient-hero-mobile: linear-gradient(180deg, oklch(1 0 0 / 0.93) 0%, oklch(1 0 0 / 0.88) 100%);
-  --shadow-glow: 0 8px 24px -12px oklch(0.76 0.16 50 / 0.55);
+  --gradient-hero: linear-gradient(90deg, oklch(1 0 0 / 0.96) 0%, oklch(1 0 0 / 0.82) 38%, oklch(1 0 0 / 0.25) 62%, oklch(1 0 0 / 0) 80%);
+  --gradient-hero-rtl: linear-gradient(270deg, oklch(1 0 0 / 0.96) 0%, oklch(1 0 0 / 0.82) 38%, oklch(1 0 0 / 0.25) 62%, oklch(1 0 0 / 0) 80%);
+  --gradient-hero-mobile: linear-gradient(180deg, oklch(1 0 0 / 0.94) 0%, oklch(1 0 0 / 0.86) 60%, oklch(1 0 0 / 0.55) 100%);
+  --shadow-glow: 0 6px 16px -10px oklch(0.76 0.16 50 / 0.6);
 }
 
 
@@ -81,7 +91,7 @@
   }
   [dir="rtl"] & {
     @media (min-width: 64rem) {
-      background-image: linear-gradient(270deg, oklch(1 0 0 / 0.97) 0%, oklch(1 0 0 / 0.88) 45%, oklch(1 0 0 / 0.1) 100%);
+      background-image: var(--gradient-hero-rtl);
     }
   }
 }

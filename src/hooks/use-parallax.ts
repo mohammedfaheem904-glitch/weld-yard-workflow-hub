@@ -44,7 +44,7 @@ export function useParallax(
     };
 
     img.style.willChange = "transform";
-    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); });
+    const io = new IntersectionObserver(([e]) => { visible = !!e?.isIntersecting; sync(); });
     io.observe(el);
     mqMotion.addEventListener("change", sync);
     mqWidth.addEventListener("change", sync);

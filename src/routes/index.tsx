@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useParallax, sectionParallax } from "@/hooks/use-parallax";
-import hero from "@/assets/hero-engineer-branded.jpg";
+import hero from "@/assets/hero-engineer.jpg";
 import engineering from "@/assets/engineering.jpg";
 import { JOURNEYS, BUSINESS_AREAS, DWM_FEATURES, DWM_URL, INDUSTRIES } from "@/lib/site";
 import { seo } from "@/lib/seo";
@@ -30,7 +30,7 @@ function Home() {
   useParallax(engRef, engImgRef, sectionParallax);
   return (
     <>
-      <section className="relative overflow-hidden border-b">
+      <section className="relative -mt-[4.625rem] overflow-hidden border-b pt-[4.625rem]">
         <div role="img" aria-label={tr("Weld Yard engineer reviewing a fabrication drawing in a steel workshop", "مهندس من Weld Yard يراجع مخطط تصنيع في ورشة فولاذ")} className="hero-fixed-bg absolute inset-0 bg-cover bg-no-repeat" style={{ backgroundImage: `url(${hero})`, backgroundPosition: "75% center" }} />
         <div aria-hidden className="absolute inset-0 bg-hero-fade" />
         <Container className="relative py-20 sm:py-28 lg:py-36">

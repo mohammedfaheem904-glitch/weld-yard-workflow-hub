@@ -3,6 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useParallax, sectionParallax } from "@/hooks/use-parallax";
 import hero from "@/assets/hero-engineer.jpg";
 import engineering from "@/assets/engineering.jpg";
+import journeysBg from "@/assets/hero-welding.jpg";
+import industriesBg from "@/assets/industry-oil-gas.jpg";
 import { JOURNEYS, BUSINESS_AREAS, DWM_FEATURES, DWM_URL, INDUSTRIES } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import { t } from "@/lib/i18n";
@@ -73,8 +75,10 @@ function Home() {
         </Container>
       </section>
 
-      <section className="border-y bg-card py-20 sm:py-28" aria-labelledby="journeys-title">
-        <Container>
+      <section className="relative overflow-hidden border-y bg-card py-20 sm:py-28" aria-labelledby="journeys-title">
+        <div aria-hidden className="hero-fixed-bg absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${journeysBg})` }} />
+        <div aria-hidden className="absolute inset-0 bg-card/85" />
+        <Container className="relative">
           <SectionHeading eyebrow={tr("Start here", "ابدأ من هنا")} title={tr("Find the right next step", "اختر خطوتك التالية المناسبة")} intro={tr("Choose the path that matches your team.", "اختر المسار الذي يناسب فريقك.")} />
           <ul className="mt-14 grid gap-px border bg-border lg:grid-cols-3">
             {JOURNEYS.map((raw) => {
@@ -138,15 +142,17 @@ function Home() {
         </Container>
       </section>
 
-      <section className="border-y bg-card py-20 sm:py-28">
-        <Container>
+      <section className="relative overflow-hidden border-y bg-card py-20 sm:py-28">
+        <div aria-hidden className="hero-fixed-bg absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${industriesBg})` }} />
+        <div aria-hidden className="absolute inset-0 bg-card/85" />
+        <Container className="relative">
           <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <SectionHeading eyebrow={tr("Industries", "القطاعات")} title={tr("Built for demanding sectors", "مصممة للقطاعات ذات المتطلبات العالية")} />
             <TextLink to="/industries">{tr("All industries", "جميع القطاعات")}</TextLink>
           </div>
           <ul className="mt-12 grid grid-cols-2 gap-px border bg-border lg:grid-cols-4">
             {INDUSTRIES.map((i) => (
-              <li key={i.name} className="bg-card p-6 font-display text-lg font-bold">{loc(i, locale).name}</li>
+              <li key={i.name} className="bg-card/90 p-6 font-display text-lg font-bold">{loc(i, locale).name}</li>
             ))}
           </ul>
         </Container>

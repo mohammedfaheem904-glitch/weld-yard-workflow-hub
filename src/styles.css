@@ -157,4 +157,9 @@
 /* Stationary hero photo: fixed only on wide, pointer-capable screens with motion allowed. */
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .hero-fixed-bg { background-attachment: fixed; }
+  /* Home hero: start the photo just below the top bar so the full helmet shows. */
+  .home-hero-bg.hero-fixed-bg { background-size: max(100vw, calc((100vh - 4.625rem) * 1.5)) auto; background-position: 75% 4.625rem; }
 }
+
+/* Home hero focal point (non-fixed screens): keep the helmet top in frame. */
+.home-hero-bg { background-size: cover; background-position: 72% 4.625rem; }

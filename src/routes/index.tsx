@@ -31,7 +31,7 @@ function Home() {
   return (
     <>
       <section className="relative -mt-[4.625rem] overflow-hidden border-b pt-[4.625rem]">
-        <div role="img" aria-label={tr("Weld Yard engineer reviewing a fabrication drawing in a steel workshop", "مهندس من Weld Yard يراجع مخطط تصنيع في ورشة فولاذ")} className="hero-fixed-bg absolute inset-0 bg-cover bg-no-repeat" style={{ backgroundImage: `url(${hero})`, backgroundPosition: "75% center" }} />
+        <div role="img" aria-label={tr("Weld Yard engineer reviewing a fabrication drawing in a steel workshop", "مهندس من Weld Yard يراجع مخطط تصنيع في ورشة فولاذ")} className="hero-fixed-bg home-hero-bg absolute inset-0 bg-background bg-no-repeat" style={{ backgroundImage: `url(${hero})` }} />
         <div aria-hidden className="absolute inset-0 bg-hero-fade" />
         <Container className="relative py-20 sm:py-28 lg:py-36">
           <div className="max-w-2xl lg:max-w-xl xl:max-w-2xl">

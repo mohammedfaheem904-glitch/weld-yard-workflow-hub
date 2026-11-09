@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { useState } from "react";
 import { NAV, STORE_URL } from "@/lib/site";
@@ -15,8 +15,9 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const { locale } = useLocale();
   const d = t(locale);
+  const isHome = useRouterState({ select: (s) => s.location.pathname === "/" });
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur">
+    <header className={`sticky top-0 z-50 backdrop-blur ${isHome ? "border-b border-foreground/10 bg-background/55" : "border-b bg-background/95"}`}>
       <span aria-hidden className="block h-0.5 bg-primary" />
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-4 focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-foreground">
         {d.skip}

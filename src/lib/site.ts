@@ -150,7 +150,7 @@ export const SOCIAL_LINKS: { key: SocialKey; name: string; url: string; label: s
 // Official 1200x630 share image (absolute production URL; file lives at public/og-image.png).
 export const SHARE_IMAGE_URL: string | null = "https://www.weldyard.com/og-image.png";
 
-// Official logo mark (file lives at public/weld-yard-logo.png). Null keeps the WY monogram fallback.
+// Official horizontal logo (file lives at public/weld-yard-logo.png). Null keeps the WY monogram fallback.
 export const LOGO_IMAGE_URL: string | null = "/weld-yard-logo.png";
 
 // Allow only https URLs (or same-site relative paths). Blocks javascript:, data:, http:, etc.

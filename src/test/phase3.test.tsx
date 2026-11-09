@@ -8,11 +8,10 @@ describe("Logo", () => {
     render(<Logo src={null} />);
     expect(screen.getByTestId("logo-fallback")).toBeTruthy();
   });
-  it("renders the official mark (decorative) beside the brand text when a safe URL is set", () => {
+  it("renders the official logo image with the brand name as alt text", () => {
     const { container } = render(<Logo src="https://cdn.example.com/logo.svg" />);
     expect(screen.getByTestId("logo-official")).toBeTruthy();
-    expect(container.querySelector("img")!.getAttribute("alt")).toBe("");
-    expect(screen.getByText("WELD YARD").className).toContain("text-brand-wordmark");
+    expect(container.querySelector("img")!.getAttribute("alt")).toBe("Weld Yard — Integrated Welding Solutions");
   });
   it("falls back to the monogram when the image fails to load", () => {
     const { container } = render(<Logo src="/weld-yard-logo.png" />);

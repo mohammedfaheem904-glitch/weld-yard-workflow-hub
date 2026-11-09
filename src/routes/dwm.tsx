@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import heroImg from "@/assets/hero-dwm.jpg";
+import workspaceImg from "@/assets/dwm-digital-workspace.jpg";
 import { DWM_URL } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import { t } from "@/lib/i18n";
@@ -119,8 +120,10 @@ function Page() {
       </section>
 
       {/* Modules + roles */}
-      <section className="border-y bg-card py-20 sm:py-28">
-        <Container className="grid gap-14 lg:grid-cols-2">
+      <section className="relative overflow-hidden border-y bg-card py-20 sm:py-28">
+        <div aria-hidden className="hero-fixed-bg absolute inset-0 bg-cover bg-no-repeat" style={{ backgroundImage: `url(${workspaceImg})`, backgroundPosition: "70% center" }} />
+        <div aria-hidden className="absolute inset-0 bg-card/85" />
+        <Container className="relative grid gap-14 lg:grid-cols-2">
           <div>
             <SectionHeading eyebrow={tr("Workspace areas", "مجالات العمل")} title={tr("Seven areas, one connected record", "سبعة مجالات، سجل واحد مترابط")} />
             <ol className="mt-8 grid gap-px border bg-border">

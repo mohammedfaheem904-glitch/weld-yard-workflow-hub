@@ -88,7 +88,7 @@ function Home() {
               ["Quality records scattered across files and spreadsheets", "سجلات جودة موزعة بين الملفات وجداول البيانات", "Weld Yard DWM keeps welding records in one structured workspace.", "يحفظ Weld Yard DWM سجلات اللحام في مساحة عمل واحدة منظمة."],
             ] as const).map(([p, pa, s, sa]) => (
               <div key={p} className="grid gap-3 py-6 md:grid-cols-2 md:gap-10">
-                <p className="font-semibold text-navy-muted line-through decoration-primary/60">{tr(p, pa)}</p>
+                <p className="font-semibold text-navy-muted">{tr(p, pa)}</p>
                 <p className="flex gap-3 font-semibold"><span aria-hidden className="text-primary rtl:rotate-180">→</span>{tr(s, sa)}</p>
               </div>
             ))}

@@ -21,7 +21,7 @@ export function SocialLinks() {
             rel="noopener noreferrer"
             aria-label={locale === "ar" ? s.labelAr : s.label}
             title={s.name}
-            className="grid h-10 w-10 place-items-center border border-navy-border bg-transparent text-navy-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+            className="grid h-10 w-10 place-items-center border border-border bg-transparent text-navy transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false">
               <path d={PATHS[s.key]} />

@@ -75,6 +75,27 @@ function Home() {
         </Container>
       </section>
 
+      <section className="border-t bg-navy py-20 text-navy-foreground sm:py-28">
+        <Container>
+          <Eyebrow>{tr("Why it matters", "لماذا يهم ذلك")}</Eyebrow>
+          <h2 className="mt-4 max-w-3xl text-3xl font-extrabold sm:text-4xl">{tr("Welding problems rarely start at the weld", "نادراً ما تبدأ مشكلات اللحام عند اللحام نفسه")}</h2>
+          <p className="mt-4 max-w-2xl text-navy-muted">{tr("They start in the gaps between suppliers, procedures, inspectors and paperwork. We work across those gaps.", "إنها تبدأ في الفجوات بين الموردين والإجراءات والمفتشين والأوراق. ونحن نعمل عبر هذه الفجوات.")}</p>
+          <div className="mt-12 divide-y divide-navy-border border-y border-navy-border">
+            {([
+              ["Consumables that don't match the qualified procedure", "مواد استهلاكية لا تطابق الإجراء المؤهَّل", "Product supply informed by the same team that reviews your WPS.", "توريد منتجات يسترشد بالفريق نفسه الذي يراجع إجراءات اللحام (WPS) لديك."],
+              ["Procedures and welder qualifications prepared late", "إجراءات وتأهيل لحّامين يُعدّان متأخراً", "Engineering support from pWPS through PQR, WPS and WPQ before production starts.", "دعم هندسي من pWPS مروراً بـ PQR وWPS وWPQ قبل بدء الإنتاج."],
+              ["Inspection findings discovered at handover", "ملاحظات فحص تُكتشف عند التسليم", "Inspection planned from fit-up, so issues are raised while they are still easy to fix.", "فحص مخطط له من مرحلة التجميع، فتُرصد المشكلات وهي لا تزال سهلة المعالجة."],
+              ["Quality records scattered across files and spreadsheets", "سجلات جودة موزعة بين الملفات وجداول البيانات", "Weld Yard DWM keeps welding records in one structured workspace.", "يحفظ Weld Yard DWM سجلات اللحام في مساحة عمل واحدة منظمة."],
+            ] as const).map(([p, pa, s, sa]) => (
+              <div key={p} className="grid gap-3 py-6 md:grid-cols-2 md:gap-10">
+                <p className="font-semibold text-navy-muted line-through decoration-primary/60">{tr(p, pa)}</p>
+                <p className="flex gap-3 font-semibold"><span aria-hidden className="text-primary rtl:rotate-180">→</span>{tr(s, sa)}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
       <section className="relative overflow-hidden border-y bg-card py-20 sm:py-28" aria-labelledby="journeys-title">
         <div aria-hidden className="hero-fixed-bg absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${journeysBg})` }} />
         <div aria-hidden className="absolute inset-0 bg-card/85" />

@@ -38,6 +38,21 @@ function Page() {
           </div>
         </Container>
       </section>
+      <section className="border-t bg-navy py-20 text-navy-foreground">
+        <Container className="grid gap-px border border-navy-border bg-navy-border md:grid-cols-2">
+          {([
+            ["What we are", "من نحن", ["A welding-focused company covering products, engineering, inspection and digital records", "One point of contact across those disciplines", "Bilingual support in English and Arabic"], ["شركة متخصصة في اللحام تغطي المنتجات والهندسة والفحص والسجلات الرقمية", "جهة تواصل واحدة عبر هذه التخصصات", "دعم بلغتين: العربية والإنجليزية"]],
+            ["How we work", "كيف نعمل", ["We start from your project requirements and applicable codes", "We recommend only the services your scope needs", "We keep records traceable from start to handover"], ["ننطلق من متطلبات مشروعك والأكواد المعمول بها", "نوصي فقط بالخدمات التي يحتاجها نطاق عملك", "نحافظ على سجلات قابلة للتتبع من البداية حتى التسليم"]],
+          ] as const).map(([h, ha, items, itemsAr]) => (
+            <div key={h} className="bg-navy p-8 sm:p-10">
+              <h2 className="text-2xl font-extrabold">{tr(h, ha)}</h2>
+              <ul className="mt-6 space-y-3">
+                {(locale === "ar" ? itemsAr : items).map((x) => <li key={x} className="flex gap-3 text-navy-muted"><span aria-hidden className="mt-2 size-1.5 shrink-0 bg-primary" />{x}</li>)}
+              </ul>
+            </div>
+          ))}
+        </Container>
+      </section>
       <section className="border-t bg-card py-20">
         <Container>
           <SectionHeading eyebrow={tr("What guides us", "ما يوجّهنا")} title={tr("Our principles", "مبادئنا")} />

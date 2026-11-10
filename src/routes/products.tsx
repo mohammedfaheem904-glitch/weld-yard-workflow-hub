@@ -62,6 +62,36 @@ function Products() {
           </div>
         </Container>
       </section>
+      <section className="border-t bg-navy py-20 text-navy-foreground">
+        <Container>
+          <SectionHeading eyebrow={tr("Technical reference", "مرجع فني")} title={tr("Process and consumable overview", "نظرة عامة على العمليات والمواد الاستهلاكية")} />
+          <p className="mt-4 max-w-2xl text-sm text-navy-muted">{tr("General guidance only. The consumable for your job must match the qualified WPS and the applicable code.", "إرشاد عام فقط. يجب أن تطابق المادة الاستهلاكية لعملك إجراء اللحام المؤهل (WPS) والكود المعمول به.")}</p>
+          <div className="mt-10 overflow-x-auto">
+            <table className="w-full min-w-[640px] border-collapse text-sm">
+              <thead><tr className="font-mono text-xs text-navy-muted">
+                <th className="py-3 text-start font-normal">{tr("Process", "العملية")}</th>
+                <th className="py-3 text-start font-normal">{tr("Consumable type", "نوع المادة الاستهلاكية")}</th>
+                <th className="py-3 text-start font-normal">{tr("Typical use", "الاستخدام الشائع")}</th>
+              </tr></thead>
+              <tbody>
+                {([
+                  ["SMAW", "Covered electrodes", "أقطاب مغلفة", "Site work, structural and pipe welding", "أعمال الموقع ولحام الهياكل والأنابيب"],
+                  ["GTAW", "Filler rods + shielding gas", "قضبان حشو + غاز حماية", "Root passes, thin sections, stainless and alloys", "جذور اللحام والمقاطع الرقيقة والفولاذ المقاوم للصدأ والسبائك"],
+                  ["GMAW", "Solid wire + shielding gas", "سلك مصمت + غاز حماية", "Shop fabrication and production welding", "التصنيع في الورش ولحام الإنتاج"],
+                  ["FCAW", "Flux-cored wire", "سلك بقلب مساعد صهر", "Heavy sections and higher deposition", "المقاطع السميكة ومعدل ترسيب أعلى"],
+                  ["SAW", "Wire + flux", "سلك + مساعد صهر", "Long seams on thick plate and vessels", "اللحامات الطويلة على الألواح السميكة والأوعية"],
+                ] as const).map(([p, c, ca, u, ua]) => (
+                  <tr key={p} className="border-t border-navy-border">
+                    <th scope="row" className="py-4 text-start font-mono font-bold text-primary" dir="ltr">{p}</th>
+                    <td className="py-4">{tr(c, ca)}</td>
+                    <td className="py-4 text-navy-muted">{tr(u, ua)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Container>
+      </section>
       <section className="border-t bg-card py-20">
         <Container className="grid gap-12 lg:grid-cols-2">
           <SectionHeading eyebrow={tr("Project supply", "توريد المشاريع")} title={tr("Buying for a project or a workshop?", "تشتري لمشروع أو ورشة؟")} intro={tr("For larger quantities, specific grades or recurring supply, send us a quote request and our team will follow up.", "للكميات الكبيرة أو الرتب المحددة أو التوريد المتكرر، أرسل لنا طلب عرض سعر وسيتابع فريقنا معك.")} />

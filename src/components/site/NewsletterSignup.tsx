@@ -34,7 +34,7 @@ export function NewsletterSignup() {
 
   return (
     <div>
-      <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-primary rtl:tracking-normal">{d.title}</h2>
+      <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-navy rtl:tracking-normal">{d.title}</h2>
       <p className="mt-3 max-w-md text-sm text-muted-foreground">{d.copy}</p>
       {state === "done" ? (
         <p role="status" className="mt-4 border border-primary/50 bg-primary/15 px-3 py-2 text-sm text-foreground">{d.success}</p>

@@ -45,7 +45,7 @@ export function SiteFooter() {
         </div>
         {cols.map((c) => (
           <div key={c.title}>
-            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-primary rtl:tracking-normal">{c.title}</h2>
+            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-navy rtl:tracking-normal">{c.title}</h2>
             <ul className="mt-4 space-y-2.5 text-sm">
               {c.links.map((l) => (
                 <li key={l.to}>
@@ -60,7 +60,7 @@ export function SiteFooter() {
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1fr_auto] md:items-end">
           <NewsletterSignup />
           <div>
-            <h2 className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-primary rtl:tracking-normal">{d.followUs}</h2>
+            <h2 className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-navy rtl:tracking-normal">{d.followUs}</h2>
             <SocialLinks />
           </div>
         </div>

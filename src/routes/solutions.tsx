@@ -57,6 +57,31 @@ function Solutions() {
         </Container>
       </section>
 
+      {/* Combined engagements */}
+      <section className="border-t bg-card py-20 sm:py-28">
+        <Container>
+          <SectionHeading eyebrow={tr("Combined engagements", "خدمات مجمّعة")} title={tr("How the services work together", "كيف تعمل الخدمات معاً")} intro={tr("Typical combinations. Every engagement is scoped to your project, so treat these as starting points.", "تركيبات شائعة. يُحدَّد نطاق كل تعاون حسب مشروعك، لذا اعتبرها نقاط انطلاق.")} />
+          <div className="mt-12 grid gap-px border bg-border lg:grid-cols-3">
+            {([
+              ["New fabrication scope", "نطاق تصنيع جديد", "You need qualified procedures and the right consumables before production.", "تحتاج إلى إجراءات مؤهلة ومواد استهلاكية مناسبة قبل الإنتاج.", ["02", "01"]],
+              ["Quality on an active project", "الجودة في مشروع قائم", "Welding is under way and you need inspection coverage and clear records.", "اللحام جارٍ وتحتاج إلى تغطية فحص وسجلات واضحة.", ["03", "04"]],
+              ["End-to-end support", "دعم متكامل", "One partner from material supply to the handover dossier.", "شريك واحد من توريد المواد حتى ملف التسليم.", ["01", "02", "03", "04"]],
+            ] as const).map(([en, ar2, b, ba, ns]) => (
+              <article key={en} className="flex flex-col bg-background p-8">
+                <h3 className="text-xl font-extrabold">{tr(en, ar2)}</h3>
+                <p className="mt-3 flex-1 text-sm text-muted-foreground">{tr(b, ba)}</p>
+                <ul className="mt-6 flex flex-wrap gap-2">
+                  {ns.map((n) => {
+                    const a = BUSINESS_AREAS.find((x) => x.n === n);
+                    return a ? <li key={n} className="border px-2.5 py-1 font-mono text-xs"><span className="text-brand-ink">{n}</span> {loc(a, locale).title}</li> : null;
+                  })}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
+
       {/* Coverage matrix */}
       <section className="border-y bg-navy py-20 text-navy-foreground">
         <Container>

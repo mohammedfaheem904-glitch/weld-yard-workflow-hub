@@ -102,7 +102,7 @@ function Page() {
               </thead>
               <tbody className="divide-y">
                 {refRows.map((r) => (
-                  <tr key={r[0][0]} className="even:bg-card">
+                  <tr key={r[0]?.[0]} className="even:bg-card">
                     {r.map(([en, a], j) => <td key={j} className={j === 0 ? "px-4 py-3 font-mono font-bold" : "px-4 py-3"}>{ar ? a : en}</td>)}
                   </tr>
                 ))}

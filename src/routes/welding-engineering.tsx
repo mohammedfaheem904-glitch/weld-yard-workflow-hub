@@ -50,6 +50,15 @@ const docs = [
   { code: "WPQ", en: "Welder Performance Qualification", ar: "تأهيل أداء اللحّام", fields: [["Welder", "اللحّام"], ["Position", "الوضعية"], ["Range qualified", "نطاق التأهيل"], ["Validity", "الصلاحية"]] },
 ];
 
+const codeHead: [string, string][] = [["Reference", "المرجع"], ["Typical scope", "النطاق المعتاد"], ["Qualifies", "ما يؤهّله"]];
+const codeRows: [string, string][][] = [
+  [["ASME BPVC Section IX", "ASME BPVC Section IX"], ["Pressure equipment and process piping", "معدات الضغط وأنابيب العمليات"], ["WPS / PQR / WPQ", "WPS / PQR / WPQ"]],
+  [["AWS D1.1", "AWS D1.1"], ["Structural steel welding", "لحام الهياكل الفولاذية"], ["WPS / PQR / welder qualification", "WPS / PQR / تأهيل اللحّام"]],
+  [["API 1104", "API 1104"], ["Pipeline and related facilities", "خطوط الأنابيب والمرافق المرتبطة"], ["Procedure / welder qualification", "تأهيل الإجراء / اللحّام"]],
+  [["ISO 15614-1", "ISO 15614-1"], ["Arc welding procedure tests for steels and nickel alloys", "اختبارات إجراءات اللحام بالقوس للفولاذ وسبائك النيكل"], ["WPQR", "WPQR"]],
+  [["ISO 9606-1", "ISO 9606-1"], ["Welder qualification — steels", "تأهيل اللحّامين — الفولاذ"], ["Welder certificate", "شهادة اللحّام"]],
+];
+
 function Page() {
   const { locale } = useLocale();
   const tr = useTr();
@@ -129,6 +138,26 @@ function Page() {
                 </div>
               </figure>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-20 sm:py-24">
+        <Container>
+          <SectionHeading eyebrow={tr("Code references", "المراجع والأكواد")} title={tr("Common qualification references", "مراجع التأهيل الشائعة")} intro={tr("General guidance only — the governing code is set by your project specification and client.", "إرشاد عام فقط — يحدد الكود المعتمد مواصفات مشروعك والعميل.")} />
+          <div className="mt-10 overflow-x-auto border">
+            <table className="w-full min-w-[640px] text-start text-sm">
+              <thead className="bg-navy text-navy-foreground">
+                <tr>{codeHead.map(([en, a]) => <th key={en} scope="col" className="px-4 py-3 text-start font-mono text-xs uppercase">{ar ? a : en}</th>)}</tr>
+              </thead>
+              <tbody className="divide-y">
+                {codeRows.map((r) => (
+                  <tr key={r[0][0]} className="even:bg-card">
+                    {r.map(([en, a], j) => <td key={j} className={j === 0 ? "px-4 py-3 font-mono font-bold" : "px-4 py-3"}>{ar ? a : en}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </Container>
       </section>

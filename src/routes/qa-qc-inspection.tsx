@@ -36,6 +36,17 @@ const trace = [
   ["Material", "المادة"], ["Joint", "الوصلة"], ["Welder", "اللحّام"], ["Procedure", "الإجراء"], ["Inspection result", "نتيجة الفحص"], ["Turnover dossier", "ملف التسليم"],
 ];
 
+const itpHead: [string, string][] = [["Activity", "النشاط"], ["Stage", "المرحلة"], ["Typical point", "نقطة الفحص المعتادة"], ["Record", "السجل"]];
+const itpRows: [string, string][][] = [
+  [["Material receiving", "استلام المواد"], ["Pre-welding", "قبل اللحام"], ["Review (R)", "مراجعة (R)"], ["Material certificates", "شهادات المواد"]],
+  [["WPS / welder approval", "اعتماد WPS / اللحّام"], ["Pre-welding", "قبل اللحام"], ["Hold (H)", "توقف (H)"], ["Approved WPS, WPQ", "WPS وWPQ معتمدة"]],
+  [["Fit-up", "التجميع"], ["Pre-welding", "قبل اللحام"], ["Witness (W)", "شهادة (W)"], ["Fit-up report", "تقرير التجميع"]],
+  [["Welding in progress", "اللحام الجاري"], ["In-process", "أثناء اللحام"], ["Surveillance", "مراقبة"], ["Weld log", "سجل اللحام"]],
+  [["Visual inspection", "الفحص البصري"], ["Post-welding", "بعد اللحام"], ["Witness (W)", "شهادة (W)"], ["VT report", "تقرير VT"]],
+  [["NDT", "الاختبارات غير الإتلافية"], ["Post-welding", "بعد اللحام"], ["Review (R)", "مراجعة (R)"], ["NDT reports", "تقارير NDT"]],
+  [["Final release", "الإفراج النهائي"], ["Turnover", "التسليم"], ["Hold (H)", "توقف (H)"], ["Turnover dossier", "ملف التسليم"]],
+];
+
 function Page() {
   const { locale } = useLocale();
   const tr = useTr();
@@ -88,6 +99,26 @@ function Page() {
               </li>
             ))}
           </ol>
+        </Container>
+      </section>
+
+      <section className="py-20 sm:py-24">
+        <Container>
+          <SectionHeading eyebrow={tr("Inspection & Test Plan", "خطة الفحص والاختبار")} title={tr("Example hold and witness points", "أمثلة على نقاط التوقف والشهادة")} intro={tr("Illustrative ITP only. H = work stops until released; W = inspector invited to attend; R = document review. Actual points are agreed per project.", "خطة توضيحية فقط. H = يتوقف العمل حتى الإفراج؛ W = دعوة المفتش للحضور؛ R = مراجعة الوثائق. تُحدَّد النقاط الفعلية لكل مشروع.")} />
+          <div className="mt-10 overflow-x-auto border">
+            <table className="w-full min-w-[640px] text-start text-sm">
+              <thead className="bg-navy text-navy-foreground">
+                <tr>{itpHead.map(([en, a]) => <th key={en} scope="col" className="px-4 py-3 text-start font-mono text-xs uppercase">{ar ? a : en}</th>)}</tr>
+              </thead>
+              <tbody className="divide-y">
+                {itpRows.map((r) => (
+                  <tr key={r[0][0]} className="even:bg-card">
+                    {r.map(([en, a], j) => <td key={j} className={j === 0 ? "px-4 py-3 font-mono font-bold" : "px-4 py-3"}>{ar ? a : en}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </Container>
       </section>
 

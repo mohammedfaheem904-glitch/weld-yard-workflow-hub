@@ -12,7 +12,7 @@ import { INDUSTRIES } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import { t } from "@/lib/i18n";
 import { loc, useLocale, useLocalizedMeta, useTr } from "@/lib/locale";
-import { btnDark, btnDarkOutline, Container, CtaBand, PageHero } from "@/components/site/blocks";
+import { btnDark, btnDarkOutline, Container, CtaBand, PageHero, SectionHeading } from "@/components/site/blocks";
 
 export const Route = createFileRoute("/industries")({
   head: () => seo("Industries", "Weld Yard supports welding operations in oil & gas, petrochemical, power, structural steel, fabrication, marine and infrastructure.", "/industries"),
@@ -37,6 +37,15 @@ const details: { img: string; challenge: [string, string]; svc: Svc[] }[] = [
   { img: marine, challenge: ["Welding quality in shipyard, repair and offshore work", "جودة اللحام في أحواض السفن والإصلاح والأعمال البحرية"], svc: ["P", "E", "Q"] },
   { img: inspection, challenge: ["Inspection of tank and pipeline welds", "فحص لحامات الخزانات وخطوط الأنابيب"], svc: ["P", "Q", "D"] },
   { img: products, challenge: ["Reliable consumables and repeatable weld quality", "مواد استهلاكية موثوقة وجودة لحام قابلة للتكرار"], svc: ["P", "E"] },
+];
+
+const refHead: [string, string][] = [["Sector", "القطاع"], ["Typical challenge", "التحدي المعتاد"], ["Commonly referenced", "المراجع الشائعة"]];
+const refRows: [string, string][][] = [
+  [["Oil & gas pipelines", "خطوط أنابيب النفط والغاز"], ["Field welds, traceability over long runs", "لحامات ميدانية وتتبع عبر مسافات طويلة"], ["API 1104", "API 1104"]],
+  [["Process piping", "أنابيب العمليات"], ["Material grades, PWHT, NDT extent", "درجات المواد والمعالجة الحرارية ونطاق NDT"], ["ASME B31.3, ASME IX", "ASME B31.3، ASME IX"]],
+  [["Power / boilers", "الطاقة / الغلايات"], ["Pressure parts and repair welds", "أجزاء الضغط ولحامات الإصلاح"], ["ASME Section I, ASME IX", "ASME Section I، ASME IX"]],
+  [["Structural steel", "الهياكل الفولاذية"], ["High volume of connections to inspect", "عدد كبير من الوصلات للفحص"], ["AWS D1.1, EN 1090", "AWS D1.1، EN 1090"]],
+  [["Storage tanks", "خزانات التخزين"], ["Shell and bottom weld inspection", "فحص لحامات الجدار والقاع"], ["API 650", "API 650"]],
 ];
 
 function Page() {
@@ -83,6 +92,26 @@ function Page() {
           </ul>
         </Container>
       </section>
+      <section className="py-20 sm:py-24">
+        <Container>
+          <SectionHeading eyebrow={tr("Sector references", "مراجع القطاعات")} title={tr("Sector challenges and common codes", "تحديات القطاعات والأكواد الشائعة")} intro={tr("Typical references only — the applicable codes are defined by each project and client.", "مراجع معتادة فقط — تحدد كل مشروع وعميل الأكواد المعتمدة.")} />
+          <div className="mt-10 overflow-x-auto border">
+            <table className="w-full min-w-[640px] text-start text-sm">
+              <thead className="bg-navy text-navy-foreground">
+                <tr>{refHead.map(([en, a]) => <th key={en} scope="col" className="px-4 py-3 text-start font-mono text-xs uppercase">{ar ? a : en}</th>)}</tr>
+              </thead>
+              <tbody className="divide-y">
+                {refRows.map((r) => (
+                  <tr key={r[0][0]} className="even:bg-card">
+                    {r.map(([en, a], j) => <td key={j} className={j === 0 ? "px-4 py-3 font-mono font-bold" : "px-4 py-3"}>{ar ? a : en}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Container>
+      </section>
+
       <CtaBand title={tr("Working in a sector not listed?", "تعمل في قطاع غير مدرج؟")} body={tr("Tell us about your welding scope — we'll let you know how we can help.", "أخبرنا عن نطاق أعمال اللحام لديك — وسنوضح لك كيف يمكننا المساعدة.")}>
         <Link to="/contact" className={btnDark}>{d.contactTeam}</Link>
         <Link to="/solutions" className={btnDarkOutline}>{tr("Explore Solutions", "استكشف الحلول")}</Link>

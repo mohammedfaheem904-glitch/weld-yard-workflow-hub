@@ -30,6 +30,13 @@ function Page() {
       intro={tr("Send us a message about products, engineering, inspection or DWM and the right person will get back to you.", "أرسل لنا رسالة بشأن المنتجات أو الهندسة أو الفحص أو DWM وسيتواصل معك الشخص المختص.")}
       aside={
         <div className="space-y-6">
+          <div className="border bg-card p-4">
+            <p className="font-mono text-xs font-bold uppercase tracking-wider text-brand-ink">{tr("Looking for something specific?", "تبحث عن شيء محدد؟")}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Link to="/request-quote" className="rounded-md border px-3 py-1.5 text-sm font-semibold hover:border-primary hover:text-brand-ink">{tr("Request a Quote", "طلب عرض سعر")}</Link>
+              <Link to="/request-dwm-demo" className="rounded-md border px-3 py-1.5 text-sm font-semibold hover:border-primary hover:text-brand-ink">{tr("Request a DWM Demo", "طلب عرض تجريبي لـ DWM")}</Link>
+            </div>
+          </div>
           <ul className="grid gap-3 sm:grid-cols-2">
             {([
               [Mail, tr("Email", "البريد الإلكتروني"), "system@weldyard.com", tr("All sales and support inquiries.", "جميع استفسارات المبيعات والدعم.")],

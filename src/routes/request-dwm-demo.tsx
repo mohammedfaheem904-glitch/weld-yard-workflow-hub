@@ -46,6 +46,22 @@ function Page() {
               ))}
             </ol>
           </div>
+          <div>
+            <p className="font-mono text-xs font-bold uppercase tracking-wider text-brand-ink">{tr("Topics we can cover", "مواضيع يمكن تناولها")}</p>
+            <ul className="mt-4 grid gap-3">
+              {([
+                ["Procedures & welders", "الإجراءات واللحّامون", "How pWPS, PQR, WPS and WPQ fit in the workflow.", "كيف تندرج pWPS وPQR وWPS وWPQ ضمن مسار العمل."],
+                ["Weld log & inspection", "سجل اللحام والفحص", "How welds, inspections and NCRs are recorded.", "كيف تُسجَّل اللحامات والفحوصات وحالات عدم المطابقة."],
+                ["Turnover", "التسليم", "How quality records come together for handover.", "كيف تُجمَّع سجلات الجودة للتسليم."],
+              ] as const).map(([en, ar, dEn, dAr]) => (
+                <li key={en} className="border-s-2 border-primary bg-card p-3">
+                  <p className="font-bold">{tr(en, ar)}</p>
+                  <p className="text-sm text-muted-foreground">{tr(dEn, dAr)}</p>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2 text-xs text-muted-foreground">{tr("The exact content of the session is agreed with your team.", "يُتفق على محتوى الجلسة بالتحديد مع فريقك.")}</p>
+          </div>
           <Checklist items={tr(["A walkthrough tailored to your workflow", "Answers to your team's questions", "Next steps for getting started"], ["جولة تعريفية مصممة وفق سير عملك", "إجابات عن أسئلة فريقك", "الخطوات التالية للبدء"])} />
           <p className="text-sm text-muted-foreground">
             {tr("Already a user?", "مستخدم حالي؟")} <a href={DWM_URL} className="font-bold text-brand-ink">{d.accessDwm}</a>

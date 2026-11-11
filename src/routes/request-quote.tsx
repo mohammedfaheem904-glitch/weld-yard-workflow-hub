@@ -24,7 +24,24 @@ function Page() {
       eyebrow={tr("Request a Quote", "طلب عرض سعر")}
       title={tr("Tell us what you need", "أخبرنا بما تحتاجه")}
       intro={tr("Share your requirement and our team will prepare a quotation.", "شاركنا متطلباتك وسيُعد فريقنا عرض سعر.")}
-      aside={<Checklist items={tr(["Product names, grades and quantities", "Scope of engineering or inspection work", "Project location and timeline"], ["أسماء المنتجات ورتبها وكمياتها", "نطاق الأعمال الهندسية أو أعمال الفحص", "موقع المشروع وجدوله الزمني"])} />}
+      aside={
+        <div>
+          <p className="font-mono text-xs font-bold uppercase tracking-wider text-brand-ink">{tr("Preparing your RFQ", "تجهيز طلب عرض السعر")}</p>
+          <p className="mt-2 text-sm text-muted-foreground">{tr("Including these details helps us quote accurately.", "تساعدنا هذه التفاصيل على إعداد عرض سعر دقيق.")}</p>
+          <div className="mt-4 space-y-4">
+            {([
+              ["For products", "للمنتجات", ["Product names, grades and specifications", "Sizes / diameters and quantities", "Required certificates, if any"], ["أسماء المنتجات ورتبها ومواصفاتها", "المقاسات / الأقطار والكميات", "الشهادات المطلوبة إن وُجدت"]],
+              ["For engineering", "للهندسة", ["Base materials and thickness ranges", "Applicable code or standard", "Required timeline"], ["المواد الأساسية ونطاقات السماكة", "الكود أو المعيار المطبّق", "الجدول الزمني المطلوب"]],
+              ["For inspection", "للفحص", ["Project location", "Approximate scope or number of joints", "Required inspection / NDT methods"], ["موقع المشروع", "النطاق التقريبي أو عدد الوصلات", "طرق الفحص / الاختبارات غير الإتلافية المطلوبة"]],
+            ] as const).map(([en, ar, iEn, iAr]) => (
+              <div key={en} className="border-s-2 border-primary bg-card p-4">
+                <p className="font-bold">{tr(en, ar)}</p>
+                <div className="mt-2"><Checklist items={tr([...iEn], [...iAr])} /></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      }
     >
       <InquiryForm
         type="quote"

@@ -150,6 +150,40 @@ function Page() {
         </Container>
       </section>
 
+      {/* Comparison */}
+      <section className="border-b py-20 sm:py-28">
+        <Container>
+          <SectionHeading eyebrow={tr("Comparison", "مقارنة")} title={tr("Scattered files vs. one connected workflow", "ملفات متفرقة مقابل مسار عمل واحد مترابط")} />
+          <p className="mt-4 max-w-3xl text-sm text-muted-foreground">{tr("General comparison of working approaches. Specific DWM capabilities are confirmed during the demo.", "مقارنة عامة بين أساليب العمل. تُؤكَّد إمكانيات DWM المحددة خلال العرض التجريبي.")}</p>
+          <div className="mt-8 overflow-x-auto border">
+            <table className="w-full min-w-[640px] text-start text-sm">
+              <thead className="bg-navy text-navy-foreground">
+                <tr>
+                  <th className="px-4 py-3 text-start font-bold">{tr("Area", "المجال")}</th>
+                  <th className="px-4 py-3 text-start font-bold">{tr("Paper & spreadsheets", "الورق وجداول البيانات")}</th>
+                  <th className="px-4 py-3 text-start font-bold">{tr("One connected workflow (DWM)", "مسار عمل واحد مترابط (DWM)")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {([
+                  ["Procedures", "الإجراءات", "pWPS, PQR and WPS kept in separate files and folders.", "حفظ pWPS وPQR وWPS في ملفات ومجلدات منفصلة.", "Procedures organised in one place along the workflow.", "تنظيم الإجراءات في مكان واحد ضمن مسار العمل."],
+                  ["Welders", "اللحّامون", "WPQ records tracked manually per project.", "متابعة سجلات WPQ يدويًا لكل مشروع.", "Welder qualifications kept with the project records.", "حفظ تأهيلات اللحّامين مع سجلات المشروع."],
+                  ["Weld log", "سجل اللحام", "Joint data copied between sheets.", "نسخ بيانات الوصلات بين الجداول.", "Welds recorded against joints, welders and procedures.", "تسجيل اللحامات مقابل الوصلات واللحّامين والإجراءات."],
+                  ["Inspection & NCR", "الفحص وعدم المطابقة", "Results and NCRs spread across reports and emails.", "توزّع النتائج وتقارير عدم المطابقة بين التقارير والرسائل.", "Inspection and NCR follow-up in the same workflow.", "متابعة الفحص وعدم المطابقة ضمن المسار نفسه."],
+                  ["Turnover", "التسليم", "Records gathered by hand at the end of the project.", "تجميع السجلات يدويًا في نهاية المشروع.", "Quality records already structured for handover.", "سجلات جودة منظمة مسبقًا للتسليم."],
+                ] as const).map(([a, aa, p1, p1a, p2, p2a]) => (
+                  <tr key={a} className="border-t">
+                    <td className="px-4 py-3 font-bold">{tr(a, aa)}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{tr(p1, p1a)}</td>
+                    <td className="px-4 py-3">{tr(p2, p2a)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Container>
+      </section>
+
       {/* Benefits */}
       <section className="py-20 sm:py-28">
         <Container>

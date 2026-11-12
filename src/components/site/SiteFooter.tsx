@@ -1,7 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { CONTACT, DWM_URL, STORE_URL } from "@/lib/site";
+import { categoryHref, CONTACT, DWM_URL, PRODUCT_CATEGORIES, STORE_URL } from "@/lib/site";
 import { t } from "@/lib/i18n";
-import { useLocale } from "@/lib/locale";
+import { loc, useLocale } from "@/lib/locale";
+
+const PRODUCT_ORDER = ["Welding Machines & Equipment", "Welding Consumables", "Torches & Accessories", "Workshop Essentials", "Inspection Tools", "Safety & PPE"];
 import { Logo } from "./Logo";
 import { NewsletterSignup } from "./NewsletterSignup";
 import { SocialLinks } from "./SocialLinks";
@@ -9,7 +11,7 @@ import { SocialLinks } from "./SocialLinks";
 export function SiteFooter() {
   const { locale } = useLocale();
   const d = t(locale);
-  const cols = [
+  const cols: { title: string; links: { label: string; to?: string; href?: string }[] }[] = [
     {
       title: d.footerSolutions,
       links: [
@@ -18,6 +20,13 @@ export function SiteFooter() {
         { label: d.qaqc, to: "/qa-qc-inspection" },
         { label: d.weldYardDwm, to: "/dwm" },
       ],
+    },
+    {
+      title: d.footerProducts,
+      links: PRODUCT_ORDER.flatMap((name) => {
+        const c = PRODUCT_CATEGORIES.find((x) => x.name === name);
+        return c ? [{ label: loc(c, locale).name, href: categoryHref(c.url) }] : [];
+      }),
     },
     {
       title: d.footerCompany,
@@ -31,8 +40,8 @@ export function SiteFooter() {
   ];
   return (
     <footer className="border-t-2 border-primary bg-background text-foreground">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
-        <div className="md:col-span-2">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="sm:col-span-3 lg:col-span-2">
           <div className="inline-block"><Logo /></div>
           <p className="mt-5 max-w-sm text-sm text-muted-foreground">{d.supporting}</p>
           {(CONTACT.email || CONTACT.phone || CONTACT.address) && (
@@ -48,8 +57,12 @@ export function SiteFooter() {
             <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-navy rtl:tracking-normal">{c.title}</h2>
             <ul className="mt-4 space-y-2.5 text-sm">
               {c.links.map((l) => (
-                <li key={l.to}>
-                  <Link to={l.to} className="text-muted-foreground hover:text-primary">{l.label}</Link>
+                <li key={l.to ?? l.href}>
+                  {l.to ? (
+                    <Link to={l.to} className="text-muted-foreground hover:text-primary">{l.label}</Link>
+                  ) : (
+                    <a href={l.href} className="text-muted-foreground hover:text-primary">{l.label}</a>
+                  )}
                 </li>
               ))}
             </ul>

@@ -83,7 +83,7 @@ export const INDUSTRIES = [
 
 // Optional `url`: add verified store category URLs here; unset entries link to the store home.
 export const PRODUCT_CATEGORIES: { name: string; body: string; url?: string; ar?: { name: string; body: string } }[] = [
-  { name: "Welding Consumables", body: "Electrodes, filler wires, TIG rods and fluxes for common processes and materials.", ar: { name: "مواد اللحام الاستهلاكية", body: "أقطاب وأسلاك حشو وقضبان TIG ومساعدات صهر للعمليات والمواد الشائعة." } },
+  { name: "Welding Consumables", body: "Electrodes, filler wires, TIG rods and fluxes for common processes and materials.", url: "https://store.weldyard.com/product-category/%d9%85%d9%86%d8%aa%d8%ac%d8%a7%d8%aa/%d8%a3%d8%b3%d9%84%d8%a7%d9%83-%d8%a7%d9%84%d9%84%d8%ad%d8%a7%d9%85/", ar: { name: "مواد اللحام الاستهلاكية", body: "أقطاب وأسلاك حشو وقضبان TIG ومساعدات صهر للعمليات والمواد الشائعة." } },
   { name: "Welding Machines & Equipment", body: "Power sources and equipment for MMA, MIG/MAG and TIG applications.", url: "https://store.weldyard.com/product-category/%d9%85%d9%86%d8%aa%d8%ac%d8%a7%d8%aa/%d9%85%d8%a7%d9%83%d9%8a%d9%86%d8%a7%d8%aa-%d8%a7%d9%84%d8%ad%d8%a7%d9%85/", ar: { name: "ماكينات ومعدات اللحام", body: "مصادر طاقة ومعدات لتطبيقات MMA وMIG/MAG وTIG." } },
   { name: "Torches & Accessories", body: "Torches, cables, clamps, holders and consumable spare parts.", ar: { name: "المشاعل والملحقات", body: "مشاعل وكابلات ومشابك وحوامل وقطع غيار استهلاكية." } },
   { name: "Safety & PPE", body: "Helmets, gloves, protective clothing and fume protection.", ar: { name: "السلامة ومعدات الوقاية الشخصية", body: "خوذات وقفازات وملابس واقية وحماية من الأدخنة." } },

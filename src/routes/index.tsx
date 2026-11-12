@@ -13,6 +13,7 @@ import {
   btnDark, btnDarkOutline, btnOutline, btnPrimary, Checklist, Container, CtaBand, Eyebrow,
   FeatureGrid, Lifecycle, SectionHeading, TextLink,
 } from "@/components/site/blocks";
+import { StatsCounter } from "@/components/site/StatsCounter";
 
 export const Route = createFileRoute("/")({
   head: () => seo("Integrated Welding Solutions", "Weld Yard connects welding products, engineering support, QA/QC inspection and digital welding management across your welding operations.", "/"),
@@ -55,6 +56,8 @@ function Home() {
           </div>
         </Container>
       </section>
+
+      <StatsCounter />
 
       <section className="py-20 sm:py-28">
         <Container>

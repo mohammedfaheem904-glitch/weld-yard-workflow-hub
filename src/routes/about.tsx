@@ -3,6 +3,7 @@ import hero from "@/assets/hero-welding.jpg";
 import { seo } from "@/lib/seo";
 import { t } from "@/lib/i18n";
 import { useLocale, useLocalizedMeta, useTr } from "@/lib/locale";
+import { StatsCounter } from "@/components/site/StatsCounter";
 import { btnDark, btnDarkOutline, Container, CtaBand, FeatureGrid, PageHero, SectionHeading } from "@/components/site/blocks";
 
 export const Route = createFileRoute("/about")({
@@ -29,6 +30,7 @@ function Page() {
   return (
     <>
       <PageHero eyebrow={d.aboutWeldYard} title={tr("Integrated Welding Solutions", "حلول لحام متكاملة")} intro={tr("Weld Yard brings welding products, engineering, QA/QC inspection and digital welding management together under one company.", "تجمع Weld Yard بين منتجات اللحام والهندسة وفحص ضمان/مراقبة الجودة (QA/QC) والإدارة الرقمية للحام تحت مظلة شركة واحدة.")} image={hero} fixedImage />
+      <StatsCounter />
       <section className="py-20 sm:py-28">
         <Container className="grid gap-12 lg:grid-cols-2">
           <SectionHeading eyebrow={tr("Our approach", "نهجنا")} title={tr("Connecting the essential stages of welding", "ربط المراحل الأساسية للّحام")} />

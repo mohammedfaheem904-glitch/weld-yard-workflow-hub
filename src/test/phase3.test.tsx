@@ -25,8 +25,8 @@ describe("Logo", () => {
 });
 
 describe("store category destinations", () => {
-  it("all current categories link to the store home", () => {
-    for (const c of PRODUCT_CATEGORIES) expect(categoryHref(c.url)).toBe(STORE_URL);
+  it("all current categories link to a verified store category page", () => {
+    for (const c of PRODUCT_CATEGORIES) expect(categoryHref(c.url)).toMatch(/^https:\/\/store\.weldyard\.com\/product-category\//);
   });
   it("accepts verified https store category URLs", () => {
     expect(categoryHref("https://store.weldyard.com/product-category/safety/")).toBe("https://store.weldyard.com/product-category/safety/");
